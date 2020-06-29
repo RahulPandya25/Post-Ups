@@ -1,0 +1,22 @@
+{
+  "name": "post-ups",
+  "version": "1.0.0",
+  "description": "A Social Website Application built completely around NoSQL Database. Anyone can submit their post here on the application, and this Post is not only subjected to Text, but it can be an Image, Video or any other document or perhaps a combination of these. A post can have tags through which one can query and filter according to their needs, an upvote/downvote feature  and comments that can be text or images(Gifs included).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RahulPandya25/Post-Ups.git"
+  },
+  "keywords": [
+    "post"
+  ],
+  "author": "Rahul Pandya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RahulPandya25/Post-Ups/issues"
+  },
+  "homepage": "https://github.com/RahulPandya25/Post-Ups#readme"
+}
