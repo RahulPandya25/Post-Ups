@@ -6,7 +6,7 @@ var express = require("express");
 var path = require("path");
 var bodyParser = require("body-parser");
 
-var sample = require("./routes/sample.js");
+var api = require("./controller/api.js");
 var app = express();
 
 const ANGULAR_BUNDLE = "dist/Post-Ups";
@@ -14,16 +14,13 @@ const ANGULAR_BUNDLE = "dist/Post-Ups";
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: "false" }));
 
-//Put your angular dist folder here
+//make angular dist folder available for public
 app.use(express.static(path.join(__dirname, ANGULAR_BUNDLE)));
-app.use("/", express.static(path.join(__dirname, ANGULAR_BUNDLE)));
-app.use("/sample", sample);
 
-// get req
-app.get("/test", testFun);
+// all the api requests
+app.use("/api", api);
 
-function testFun(req, res) {
-  res.send("testinggg");
-}
+// all the other request should be redirected to angular app
+app.use("*", express.static(path.join(__dirname, ANGULAR_BUNDLE)));
 
 module.exports = app;
