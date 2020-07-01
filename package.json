@@ -21,8 +21,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "preinstall": "npm install"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
