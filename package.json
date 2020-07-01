@@ -17,7 +17,7 @@
   "homepage": "https://github.com/RahulPandya25/Post-Ups#readme",
   "scripts": {
     "ng": "ng",
-    "start": "ng build && node ./bin/server.conf.js",
+    "start": "node ./bin/server.conf.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
