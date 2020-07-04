@@ -6,7 +6,7 @@ var express = require("express");
 var path = require("path");
 var bodyParser = require("body-parser");
 
-var api = require("./controller/api.js");
+var api = require("./express_mongo/routes/api.js");
 var app = express();
 
 const ANGULAR_BUNDLE = "dist/Post-Ups";
