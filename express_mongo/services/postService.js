@@ -1,17 +1,15 @@
-var postDb = require("../model/post.js");
+var Post = require("../model/post.js");
 
 postService = {};
 
 postService.getFeed = () => {
-  return postDb.getFeed().then((data) => {
+  return Post.find({}, { _id: 0 }).then((data) => {
     return data;
   });
 };
 
 postService.submitPost = (data) => {
-  return postDb.submitPost(data).then((data) => {
-    return data;
-  });
+  return Post.create(data);
 };
 
 module.exports = postService;

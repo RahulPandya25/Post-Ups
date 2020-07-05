@@ -1,18 +1,15 @@
-var postCollection = require("../utilities/postCollection.js");
+var mongoose = require("mongoose");
 
-var postDb = {};
+const postSchema = new mongoose.Schema(
+  {
+    Title: String,
+    Category: String,
+    Tags: Array,
+    Likes: Number,
+    Comments: Array,
+    Date: { type: Date, default: Date.now },
+  },
+  { collection: "post", timestamp: true }
+);
 
-postDb.getFeed = () => {
-  return postCollection.getFeed().then((model) => {
-    return model.find({}, { _id: 0 }).then((data) => {
-      return data;
-    });
-  });
-};
-
-postDb.submitPost = (postData) => {
-  return postCollection.submitPost(postData).then((data) => {
-    return data;
-  });
-};
-module.exports = postDb;
+module.exports = mongoose.model("post", postSchema);
