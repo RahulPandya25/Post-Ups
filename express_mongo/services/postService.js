@@ -1,9 +1,15 @@
-var postDB = require("../model/post.js");
+var postDb = require("../model/post.js");
 
 postService = {};
 
 postService.getFeed = () => {
-  return postDB.getFeed().then((data) => {
+  return postDb.getFeed().then((data) => {
+    return data;
+  });
+};
+
+postService.submitPost = (data) => {
+  return postDb.submitPost(data).then((data) => {
     return data;
   });
 };

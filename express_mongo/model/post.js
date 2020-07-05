@@ -10,4 +10,9 @@ postDb.getFeed = () => {
   });
 };
 
+postDb.submitPost = (postData) => {
+  return postCollection.submitPost(postData).then((data) => {
+    return data;
+  });
+};
 module.exports = postDb;

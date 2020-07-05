@@ -8,7 +8,12 @@ const postCollection = {};
 
 const newPostSchema = Schema(
   {
-    name: String,
+    Title: String,
+    Category: String,
+    Tags: Array,
+    Likes: String,
+    Comments: Array,
+    Date: { type: Date, default: Date.now },
   },
   { collection: "post", timestamp: true }
 );
@@ -26,6 +31,12 @@ postCollection.getFeed = () => {
       err.status = 500;
       throw err;
     });
+};
+
+postCollection.submitPost = (postData) => {
+  newPostSchema.create(postData, function (err, post) {
+    return post;
+  });
 };
 
 module.exports = postCollection;
