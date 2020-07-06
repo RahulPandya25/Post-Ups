@@ -12,8 +12,40 @@ router.get("/getFeed", function (req, res) {
   });
 });
 
-router.post("/post", function (req, res) {
+router.get("/getPost/:id", function (req, res) {
+  return postService.getPostById(req.params.id).then((data) => {
+    res.json(data);
+  });
+});
+
+router.post("/submitPost", function (req, res) {
   return postService.submitPost(req.body).then((data) => {
+    res.json(data);
+  });
+});
+
+// **** Syntax ****
+// {
+//   "comment": "<Your comment>"
+// }
+// ****************
+router.get("/submitComment/:postId", function (req, res) {
+  return postService
+    .submitCommentOnPost(req.params.postId, req.body)
+    .then((data) => {
+      res.json(data);
+    });
+});
+
+// **** Syntax ****
+// {
+//   "category": "<Your category>"
+//   "tag": "<Your tag>"
+// }
+// Tags must be in lowercase
+// ****************
+router.get("/filter", function (req, res) {
+  return postService.filterThroughPosts(req.body).then((data) => {
     res.json(data);
   });
 });

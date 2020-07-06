@@ -2,12 +2,14 @@ var mongoose = require("mongoose");
 
 const postSchema = new mongoose.Schema(
   {
-    Title: String,
-    Category: String,
-    Tags: Array,
-    Likes: Number,
-    Comments: Array,
-    Date: { type: Date, default: Date.now },
+    title: String,
+    category: String,
+    tags: Array,
+    likes: Number,
+    dislikes: Number,
+    isCommentEnabled: Boolean,
+    comments: Array,
+    datePosted: { type: Date, default: Date.now },
   },
   { collection: "post", timestamp: true }
 );
