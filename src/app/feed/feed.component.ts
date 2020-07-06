@@ -1,3 +1,4 @@
+import { PostService } from "./../services/post.service";
 import { Component, OnInit } from "@angular/core";
 import { ConstantsService } from "../services/constants.service";
 
@@ -7,9 +8,14 @@ import { ConstantsService } from "../services/constants.service";
   styleUrls: ["./feed.component.scss"],
 })
 export class FeedComponent implements OnInit {
-  constructor() {}
+  posts;
+  constructor(private postService: PostService) {}
 
   ngOnInit(): void {
     console.log(ConstantsService.BASE_URL);
+    this.postService.getFeed().subscribe((response) => {
+      this.posts = response;
+      console.log(this.posts);
+    });
   }
 }
