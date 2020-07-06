@@ -4,7 +4,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1rem;
+  padding: 0.5rem 1rem;
 
   background-color: var(--pale-white);
   box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.1);
@@ -19,8 +19,6 @@
     button {
       all: unset;
       padding: 0.75rem;
-
-      //   box-shadow: var(--emboss);
     }
   }
 
