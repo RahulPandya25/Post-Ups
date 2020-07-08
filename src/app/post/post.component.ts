@@ -29,6 +29,10 @@ export class PostComponent implements OnInit {
     datePosted: "2020-07-05T19:39:51.189Z",
     __v: 0,
   };
+  comment = "";
+  sendComment(comment) {
+    console.log(comment);
+  }
   constructor() {}
 
   ngOnInit(): void {}
