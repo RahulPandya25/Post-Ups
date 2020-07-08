@@ -1,0 +1,55 @@
+<div class="nav-container">
+  <app-navbar></app-navbar>
+</div>
+<div class="container">
+  <div class="section header">
+    <label class="post-title">
+      {{ post.title }}
+    </label>
+    <label class="post-category">
+      {{ post.category }}
+    </label>
+  </div>
+  <div class="section main-content">
+    Main content here
+  </div>
+  <div class="section post-stat">
+    <div class="like-view">
+      <div class="likes">
+        {{ post.likes }}
+        <button>
+          <i class="fa fa-heart" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="views">
+        {{ post.views }}
+        <button>
+          <i class="fa fa-eye" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="comments-count">
+      {{ post.comments.length }}
+      <button>
+        <i class="fa fa-comment" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+  <div class="section tags">
+    <label class="tag-title">Tags:&nbsp;&nbsp;</label>
+    <div class="tag" *ngFor="let tag of post.tags">
+      <a class="tag-link">
+        {{ tag }}
+      </a>
+    </div>
+  </div>
+  <div class="section comments">
+    <label>Comments</label>
+    <div class="comment-container">
+      <div class="comment" *ngFor="let comment of post.comments">
+        {{ comment }}
+      </div>
+    </div>
+  </div>
+</div>

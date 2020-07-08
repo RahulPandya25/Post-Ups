@@ -7,6 +7,7 @@ import { AppComponent } from "./app.component";
 import { FeedComponent } from "./feed/feed.component";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { NewPostComponent } from "./new-post/new-post.component";
+import { PostComponent } from './post/post.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { NewPostComponent } from "./new-post/new-post.component";
     FeedComponent,
     NavbarComponent,
     NewPostComponent,
+    PostComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
