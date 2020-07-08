@@ -16,8 +16,6 @@
     &:not(:last-child) {
       margin-bottom: 0.5rem;
     }
-    // background-color: lightgreen;
-    // margin: 1rem;
   }
 
   .section.main-content {
@@ -25,28 +23,28 @@
   }
 
   .header {
-    // background-color: lightblue;
     display: flex;
     justify-content: space-between;
 
     .post-title {
       font-size: 1.5em;
       align-self: baseline;
-
-      // background-color: lightcoral;
     }
 
     .post-category {
-      font-size: 1.2em;
+      font-size: 1em;
       align-self: baseline;
       color: var(--black);
-      // background-color: lightcoral;
     }
   }
 
   .main-content {
     background-color: lightgoldenrodyellow;
     height: 200px;
+
+    // remove below code, only for demonstration purpose
+    text-align: center;
+    line-height: 200px;
   }
 
   .post-stat {
@@ -76,7 +74,7 @@
     }
 
     .tag {
-      border: 1px solid black;
+      border: 1px solid rgb(75, 75, 75);
       border-radius: 200px;
       padding: 0.2rem 0.5rem;
       margin: 0.2rem 0;
@@ -94,15 +92,43 @@
     .comment-container {
       display: flex;
       flex-direction: column;
-      // background-color: lightpink;
       .comment {
-        background-color: var(--pale-grey);
+        background-color: var(--pale-blue-green);
         border-radius: 200px;
-        padding-left: 1rem;
+        padding: 0.5rem 1rem;
 
-        &:not(:last-child) {
-          margin-bottom: 0.3rem;
+        margin-bottom: 0.3rem;
+
+        // &:not(:last-child) {
+        //   margin-bottom: 0.3rem;
+        // }
+      }
+    }
+
+    .add-comment-section {
+      border-radius: 200px;
+      width: 100%;
+      border: 1px solid rgb(75, 75, 75);
+
+      input {
+        all: unset;
+        padding: 0.5rem 1rem;
+        max-width: calc(100% - 80px);
+
+        &::placeholder {
+          font-size: 1em;
+          color: var(--black);
         }
+      }
+      .send-comment {
+        --square: 45px;
+        all: unset;
+        width: var(--square);
+        height: var(--square);
+        border-radius: 200px;
+        text-align: center;
+        font-size: 1.3em;
+        color: var(--black);
       }
     }
   }
