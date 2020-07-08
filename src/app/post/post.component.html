@@ -37,7 +37,7 @@
     </div>
   </div>
   <div class="section tags">
-    <label class="tag-title">Tags:&nbsp;&nbsp;</label>
+    <label class="tag-title">Tags&nbsp;&nbsp;</label>
     <div class="tag" *ngFor="let tag of post.tags">
       <a class="tag-link">
         {{ tag }}
@@ -50,6 +50,18 @@
       <div class="comment" *ngFor="let comment of post.comments">
         {{ comment }}
       </div>
+    </div>
+    <div class="add-comment-section">
+      <input
+        type="text"
+        name="comment"
+        [(ngModel)]="comment"
+        class="add-comment"
+        placeholder="Add comment..."
+      />
+      <button class="send-comment" (click)="sendComment(comment)">
+        <i class="far fa-paper-plane"></i>
+      </button>
     </div>
   </div>
 </div>
