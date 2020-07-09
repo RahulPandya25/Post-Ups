@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { PostService } from "../services/post.service";
 
 @Component({
   selector: "app-post",
@@ -6,35 +8,26 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./post.component.scss"],
 })
 export class PostComponent implements OnInit {
-  post = {
-    tags: [
-      "canada",
-      "windsor",
-      "windsor",
-      "windsor",
-      "windsor",
-      "windsor",
-      "windsor",
-      "windsor",
-      "windsor",
-    ],
-    comments: ["Amazing", "Woahh"],
-    _id: "5f022c871c426d40488b7697",
-    title: "Test 1",
-    category: "Image",
-    likes: 59,
-    views: 100,
-    dislikes: 5,
-    isCommentEnabled: true,
-    datePosted: new Date("2020-07-05T19:39:51.189Z"),
-    __v: 0,
-  };
-
+  postId;
+  post;
   comment = "";
   sendComment(comment) {
     console.log(comment);
   }
-  constructor() {}
+  constructor(
+    private postService: PostService,
+    private route: ActivatedRoute
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      this.postId = params["postId"];
+    });
+
+    this.postService.getPostById(this.postId).subscribe((response) => {
+      this.post = response;
+      let date = this.post.datePosted;
+      this.post.datePosted = new Date(date);
+    });
+  }
 }
