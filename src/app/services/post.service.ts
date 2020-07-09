@@ -9,6 +9,9 @@ export class PostService {
   getFeed() {
     return this.http.get(ConstantsService.BASE_URL + "/getFeed");
   }
+  getPostById(postId) {
+    return this.http.get(ConstantsService.BASE_URL + "/getPost/" + postId);
+  }
 
   constructor(private http: HttpClient) {}
 }
