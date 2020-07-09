@@ -26,9 +26,10 @@ export class PostComponent implements OnInit {
     views: 100,
     dislikes: 5,
     isCommentEnabled: true,
-    datePosted: "2020-07-05T19:39:51.189Z",
+    datePosted: new Date("2020-07-05T19:39:51.189Z"),
     __v: 0,
   };
+
   comment = "";
   sendComment(comment) {
     console.log(comment);

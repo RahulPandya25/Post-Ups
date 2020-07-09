@@ -2,11 +2,34 @@
   <app-navbar></app-navbar>
 </div>
 <div class="container">
-  <div class="card" *ngFor="let post of posts">
-    {{post.title}}
+  <div class="post" *ngFor="let post of posts">
+    <div class="section header">
+      <div class="post-title">{{ post.title }}</div>
+      <div class="post-category">{{ post.category }}</div>
+    </div>
+    <a routerLink="/post"
+      ><div class="section main-content">
+        Main Content
+      </div></a
+    >
+    <div class="section post-stat">
+      <div class="views">
+        {{ post.views }}
+        <button>
+          <i class="fa fa-eye" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div class="comments-count">
+        {{ post.comments.length }}
+        <button>
+          <i class="fa fa-comment" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="section date-posted">
+      {{ post.datePosted.toDateString() }}
+    </div>
   </div>
 </div>
-
-
-
-<a routerLink="/post">Post</a>
