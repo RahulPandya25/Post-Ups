@@ -7,7 +7,7 @@
       <div class="post-title">{{ post.title }}</div>
       <div class="post-category">{{ post.category }}</div>
     </div>
-    <a routerLink="/post"
+    <a routerLink="/post" [queryParams]="{ postId: post._id }"
       ><div class="section main-content">
         Main Content
       </div></a

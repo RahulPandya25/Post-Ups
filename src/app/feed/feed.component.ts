@@ -9,6 +9,7 @@ import { ConstantsService } from "../services/constants.service";
 })
 export class FeedComponent implements OnInit {
   posts;
+
   constructor(private postService: PostService) {}
 
   ngOnInit(): void {
