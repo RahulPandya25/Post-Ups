@@ -1,5 +1,5 @@
 var Post = require("../model/post.js");
-const post = require("../model/post.js");
+var Comment = require("../model/comment.js");
 const { isNullOrUndefined } = require("util");
 
 postService = {};
@@ -13,17 +13,16 @@ postService.submitPost = (data) => {
 };
 
 postService.getPostById = (postId) => {
-  return Post.findById(postId).then((data) => {
-    return data;
-  });
+  return Post.findById(postId).populate("comments");
 };
 
-postService.submitCommentOnPost = (postId, data) => {
-  return Post.findById(postId).then((post) => {
-    post.comments.push({ comment: data.comment, datePosted: Date.now() });
-    Post.findByIdAndUpdate(postId, post);
-    return post;
-  });
+postService.submitCommentOnPost = async (data) => {
+  var commentObj = await Comment.create(data);
+  await Post.updateOne(
+    { _id: data.postId },
+    { $push: { comments: commentObj._id } }
+  );
+  return Post.findById(data.postId).populate("comments");
 };
 
 postService.filterThroughPosts = (data) => {
