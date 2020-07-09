@@ -28,8 +28,14 @@ export class PostComponent implements OnInit {
 
     this.postService.getPostById(this.postId).subscribe((response) => {
       this.post = response;
+      // updating post-date
       let date = this.post.datePosted;
       this.post.datePosted = new Date(date);
+      // updating comment-date
+      this.post.comments.forEach((element) => {
+        let date = element.datePosted;
+        element.datePosted = new Date(date);
+      });
     });
   }
 }

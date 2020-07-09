@@ -51,7 +51,10 @@
     <label>Comments</label>
     <div class="comment-container">
       <div class="comment" *ngFor="let commentObj of post.comments">
-        {{ commentObj.comment }}
+        <div class="comment-content">{{ commentObj.comment }}</div>
+        <div class="date-posted">
+          {{ commentObj.datePosted.toDateString() }}
+        </div>
       </div>
     </div>
     <div class="add-comment-section">
