@@ -15,6 +15,10 @@ export class FeedComponent implements OnInit {
     console.log(ConstantsService.BASE_URL);
     this.postService.getFeed().subscribe((response) => {
       this.posts = response;
+      this.posts.forEach((element) => {
+        let date = element.datePosted;
+        element.datePosted = new Date(date);
+      });
       console.log(this.posts);
     });
   }
