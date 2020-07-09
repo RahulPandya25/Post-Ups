@@ -50,8 +50,8 @@
   <div class="section comments">
     <label>Comments</label>
     <div class="comment-container">
-      <div class="comment" *ngFor="let comment of post.comments">
-        {{ comment }}
+      <div class="comment" *ngFor="let commentObj of post.comments">
+        {{ commentObj.comment }}
       </div>
     </div>
     <div class="add-comment-section">

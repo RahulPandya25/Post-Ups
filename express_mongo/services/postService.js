@@ -1,5 +1,4 @@
 var Post = require("../model/post.js");
-const post = require("../model/post.js");
 const { isNullOrUndefined } = require("util");
 
 postService = {};
