@@ -13,7 +13,7 @@ export class PostComponent implements OnInit {
   comment = "";
   sendComment(comment) {
     this.postService.postComment(this.postId, comment).subscribe((response) => {
-      console.log(response);
+      this.ngOnInit();
     });
   }
   constructor(
