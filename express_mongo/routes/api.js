@@ -26,15 +26,14 @@ router.post("/submitPost", function (req, res) {
 
 // **** Syntax ****
 // {
+//   "postId": <Post Id>
 //   "comment": "<Your comment>"
 // }
 // ****************
-router.post("/submitComment/:postId", function (req, res) {
-  return postService
-    .submitCommentOnPost(req.params.postId, req.body)
-    .then((data) => {
-      res.json(data);
-    });
+router.post("/submitComment", function (req, res) {
+  return postService.submitCommentOnPost(req.body).then((data) => {
+    res.json(data);
+  });
 });
 
 // **** Syntax ****
