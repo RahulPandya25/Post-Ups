@@ -3,6 +3,7 @@
 // ************** //
 
 var express = require("express");
+var cors = require("cors");
 var path = require("path");
 var bodyParser = require("body-parser");
 
@@ -25,6 +26,11 @@ mongoose
 
 const ANGULAR_BUNDLE = "dist/Post-Ups";
 
+app.use(
+  cors({
+    origin: "http://localhost:4200",
+  })
+);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: "false" }));
 
