@@ -41,6 +41,6 @@ app.use(express.static(path.join(__dirname, ANGULAR_BUNDLE)));
 app.use("/api", api);
 
 // all the other request should be redirected to angular app
-// app.use("*", express.static(path.join(__dirname, ANGULAR_BUNDLE)));
+app.use("*", express.static(path.join(__dirname, ANGULAR_BUNDLE)));
 
 module.exports = app;
