@@ -36,6 +36,9 @@
       </button>
     </div>
   </div>
+  <div class="section date-posted">
+    {{ post.datePosted.toDateString() }}
+  </div>
   <div class="section tags">
     <label class="tag-title">Tags&nbsp;&nbsp;</label>
     <div class="tag" *ngFor="let tag of post.tags">

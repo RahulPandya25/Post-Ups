@@ -2,6 +2,7 @@
   position: fixed;
   width: 100vw;
   top: 0;
+  z-index: 1;
 }
 
 .container {
@@ -63,6 +64,11 @@
     }
   }
 
+  .date-posted {
+    font-size: 0.75rem;
+    color: var(--black);
+  }
+
   .tags {
     display: flex;
     flex-wrap: wrap;
@@ -93,7 +99,7 @@
       display: flex;
       flex-direction: column;
       .comment {
-        background-color: var(--pale-blue-green);
+        background-color: var(--pale-grey);
         border-radius: 200px;
         padding: 0.5rem 1rem;
 
