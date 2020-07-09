@@ -29,7 +29,7 @@ router.post("/submitPost", function (req, res) {
 //   "comment": "<Your comment>"
 // }
 // ****************
-router.get("/submitComment/:postId", function (req, res) {
+router.post("/submitComment/:postId", function (req, res) {
   return postService
     .submitCommentOnPost(req.params.postId, req.body)
     .then((data) => {

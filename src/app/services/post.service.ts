@@ -12,6 +12,12 @@ export class PostService {
   getPostById(postId) {
     return this.http.get(ConstantsService.BASE_URL + "/getPost/" + postId);
   }
+  postComment(postId, reqBody) {
+    return this.http.post(
+      ConstantsService.BASE_URL + "/submitComment/" + postId,
+      reqBody
+    );
+  }
 
   constructor(private http: HttpClient) {}
 }
