@@ -6,48 +6,71 @@
 }
 
 .container {
-  padding: 1rem 3rem;
-  margin-top: 75px;
-  //   background-color: teal;
-  .form-element {
-    display: flex;
-    // padding: 0.5rem 0rem;
-    margin: 0.5rem 0;
+  margin-top: 85px;
+
+  .section {
     width: 100%;
-    flex-direction: column;
+    padding: 0 1.2rem;
+  }
 
-    input,
-    select,
-    button {
-      padding: 5px;
-      border: 1px solid rgba(0, 0, 0, 0.3);
-      border-radius: 5px;
-      color: var(--black);
-      font-size: 1rem;
+  .new-post-label {
+    font-size: 1.3em;
+  }
+
+  .form {
+    margin-top: 1.5rem;
+
+    .form-element {
+      display: flex;
+      flex-direction: column;
+
+      &:not(:last-child) {
+        margin-bottom: 0.75rem;
+      }
+
+      label {
+        font-size: 1.2em;
+      }
+
+      input,
+      select,
+      button,
+      textarea {
+        all: unset;
+        padding: 0.5rem 1rem;
+        border-radius: 0.75rem;
+        border: 1px solid rgb(75, 75, 75);
+        &::placeholder {
+          font-size: 1em;
+          color: var(--black);
+        }
+      }
+
+      input[type="file"] {
+        all: unset;
+      }
     }
 
-    .upload-container > input {
-      border: none;
-    }
-
-    textarea {
-      padding: 5px;
-      border: 1px solid rgba(0, 0, 0, 0.3);
-      border-radius: 5px;
-      color: var(--black);
-      font-size: 1rem;
-      width: 100%;
-    }
-    button {
-      background-color: var(--icon-clr-1);
-      color: white;
-      width: 70%;
-      margin: 0.5rem 3rem 0 3rem;
-      border: none;
-      transition: all 0.25s ease-in-out;
-      cursor: pointer;
-      &:hover {
-        background: #2689c1;
+    .form-btns {
+      align-items: center;
+      flex-direction: row;
+      button {
+        background-color: var(--pale-white);
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+        margin-top: 1rem;
+        text-align: center;
+        border: none;
+        cursor: pointer;
+        flex: 1;
+        &:last-child {
+          margin-left: 1rem;
+        }
+      }
+      button[type="submit"] {
+        color: var(--blue-accent);
+      }
+      button[type="reset"] {
+        color: var(--red-accent);
       }
     }
   }
