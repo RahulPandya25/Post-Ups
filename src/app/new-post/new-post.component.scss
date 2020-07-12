@@ -1,0 +1,77 @@
+.nav-container {
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  z-index: 1;
+}
+
+.container {
+  margin-top: 85px;
+
+  .section {
+    width: 100%;
+    padding: 0 1.2rem;
+  }
+
+  .new-post-label {
+    font-size: 1.3em;
+  }
+
+  .form {
+    margin-top: 1.5rem;
+
+    .form-element {
+      display: flex;
+      flex-direction: column;
+
+      &:not(:last-child) {
+        margin-bottom: 0.75rem;
+      }
+
+      label {
+        font-size: 1.2em;
+      }
+
+      input,
+      select,
+      button,
+      textarea {
+        all: unset;
+        padding: 0.5rem 1rem;
+        border-radius: 0.75rem;
+        border: 1px solid rgb(75, 75, 75);
+        &::placeholder {
+          font-size: 1em;
+          color: var(--black);
+        }
+      }
+
+      input[type="file"] {
+        all: unset;
+      }
+    }
+
+    .form-btns {
+      align-items: center;
+      flex-direction: row;
+      button {
+        background-color: var(--pale-white);
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+        margin-top: 1rem;
+        text-align: center;
+        border: none;
+        cursor: pointer;
+        flex: 1;
+        &:last-child {
+          margin-left: 1rem;
+        }
+      }
+      button[type="submit"] {
+        color: var(--blue-accent);
+      }
+      button[type="reset"] {
+        color: var(--red-accent);
+      }
+    }
+  }
+}

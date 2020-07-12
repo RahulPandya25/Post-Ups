@@ -3,6 +3,7 @@
 // ************** //
 
 var express = require("express");
+var cors = require("cors");
 var path = require("path");
 var bodyParser = require("body-parser");
 
@@ -23,8 +24,13 @@ mongoose
   .then(() => console.log("DB connection succesful"))
   .catch((err) => console.error(err));
 
-const ANGULAR_BUNDLE = "dist/Post-Ups";
+const ANGULAR_BUNDLE = "dist";
 
+app.use(
+  cors({
+    origin: "http://localhost:4200",
+  })
+);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: "false" }));
 
@@ -35,6 +41,6 @@ app.use(express.static(path.join(__dirname, ANGULAR_BUNDLE)));
 app.use("/api", api);
 
 // all the other request should be redirected to angular app
-// app.use("*", express.static(path.join(__dirname, ANGULAR_BUNDLE)));
+app.use("*", express.static(path.join(__dirname, ANGULAR_BUNDLE)));
 
 module.exports = app;

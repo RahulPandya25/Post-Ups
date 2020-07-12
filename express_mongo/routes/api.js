@@ -26,15 +26,14 @@ router.post("/submitPost", function (req, res) {
 
 // **** Syntax ****
 // {
+//   "postId": <Post Id>
 //   "comment": "<Your comment>"
 // }
 // ****************
-router.get("/submitComment/:postId", function (req, res) {
-  return postService
-    .submitCommentOnPost(req.params.postId, req.body)
-    .then((data) => {
-      res.json(data);
-    });
+router.post("/submitComment", function (req, res) {
+  return postService.submitCommentOnPost(req.body).then((data) => {
+    res.json(data);
+  });
 });
 
 // **** Syntax ****
@@ -44,7 +43,7 @@ router.get("/submitComment/:postId", function (req, res) {
 // }
 // Tags must be in lowercase
 // ****************
-router.get("/filter", function (req, res) {
+router.post("/filter", function (req, res) {
   return postService.filterThroughPosts(req.body).then((data) => {
     res.json(data);
   });
