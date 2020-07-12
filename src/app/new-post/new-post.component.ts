@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ConstantsService } from "../services/constants.service";
 
 @Component({
   selector: "app-new-post",
@@ -6,10 +7,8 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./new-post.component.scss"],
 })
 export class NewPostComponent implements OnInit {
-  flag;
-  text = false;
-  video = false;
-  image = false;
+  flag = 2;
+  file = false;
   private fileList;
 
   selectFile(event) {
@@ -28,6 +27,14 @@ export class NewPostComponent implements OnInit {
     {
       id: 3,
       name: "Video",
+    },
+    {
+      id: 4,
+      name: "Audio",
+    },
+    {
+      id: 5,
+      name: "Document",
     },
   ];
   constructor() {}
