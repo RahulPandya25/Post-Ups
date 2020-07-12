@@ -7,7 +7,7 @@ import { ConstantsService } from "../services/constants.service";
   styleUrls: ["./new-post.component.scss"],
 })
 export class NewPostComponent implements OnInit {
-  flag = 2;
+  flag = -1;
   file = false;
   private fileList;
 
