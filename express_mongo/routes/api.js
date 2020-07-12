@@ -49,4 +49,10 @@ router.post("/filter", function (req, res) {
   });
 });
 
+router.post("/updateLikes/:id", function (req, res) {
+  return postService.incrementLikeOnPost(req.params.id).then((data) => {
+    res.json(data);
+  });
+});
+
 module.exports = router;
