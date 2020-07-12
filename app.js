@@ -24,7 +24,7 @@ mongoose
   .then(() => console.log("DB connection succesful"))
   .catch((err) => console.error(err));
 
-const ANGULAR_BUNDLE = "dist/Post-Ups";
+const ANGULAR_BUNDLE = "dist";
 
 app.use(
   cors({

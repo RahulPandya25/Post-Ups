@@ -43,7 +43,7 @@ router.post("/submitComment", function (req, res) {
 // }
 // Tags must be in lowercase
 // ****************
-router.get("/filter", function (req, res) {
+router.post("/filter", function (req, res) {
   return postService.filterThroughPosts(req.body).then((data) => {
     res.json(data);
   });

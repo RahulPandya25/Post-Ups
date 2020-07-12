@@ -9,18 +9,35 @@ import { ConstantsService } from "../services/constants.service";
 })
 export class FeedComponent implements OnInit {
   posts;
+  currentTag;
 
-  constructor(private postService: PostService) {}
+  constructor(
+    private postService: PostService,
+    private constService: ConstantsService
+  ) {}
 
   ngOnInit(): void {
-    console.log(ConstantsService.BASE_URL);
-    this.postService.getFeed().subscribe((response) => {
-      this.posts = response;
-      this.posts.forEach((element) => {
-        let date = element.datePosted;
-        element.datePosted = new Date(date);
+    // getting currentTag
+    this.constService.currentTag.subscribe((tag) => (this.currentTag = tag));
+
+    if (this.currentTag === this.constService.DEFAULT_TAG) {
+      this.postService.getFeed().subscribe((response) => {
+        this.posts = response;
+        this.posts.forEach((element) => {
+          let date = element.datePosted;
+          element.datePosted = new Date(date);
+        });
       });
-      console.log(this.posts);
-    });
+    } else {
+      this.postService
+        .filterThroughPosts(this.currentTag)
+        .subscribe((response) => {
+          this.posts = response;
+          this.posts.forEach((element) => {
+            let date = element.datePosted;
+            element.datePosted = new Date(date);
+          });
+        });
+    }
   }
 }
