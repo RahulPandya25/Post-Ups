@@ -3,10 +3,16 @@
 </div>
 
 <div class="container">
-  <form class="emboss">
+  <label class="section new-post-label">New Post</label>
+  <form class="section form">
     <div class="form-element">
       <label for="post-title">Title</label>
-      <input type="text" name="post-title" id="post-title" />
+      <input
+        type="text"
+        name="post-title"
+        id="post-title"
+        placeholder="Add Title..."
+      />
     </div>
     <div class="form-element">
       <label for="category">Category</label
@@ -15,41 +21,38 @@
         name="category"
         id="category"
         (change)="changeCategory($event)"
+        aria-placeholder="Select Category"
       >
         <option *ngFor="let category of categories" [value]="category.id">
           {{ category.name }}</option
         >
       </select>
     </div>
-    <div class="form-element">
-      <div *ngIf="flag == '1'" class="text-container">
-        <!-- <label for="text">Add Text</label> -->
-        <textarea rows="3">Enter the text here</textarea>
-      </div>
-      <div *ngIf="flag == '2'" class="upload-container">
-        <label for="imageFile">Upload Image</label>
-        <input
-          type="file"
-          name="imageFile"
-          id="imageFile"
-          (change)="selectFile($event)"
-        />
-      </div>
-      <div *ngIf="flag == '3'" class="upload-container">
-        <label for="videoFile">Upload Video</label>
-        <input
-          type="file"
-          name="videoFile"
-          id="videoFile"
-          (change)="selectFile($event)"
-        />
-      </div>
+    <div class="form-element" *ngIf="flag == 1">
+      <label for="text">Add Text</label>
+      <textarea rows="3" placeholder="Enter the post here..."></textarea>
     </div>
-    <div class="form-element tag">
-      <label for="tag">Tags:</label>
-      <input type="text" name="tag" />
+
+    <div class="form-element" *ngIf="flag != 1 && flag != -1">
+      <label for="mediaFile">Upload File</label>
+      <input
+        type="file"
+        name="mediaFile"
+        id="mediaFile"
+        (change)="selectFile($event)"
+      />
     </div>
+
     <div class="form-element">
+      <label for="tag">Tags</label>
+      <input
+        type="text"
+        name="tag"
+        placeholder="Add Tags seperated by commas..."
+      />
+    </div>
+    <div class="form-element form-btns">
+      <button type="reset">Reset</button>
       <button type="submit">Submit</button>
     </div>
   </form>
