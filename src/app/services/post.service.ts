@@ -19,5 +19,11 @@ export class PostService {
     });
   }
 
+  filterThroughPosts(tag) {
+    return this.http.post(ConstantsService.BASE_URL + "/filter", {
+      tag: tag,
+    });
+  }
+
   constructor(private http: HttpClient) {}
 }
