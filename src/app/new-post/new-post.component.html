@@ -1,3 +1,56 @@
-<app-navbar></app-navbar>
-<p>new-post works!</p>
-<a routerLink="/">Feed</a>
+<div class="nav-container">
+  <app-navbar></app-navbar>
+</div>
+
+<div class="container">
+  <form class="emboss">
+    <div class="form-element">
+      <label for="post-title">Title</label>
+      <input type="text" name="post-title" id="post-title" />
+    </div>
+    <div class="form-element">
+      <label for="category">Category</label
+      ><select
+        ngModel
+        name="category"
+        id="category"
+        (change)="changeCategory($event)"
+      >
+        <option *ngFor="let category of categories" [value]="category.id">
+          {{ category.name }}</option
+        >
+      </select>
+    </div>
+    <div class="form-element">
+      <div *ngIf="flag == '1'" class="text-container">
+        <!-- <label for="text">Add Text</label> -->
+        <textarea rows="3">Enter the text here</textarea>
+      </div>
+      <div *ngIf="flag == '2'" class="upload-container">
+        <label for="imageFile">Upload Image</label>
+        <input
+          type="file"
+          name="imageFile"
+          id="imageFile"
+          (change)="selectFile($event)"
+        />
+      </div>
+      <div *ngIf="flag == '3'" class="upload-container">
+        <label for="videoFile">Upload Video</label>
+        <input
+          type="file"
+          name="videoFile"
+          id="videoFile"
+          (change)="selectFile($event)"
+        />
+      </div>
+    </div>
+    <div class="form-element tag">
+      <label for="tag">Tags:</label>
+      <input type="text" name="tag" />
+    </div>
+    <div class="form-element">
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+</div>

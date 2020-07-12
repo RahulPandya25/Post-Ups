@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { PostService } from "../services/post.service";
+import { ConstantsService } from "../services/constants.service";
 
 @Component({
   selector: "app-post",
@@ -11,15 +12,23 @@ export class PostComponent implements OnInit {
   postId;
   post;
   comment = "";
+
   sendComment(comment) {
     this.postService.postComment(this.postId, comment).subscribe((response) => {
       this.comment = "";
       this.ngOnInit();
     });
   }
+
+  searchThisTag(tag: String) {
+    this.constService.changeTag(tag.toLowerCase());
+    this.router.navigateByUrl("/");
+  }
   constructor(
     private postService: PostService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private constService: ConstantsService
   ) {}
 
   ngOnInit(): void {

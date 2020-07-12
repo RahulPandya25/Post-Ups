@@ -80,3 +80,25 @@
     }
   }
 }
+
+.new-post-btn {
+  all: unset;
+  --size: 50px;
+
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: var(--pale-white);
+  height: var(--size);
+  width: var(--size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+
+  .fa {
+    font-size: 1.25rem;
+  }
+}
