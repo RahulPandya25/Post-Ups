@@ -43,7 +43,7 @@
     </div>
     <div class="sorts-and-filters">
       <div class="feeds" *ngFor="let item of feed">
-        <div
+        <button
           *ngIf="item.show"
           class="element"
           [ngClass]="{
@@ -52,10 +52,10 @@
           (click)="refreshFeed(item.value)"
         >
           {{ item.name }}
-        </div>
+        </button>
       </div>
       <div class="sorts" *ngFor="let item of sorts">
-        <div
+        <button
           *ngIf="item.show"
           class="element"
           [ngClass]="{
@@ -64,7 +64,7 @@
           (click)="sortFeed(item.value)"
         >
           {{ item.name }}
-        </div>
+        </button>
       </div>
       <div class="category">
         &nbsp;&nbsp;Filter:

@@ -79,6 +79,12 @@ export class NavbarComponent implements OnInit {
   ];
 
   refreshFeed(tag) {
+    //update the tag in view
+    this.feed.forEach((element) => {
+      if (element.value === tag) element.isActive = true;
+      else element.isActive = false;
+    });
+
     this.constService.changeTag(tag.toLowerCase());
     console.log(`Feed tag: ${tag}`);
   }
@@ -92,6 +98,11 @@ export class NavbarComponent implements OnInit {
   }
 
   sortFeed(value) {
+    //update the tag in view
+    this.sorts.forEach((element) => {
+      if (element.value === value) element.isActive = true;
+      else element.isActive = false;
+    });
     console.log(`Sort: ${value}`);
   }
 
