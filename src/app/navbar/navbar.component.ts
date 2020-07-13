@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
   isTagSearched = false;
 
   feed = [
-    { name: "All", value: "all", isActive: false, show: true },
+    { name: "All Posts", value: "all", isActive: false, show: true },
     { name: "Tag", value: "", isActive: true, show: true, isCustom: true },
   ];
   sorts = [
