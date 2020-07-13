@@ -12,7 +12,8 @@ postService.submitPost = (data) => {
   return Post.create(data);
 };
 
-postService.getPostById = (postId) => {
+postService.getPostById = async (postId) => {
+  await Post.findOneAndUpdate({ _id: postId }, { $inc: { views: 1 } });
   return Post.findById(postId).populate("comments");
 };
 
@@ -45,6 +46,11 @@ postService.filterThroughPosts = (data) => {
     var query = { tags: data.tag, category: data.category };
   }
   return Post.find(query);
+};
+
+postService.incrementLikeOnPost = async (postId) => {
+  await Post.findOneAndUpdate({ _id: postId }, { $inc: { likes: 1 } });
+  return Post.findById(postId).populate("comments");
 };
 
 module.exports = postService;
