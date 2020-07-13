@@ -1,11 +1,87 @@
 <div class="navbar">
-  <div class="back-btn">
-    <button routerLink="/">
-      <i class="fa fa-arrow-left" aria-hidden="true"></i>
-    </button>
+  <div class="primary-bar">
+    <div
+      class="back-btn"
+      [ngClass]="{
+        hide: !showBackBtn
+      }"
+    >
+      <button routerLink="/">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="title">Post-Ups</div>
+    <div
+      class="search-btn"
+      [ngClass]="{
+        hide: !showSearchBtn
+      }"
+    >
+      <button (click)="showSearchBar = !showSearchBar">
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </button>
+    </div>
   </div>
-  <div class="title">Post-Ups</div>
-  <div class="search-btn">
-    <button><i class="fa fa-search" aria-hidden="true"></i></button>
+  <div
+    class="secondary-bar"
+    *ngIf="showSecondaryNavBar"
+    [ngClass]="{
+      'show-search-bar': showSearchBar
+    }"
+  >
+    <div class="search-tag" *ngIf="showSearchBar">
+      <input
+        type="text"
+        name="tag"
+        [(ngModel)]="tag"
+        class="tag-input"
+        placeholder="Search Tag..."
+      />
+      <button class="search-btn" (click)="searchTag(tag)">
+        <i class="far fa-paper-plane"></i>
+      </button>
+    </div>
+    <div class="sorts-and-filters">
+      <div class="feeds" *ngFor="let item of feed">
+        <div
+          *ngIf="item.show"
+          class="element"
+          [ngClass]="{
+            active: item.isActive
+          }"
+          (click)="refreshFeed(item.value)"
+        >
+          {{ item.name }}
+        </div>
+      </div>
+      <div class="sorts" *ngFor="let item of sorts">
+        <div
+          *ngIf="item.show"
+          class="element"
+          [ngClass]="{
+            active: item.isActive
+          }"
+          (click)="sortFeed(item.value)"
+        >
+          {{ item.name }}
+        </div>
+      </div>
+      <div class="category">
+        &nbsp;&nbsp;Filter:
+        <select
+          class="element"
+          aria-placeholder="Select Category"
+          (change)="changeCategory($event)"
+        >
+          <option
+            *ngFor="let category of categories"
+            [value]="category.value"
+            [selected]="category.defaultSelected == true"
+          >
+            {{ category.name }}</option
+          >
+        </select>
+      </div>
+    </div>
   </div>
 </div>

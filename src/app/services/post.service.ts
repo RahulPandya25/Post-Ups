@@ -19,6 +19,13 @@ export class PostService {
     });
   }
 
+  likeThisPost(postId) {
+    return this.http.post(
+      ConstantsService.BASE_URL + "/updateLikes/" + postId,
+      {}
+    );
+  }
+
   filterThroughPosts(tag) {
     return this.http.post(ConstantsService.BASE_URL + "/filter", {
       tag: tag,

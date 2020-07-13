@@ -10,6 +10,7 @@ import { FeedComponent } from "./feed/feed.component";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { NewPostComponent } from "./new-post/new-post.component";
 import { PostComponent } from "./post/post.component";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,13 @@ import { PostComponent } from "./post/post.component";
     NewPostComponent,
     PostComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    CommonModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
