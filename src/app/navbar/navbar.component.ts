@@ -1,7 +1,6 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { ConstantsService } from "../services/constants.service";
 import { Router } from "@angular/router";
-import { element } from "protractor";
 
 @Component({
   selector: "app-navbar",
@@ -12,6 +11,7 @@ export class NavbarComponent implements OnInit {
   @Input() showSecondaryNavBar: boolean;
   @Input() showBackBtn: boolean;
   @Input() showSearchBtn: boolean;
+  @Output() updateFeed: EventEmitter<any> = new EventEmitter();
 
   tag;
   showSearchBar = false;
@@ -127,7 +127,7 @@ export class NavbarComponent implements OnInit {
   }
 
   updateFeedComponent() {
-    console.log("update");
+    this.updateFeed.emit();
   }
 
   constructor(private constService: ConstantsService, private router: Router) {}

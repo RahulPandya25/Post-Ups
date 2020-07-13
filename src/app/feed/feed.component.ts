@@ -43,6 +43,10 @@ export class FeedComponent implements OnInit {
       });
   }
 
+  updateFeed() {
+    this.getFeed();
+  }
+
   ngOnInit(): void {
     this.getFeed();
   }
