@@ -16,6 +16,7 @@
 
     .back-btn,
     .search-btn {
+      transition: all 0.25s ease-in-out;
       button {
         all: unset;
         padding: 0.75rem;
@@ -47,8 +48,8 @@
       justify-content: space-between;
       .tag-input {
         all: unset;
-        padding: 0.5rem 1rem;
-        max-width: 70%;
+        padding: 0.5rem 0.75rem;
+        max-width: 72%;
 
         &::placeholder {
           font-size: 1em;
@@ -58,9 +59,9 @@
       .search-btn {
         --square: 45px;
         all: unset;
+
         width: var(--square);
         height: var(--square);
-        border-radius: 0.5rem;
         text-align: center;
         font-size: 1.3em;
         .fa::before {
@@ -91,18 +92,27 @@
       }
 
       .element {
+        all: unset;
         background-color: rgba(0, 0, 0, 0.05);
-        color: var(--dark);
         margin: 0 0.25rem;
         border-radius: 0.75rem;
         padding: 0.2rem 0.5rem;
         text-align: center;
         cursor: pointer;
+        transition: all 0.25s ease-in-out;
+        color: var(--dark);
+
+        span {
+          color: var(--dark);
+        }
 
         &.active {
           background-color: var(--blue-accent);
           color: white;
-          border: none;
+
+          span {
+            color: white;
+          }
         }
       }
     }
