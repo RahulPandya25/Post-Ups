@@ -48,8 +48,8 @@ postService.filterThroughPosts = (data) => {
   return Post.find(query);
 };
 
-postService.incrementLikeOnPost = (postId) => {
-  Post.findOneAndUpdate({ _id: postId }, { $inc: { likes: 1 } });
+postService.incrementLikeOnPost = async (postId) => {
+  await Post.findOneAndUpdate({ _id: postId }, { $inc: { likes: 1 } });
   return Post.findById(postId).populate("comments");
 };
 

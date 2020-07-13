@@ -13,11 +13,29 @@ export class PostComponent implements OnInit {
   post;
   comment = "";
 
-  sendComment(comment) {
-    this.postService.postComment(this.postId, comment).subscribe((response) => {
-      this.comment = "";
-      this.ngOnInit();
+  likeThisPost(postId) {
+    console.log(postId);
+    this.postService.likeThisPost(postId).subscribe((response) => {
+      this.post = response;
+      // updating post-date
+      let date = this.post.datePosted;
+      this.post.datePosted = new Date(date);
+      // updating comment-date
+      this.post.comments.forEach((element) => {
+        let date = element.datePosted;
+        element.datePosted = new Date(date);
+      });
     });
+  }
+
+  sendComment(comment) {
+    if (comment !== "")
+      this.postService
+        .postComment(this.postId, comment)
+        .subscribe((response) => {
+          this.comment = "";
+          this.ngOnInit();
+        });
   }
 
   searchThisTag(tag: String) {
