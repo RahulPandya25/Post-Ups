@@ -124,12 +124,11 @@
 
       display: flex;
       justify-content: space-between;
-      align-items: center;
 
       input {
         all: unset;
-        padding: 0.5rem 1rem;
-        flex-grow: 1;
+        padding: 0.5rem 0.75rem;
+        max-width: 75%;
 
         &::placeholder {
           font-size: 1em;
@@ -139,9 +138,9 @@
       .send-comment {
         --square: 45px;
         all: unset;
+
         width: var(--square);
         height: var(--square);
-        border-radius: 200px;
         text-align: center;
         font-size: 1.3em;
         color: var(--black);

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { ConstantsService } from "../services/constants.service";
 import { Router } from "@angular/router";
+import { element } from "protractor";
 
 @Component({
   selector: "app-navbar",
@@ -11,13 +12,14 @@ export class NavbarComponent implements OnInit {
   @Input() showSecondaryNavBar: boolean;
   @Input() showBackBtn: boolean;
   @Input() showSearchBtn: boolean;
-  currentCategory = "all";
+
   tag;
   showSearchBar = false;
+  isTagSearched = false;
 
   feed = [
-    { name: "All", value: "all", isActive: true, show: true },
-    { name: "Search", value: "tag", isActive: false, show: true },
+    { name: "All", value: "all", isActive: false, show: true },
+    { name: "Tag", value: "", isActive: true, show: true, isCustom: true },
   ];
   sorts = [
     {
@@ -79,25 +81,53 @@ export class NavbarComponent implements OnInit {
   ];
 
   refreshFeed(tag) {
+    //update the tag in view
+    this.feed.forEach((element) => {
+      if (element.value === tag) element.isActive = true;
+      else element.isActive = false;
+    });
+
+    // update feed logic
     this.constService.changeTag(tag.toLowerCase());
-    console.log(`Feed tag: ${tag}`);
+    this.updateFeedComponent();
   }
 
   searchTag(tag) {
     if (tag !== "") {
+      this.isTagSearched = true;
+      this.feed.forEach((element) => {
+        if (element.isCustom) {
+          element.name = tag;
+          element.value = tag.toLowerCase();
+        }
+      });
+
+      // update feed logic
       this.constService.changeTag(tag.toLowerCase());
-      // this.router.navigateByUrl("/");
-      console.log(`Search tag: ${tag}`);
+      this.updateFeedComponent();
     }
   }
 
   sortFeed(value) {
-    console.log(`Sort: ${value}`);
+    //update the tag in view
+    this.sorts.forEach((element) => {
+      if (element.value === value) element.isActive = true;
+      else element.isActive = false;
+    });
+
+    // update feed logic
+    this.constService.changeSort(value);
+    this.updateFeedComponent();
   }
 
   changeCategory(e) {
-    this.currentCategory = e.target.value;
-    console.log(`Current Category: ${this.currentCategory}`);
+    // update feed logic
+    this.constService.changeCategory(e.target.value);
+    this.updateFeedComponent();
+  }
+
+  updateFeedComponent() {
+    console.log("update");
   }
 
   constructor(private constService: ConstantsService, private router: Router) {}

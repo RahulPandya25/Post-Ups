@@ -10,34 +10,40 @@ import { ConstantsService } from "../services/constants.service";
 export class FeedComponent implements OnInit {
   posts;
   currentTag;
+  currentSort;
+  currentCatgeory;
 
   constructor(
     private postService: PostService,
     private constService: ConstantsService
   ) {}
 
-  ngOnInit(): void {
-    // getting currentTag
+  getFeed() {
+    // getting values
     this.constService.currentTag.subscribe((tag) => (this.currentTag = tag));
+    this.constService.currentCategory.subscribe(
+      (cat) => (this.currentCatgeory = cat)
+    );
+    this.constService.currentSort.subscribe(
+      (sort) => (this.currentSort = sort)
+    );
 
-    if (this.currentTag === this.constService.DEFAULT_TAG) {
-      this.postService.getFeed().subscribe((response) => {
+    this.postService
+      .getFeed({
+        tag: this.currentTag,
+        sort: this.currentSort,
+        category: this.currentCatgeory,
+      })
+      .subscribe((response) => {
         this.posts = response;
         this.posts.forEach((element) => {
           let date = element.datePosted;
           element.datePosted = new Date(date);
         });
       });
-    } else {
-      this.postService
-        .filterThroughPosts(this.currentTag)
-        .subscribe((response) => {
-          this.posts = response;
-          this.posts.forEach((element) => {
-            let date = element.datePosted;
-            element.datePosted = new Date(date);
-          });
-        });
-    }
+  }
+
+  ngOnInit(): void {
+    this.getFeed();
   }
 }
