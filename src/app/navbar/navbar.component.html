@@ -44,14 +44,15 @@
     <div class="sorts-and-filters">
       <div class="feeds" *ngFor="let item of feed">
         <button
-          *ngIf="item.show"
+          *ngIf="item.show && isTagSearched"
           class="element"
           [ngClass]="{
             active: item.isActive
           }"
           (click)="refreshFeed(item.value)"
         >
-          {{ item.name }}
+          <span *ngIf="item.value === 'all'">{{ item.name }}</span>
+          <span *ngIf="item.value !== 'all'">Search"{{ item.name }}"</span>
         </button>
       </div>
       <div class="sorts" *ngFor="let item of sorts">

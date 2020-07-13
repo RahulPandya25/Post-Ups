@@ -6,7 +6,9 @@ import { Injectable } from "@angular/core";
   providedIn: "root",
 })
 export class PostService {
-  getFeed() {
+  getFeed(feed) {
+    console.log(feed);
+
     return this.http.get(ConstantsService.BASE_URL + "/getFeed");
   }
   getPostById(postId) {

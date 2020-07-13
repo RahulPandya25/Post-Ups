@@ -16,6 +16,7 @@
 
     .back-btn,
     .search-btn {
+      transition: all 0.25s ease-in-out;
       button {
         all: unset;
         padding: 0.75rem;
@@ -93,17 +94,25 @@
       .element {
         all: unset;
         background-color: rgba(0, 0, 0, 0.05);
-        color: var(--dark);
         margin: 0 0.25rem;
         border-radius: 0.75rem;
         padding: 0.2rem 0.5rem;
         text-align: center;
         cursor: pointer;
+        transition: all 0.25s ease-in-out;
+        color: var(--dark);
+
+        span {
+          color: var(--dark);
+        }
 
         &.active {
           background-color: var(--blue-accent);
           color: white;
-          border: none;
+
+          span {
+            color: white;
+          }
         }
       }
     }
