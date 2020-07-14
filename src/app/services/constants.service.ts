@@ -17,7 +17,7 @@ export class ConstantsService {
 
   private sortSource = new BehaviorSubject(defaults.defaultSort);
   currentSort = this.sortSource.asObservable();
-  changeSort(sort: string) {
+  changeSort(sort) {
     this.sortSource.next(sort);
   }
 
