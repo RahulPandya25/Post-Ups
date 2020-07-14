@@ -8,8 +8,15 @@ import { Injectable } from "@angular/core";
 export class PostService {
   getFeed(feed) {
     console.log(feed);
-
-    return this.http.get(ConstantsService.BASE_URL + "/getFeed");
+    // old method
+    // return this.http.get(ConstantsService.BASE_URL + "/getFeed");
+    return this.http.post(ConstantsService.BASE_URL + "/filter", {
+      tag: this.constService.DEFAULT_TAG === feed.tag ? undefined : feed.tag,
+      category:
+        this.constService.DEFAULT_CATEGORY === feed.category
+          ? undefined
+          : feed.category,
+    });
   }
   getPostById(postId) {
     return this.http.get(ConstantsService.BASE_URL + "/getPost/" + postId);
@@ -34,5 +41,8 @@ export class PostService {
     });
   }
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private constService: ConstantsService
+  ) {}
 }
