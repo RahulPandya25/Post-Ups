@@ -1,6 +1,7 @@
 import { PostService } from "./../services/post.service";
 import { Component, OnInit } from "@angular/core";
 import { ConstantsService } from "../services/constants.service";
+import defaults from "../assets/defaults.json";
 
 @Component({
   selector: "app-feed",
@@ -30,9 +31,13 @@ export class FeedComponent implements OnInit {
 
     this.postService
       .getFeed({
-        tag: this.currentTag,
+        tag:
+          defaults.defaultTag === this.currentTag ? undefined : this.currentTag,
         sort: this.currentSort,
-        category: this.currentCatgeory,
+        category:
+          defaults.defaultCategory === this.currentCatgeory
+            ? undefined
+            : this.currentCatgeory,
       })
       .subscribe((response) => {
         this.posts = response;

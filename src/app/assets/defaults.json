@@ -1,6 +1,6 @@
 {
   "defaultTag": "all",
-  "defaultSort": "recentlyPosted",
+  "defaultSort": { "datePosted": -1 },
   "defaultCategory": "all",
   "feed": [
     { "name": "All Posts", "value": "all", "isActive": false, "show": true },
@@ -15,25 +15,25 @@
   "sorts": [
     {
       "name": "Recently Posted",
-      "value": "recentlyPosted",
+      "value": { "datePosted": -1 },
       "isActive": true,
       "show": true
     },
     {
       "name": "Most Liked",
-      "value": "mostLiked",
+      "value": { "likes": -1 },
       "isActive": false,
       "show": true
     },
     {
       "name": "Most Viewed",
-      "value": "mostViewed",
+      "value": { "views": -1 },
       "isActive": false,
       "show": true
     },
     {
       "name": "Most Commented",
-      "value": "mostCommented",
+      "value": { "comments": -1 },
       "isActive": false,
       "show": true
     }
