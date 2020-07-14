@@ -95,6 +95,14 @@ export class NavbarComponent implements OnInit {
   searchTag(tag) {
     if (tag !== "") {
       this.isTagSearched = true;
+
+      //update the tag in view
+      this.feed.forEach((element) => {
+        if (element.value !== this.constService.DEFAULT_TAG)
+          element.isActive = true;
+        else element.isActive = false;
+      });
+
       this.feed.forEach((element) => {
         if (element.isCustom) {
           element.name = tag;
