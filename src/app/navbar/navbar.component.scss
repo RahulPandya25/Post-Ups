@@ -115,6 +115,11 @@
           }
         }
       }
+
+      .category option {
+        background-color: var(--light);
+        color: var(--dark);
+      }
     }
 
     // animation for searchbar dropping from back of primary nav

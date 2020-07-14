@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit {
 
   tag;
   showSearchBar = false;
-  isTagSearched = false;
+  isTagSearched = this.getCurrentTag() !== defaults.defaultTag;
 
   feed = defaults.feed;
   sorts = defaults.sorts;
@@ -90,6 +90,11 @@ export class NavbarComponent implements OnInit {
       cTag = tag;
     });
     return cTag;
+  }
+
+  tagClickedOnPostScreen() {
+    //handle when someone clicks post tag
+    console.log("tag");
   }
 
   constructor(private constService: ConstantsService, private router: Router) {}
