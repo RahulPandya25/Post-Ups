@@ -36,6 +36,7 @@
         [(ngModel)]="tag"
         class="tag-input"
         placeholder="Search Tag..."
+        (keyup.enter)="searchTag(tag)"
       />
       <button class="search-btn" (click)="searchTag(tag)">
         <i class="far fa-paper-plane"></i>

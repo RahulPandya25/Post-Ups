@@ -38,6 +38,9 @@ export class NavbarComponent implements OnInit {
   searchTag(tag) {
     if (tag !== "") {
       this.isTagSearched = true;
+      this.showSearchBar = false;
+      // this is not the local var, updating global var
+      this.tag = "";
 
       //update the tag in view
       this.feed.forEach((element) => {
@@ -54,6 +57,7 @@ export class NavbarComponent implements OnInit {
 
       // update feed logic
       this.constService.changeTag(tag.toLowerCase());
+
       this.updateFeedComponent();
     }
   }
@@ -78,6 +82,14 @@ export class NavbarComponent implements OnInit {
 
   updateFeedComponent() {
     this.updateFeed.emit();
+  }
+
+  getCurrentTag() {
+    var cTag;
+    this.constService.currentTag.subscribe((tag) => {
+      cTag = tag;
+    });
+    return cTag;
   }
 
   constructor(private constService: ConstantsService, private router: Router) {}
