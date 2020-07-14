@@ -42,13 +42,11 @@ export class NavbarComponent implements OnInit {
       // this is not the local var, updating global var
       this.tag = "";
 
-      //update the tag in view
+      //update the tag in view and update var
       this.feed.forEach((element) => {
         if (element.value !== defaults.defaultTag) element.isActive = true;
         else element.isActive = false;
-      });
 
-      this.feed.forEach((element) => {
         if (element.isCustom) {
           element.name = tag;
           element.value = tag.toLowerCase();
@@ -92,9 +90,19 @@ export class NavbarComponent implements OnInit {
     return cTag;
   }
 
-  tagClickedOnPostScreen() {
+  tagClickedOnPostScreen(tag) {
     //handle when someone clicks post tag
-    console.log("tag");
+    this.isTagSearched = true;
+    //update the tag in view and update var
+    this.feed.forEach((element) => {
+      if (element.value !== defaults.defaultTag) element.isActive = true;
+      else element.isActive = false;
+
+      if (element.isCustom) {
+        element.name = tag;
+        element.value = tag.toLowerCase();
+      }
+    });
   }
 
   constructor(private constService: ConstantsService, private router: Router) {}
