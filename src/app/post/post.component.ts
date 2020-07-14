@@ -1,7 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { PostService } from "../services/post.service";
 import { ConstantsService } from "../services/constants.service";
+import { NavbarComponent } from "../navbar/navbar.component";
 
 @Component({
   selector: "app-post",
@@ -12,6 +13,8 @@ export class PostComponent implements OnInit {
   postId;
   post;
   comment = "";
+
+  @ViewChild(NavbarComponent) navBar: NavbarComponent;
 
   likeThisPost(postId) {
     console.log(postId);
@@ -40,6 +43,7 @@ export class PostComponent implements OnInit {
 
   searchThisTag(tag: String) {
     this.constService.changeTag(tag.toLowerCase());
+    this.navBar.tagClickedOnPostScreen(tag.toLowerCase());
     this.router.navigateByUrl("/");
   }
   constructor(

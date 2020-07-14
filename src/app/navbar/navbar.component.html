@@ -36,6 +36,7 @@
         [(ngModel)]="tag"
         class="tag-input"
         placeholder="Search Tag..."
+        (keyup.enter)="searchTag(tag)"
       />
       <button class="search-btn" (click)="searchTag(tag)">
         <i class="far fa-paper-plane"></i>
@@ -51,8 +52,12 @@
           }"
           (click)="refreshFeed(item.value)"
         >
-          <span *ngIf="item.value === 'all'">{{ item.name }}</span>
-          <span *ngIf="item.value !== 'all'">Search"{{ item.name }}"</span>
+          <span *ngIf="item.value === defaultTagForViewComparision">{{
+            item.name
+          }}</span>
+          <span *ngIf="item.value !== defaultTagForViewComparision"
+            >Search"{{ item.name }}"</span
+          >
         </button>
       </div>
       <div class="sorts" *ngFor="let item of sorts">
@@ -70,7 +75,7 @@
       <div class="category">
         &nbsp;&nbsp;Filter:
         <select
-          class="element"
+          class="element active"
           aria-placeholder="Select Category"
           (change)="changeCategory($event)"
         >
