@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { ConstantsService } from "../services/constants.service";
 import { Router } from "@angular/router";
+import defaults from "../assets/defaults.json";
 
 @Component({
   selector: "app-navbar",
@@ -15,70 +16,12 @@ export class NavbarComponent implements OnInit {
 
   tag;
   showSearchBar = false;
-  isTagSearched = false;
+  isTagSearched = this.getCurrentTag() !== defaults.defaultTag;
 
-  feed = [
-    { name: "All Posts", value: "all", isActive: false, show: true },
-    { name: "Tag", value: "", isActive: true, show: true, isCustom: true },
-  ];
-  sorts = [
-    {
-      name: "Recently Posted",
-      value: "recentlyPosted",
-      isActive: true,
-      show: true,
-    },
-    {
-      name: "Most Liked",
-      value: "mostLiked",
-      isActive: false,
-      show: true,
-    },
-    {
-      name: "Most Viewed",
-      value: "mostViewed",
-      isActive: false,
-      show: true,
-    },
-    {
-      name: "Most Commented",
-      value: "mostCommented",
-      isActive: false,
-      show: true,
-    },
-  ];
-  categories = [
-    {
-      value: "all",
-      name: "All",
-      defaultSelected: true,
-    },
-    {
-      value: "text",
-      name: "Texts",
-      defaultSelected: false,
-    },
-    {
-      value: "image",
-      name: "Images",
-      defaultSelected: false,
-    },
-    {
-      value: "video",
-      name: "Videos",
-      defaultSelected: false,
-    },
-    {
-      value: "audio",
-      name: "Audios",
-      defaultSelected: false,
-    },
-    {
-      value: "document",
-      name: "Documents",
-      defaultSelected: false,
-    },
-  ];
+  feed = defaults.feed;
+  sorts = defaults.sorts;
+  categories = defaults.categories;
+  defaultTagForViewComparision = defaults.defaultTag;
 
   refreshFeed(tag) {
     //update the tag in view
@@ -93,17 +36,17 @@ export class NavbarComponent implements OnInit {
   }
 
   searchTag(tag) {
-    if (tag !== "") {
+    if (tag && tag !== "") {
       this.isTagSearched = true;
+      this.showSearchBar = false;
+      // this is not the local var, updating global var
+      this.tag = "";
 
-      //update the tag in view
+      //update the tag in view and update var
       this.feed.forEach((element) => {
-        if (element.value !== this.constService.DEFAULT_TAG)
-          element.isActive = true;
+        if (element.value !== defaults.defaultTag) element.isActive = true;
         else element.isActive = false;
-      });
 
-      this.feed.forEach((element) => {
         if (element.isCustom) {
           element.name = tag;
           element.value = tag.toLowerCase();
@@ -112,6 +55,7 @@ export class NavbarComponent implements OnInit {
 
       // update feed logic
       this.constService.changeTag(tag.toLowerCase());
+
       this.updateFeedComponent();
     }
   }
@@ -136,6 +80,29 @@ export class NavbarComponent implements OnInit {
 
   updateFeedComponent() {
     this.updateFeed.emit();
+  }
+
+  getCurrentTag() {
+    var cTag;
+    this.constService.currentTag.subscribe((tag) => {
+      cTag = tag;
+    });
+    return cTag;
+  }
+
+  tagClickedOnPostScreen(tag) {
+    //handle when someone clicks post tag
+    this.isTagSearched = true;
+    //update the tag in view and update var
+    this.feed.forEach((element) => {
+      if (element.value !== defaults.defaultTag) element.isActive = true;
+      else element.isActive = false;
+
+      if (element.isCustom) {
+        element.name = tag;
+        element.value = tag.toLowerCase();
+      }
+    });
   }
 
   constructor(private constService: ConstantsService, private router: Router) {}

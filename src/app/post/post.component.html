@@ -68,6 +68,7 @@
         [(ngModel)]="comment"
         class="add-comment"
         placeholder="Add comment..."
+        (keyup.enter)="sendComment(comment)"
       />
       <button class="send-comment" (click)="sendComment(comment)">
         <i class="far fa-paper-plane"></i>
