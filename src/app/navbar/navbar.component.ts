@@ -36,7 +36,7 @@ export class NavbarComponent implements OnInit {
   }
 
   searchTag(tag) {
-    if (tag !== "") {
+    if (tag && tag !== "") {
       this.isTagSearched = true;
       this.showSearchBar = false;
       // this is not the local var, updating global var
