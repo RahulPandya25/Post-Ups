@@ -4,10 +4,6 @@ const { isNullOrUndefined } = require("util");
 
 postService = {};
 
-postService.getFeed = () => {
-  return Post.find();
-};
-
 postService.submitPost = (data) => {
   return Post.create(data);
 };
@@ -26,18 +22,11 @@ postService.submitCommentOnPost = async (data) => {
   return Post.findById(data.postId).populate("comments");
 };
 
-postService.filterThroughPosts = (data) => {
-  if (
-    (isNullOrUndefined(data.tag) ||
-      (!isNullOrUndefined(data.tag) && data.tag === "")) &&
-    !isNullOrUndefined(data.category)
-  ) {
+postService.getFeed = (data) => {
+  console.log(data);
+  if (isNullOrUndefined(data.tag) && !isNullOrUndefined(data.category)) {
     var query = { category: data.category };
-  } else if (
-    !isNullOrUndefined(data.tag) &&
-    (isNullOrUndefined(data.category) ||
-      (!isNullOrUndefined(data.category) && data.category === ""))
-  ) {
+  } else if (!isNullOrUndefined(data.tag) && isNullOrUndefined(data.category)) {
     var query = { tags: data.tag };
   } else if (
     !isNullOrUndefined(data.tag) &&
@@ -45,7 +34,8 @@ postService.filterThroughPosts = (data) => {
   ) {
     var query = { tags: data.tag, category: data.category };
   }
-  return Post.find(query);
+
+  return Post.find(query).sort(data.sort);
 };
 
 postService.incrementLikeOnPost = async (postId) => {

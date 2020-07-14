@@ -1,21 +1,13 @@
 import { HttpClient } from "@angular/common/http";
 import { ConstantsService } from "./constants.service";
 import { Injectable } from "@angular/core";
-import defaults from "../assets/defaults.json";
 
 @Injectable({
   providedIn: "root",
 })
 export class PostService {
   getFeed(feed) {
-    console.log(feed);
-    // old method
-    // return this.http.get(ConstantsService.BASE_URL + "/getFeed");
-    return this.http.post(ConstantsService.BASE_URL + "/filter", {
-      tag: defaults.defaultTag === feed.tag ? undefined : feed.tag,
-      category:
-        defaults.defaultTag === feed.category ? undefined : feed.category,
-    });
+    return this.http.post(ConstantsService.BASE_URL + "/getFeed", feed);
   }
   getPostById(postId) {
     return this.http.get(ConstantsService.BASE_URL + "/getPost/" + postId);

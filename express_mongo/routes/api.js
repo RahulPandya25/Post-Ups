@@ -6,12 +6,6 @@ var postService = require("../services/postService.js");
 // base api call: '/api' //
 // ********************* //
 
-router.get("/getFeed", function (req, res) {
-  return postService.getFeed().then((data) => {
-    res.json(data);
-  });
-});
-
 router.get("/getPost/:id", function (req, res) {
   return postService.getPostById(req.params.id).then((data) => {
     res.json(data);
@@ -39,12 +33,13 @@ router.post("/submitComment", function (req, res) {
 // **** Syntax ****
 // {
 //   "category": "<Your category>"
+//   "sort": "<Your sorting query>"
 //   "tag": "<Your tag>"
 // }
 // Tags must be in lowercase
 // ****************
-router.post("/filter", function (req, res) {
-  return postService.filterThroughPosts(req.body).then((data) => {
+router.post("/getFeed", function (req, res) {
+  return postService.getFeed(req.body).then((data) => {
     res.json(data);
   });
 });
