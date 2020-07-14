@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { ConstantsService } from "../services/constants.service";
 import { Router } from "@angular/router";
+import defaults from "../assets/defaults.json";
 
 @Component({
   selector: "app-navbar",
@@ -17,68 +18,10 @@ export class NavbarComponent implements OnInit {
   showSearchBar = false;
   isTagSearched = false;
 
-  feed = [
-    { name: "All Posts", value: "all", isActive: false, show: true },
-    { name: "Tag", value: "", isActive: true, show: true, isCustom: true },
-  ];
-  sorts = [
-    {
-      name: "Recently Posted",
-      value: "recentlyPosted",
-      isActive: true,
-      show: true,
-    },
-    {
-      name: "Most Liked",
-      value: "mostLiked",
-      isActive: false,
-      show: true,
-    },
-    {
-      name: "Most Viewed",
-      value: "mostViewed",
-      isActive: false,
-      show: true,
-    },
-    {
-      name: "Most Commented",
-      value: "mostCommented",
-      isActive: false,
-      show: true,
-    },
-  ];
-  categories = [
-    {
-      value: "all",
-      name: "All",
-      defaultSelected: true,
-    },
-    {
-      value: "text",
-      name: "Texts",
-      defaultSelected: false,
-    },
-    {
-      value: "image",
-      name: "Images",
-      defaultSelected: false,
-    },
-    {
-      value: "video",
-      name: "Videos",
-      defaultSelected: false,
-    },
-    {
-      value: "audio",
-      name: "Audios",
-      defaultSelected: false,
-    },
-    {
-      value: "document",
-      name: "Documents",
-      defaultSelected: false,
-    },
-  ];
+  feed = defaults.feed;
+  sorts = defaults.sorts;
+  categories = defaults.categories;
+  defaultTagForViewComparision = defaults.defaultTag;
 
   refreshFeed(tag) {
     //update the tag in view
@@ -98,8 +41,7 @@ export class NavbarComponent implements OnInit {
 
       //update the tag in view
       this.feed.forEach((element) => {
-        if (element.value !== this.constService.DEFAULT_TAG)
-          element.isActive = true;
+        if (element.value !== defaults.defaultTag) element.isActive = true;
         else element.isActive = false;
       });
 
