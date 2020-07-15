@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { ConstantsService } from "../services/constants.service";
 import { Router } from "@angular/router";
-import defaults from "../assets/defaults.json";
+import defaults from "../../assets/defaults.json";
 
 @Component({
   selector: "app-navbar",
