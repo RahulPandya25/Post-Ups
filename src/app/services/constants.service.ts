@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import defaults from "../assets/defaults.json";
+import defaults from "../../assets/defaults.json";
 
 @Injectable({
   providedIn: "root",

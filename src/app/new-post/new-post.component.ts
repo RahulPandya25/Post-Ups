@@ -1,47 +1,44 @@
 import { Component, OnInit } from "@angular/core";
-import { ConstantsService } from "../services/constants.service";
-
+import defaults from "../../assets/defaults.json";
+import * as _ from "lodash";
 @Component({
   selector: "app-new-post",
   templateUrl: "./new-post.component.html",
   styleUrls: ["./new-post.component.scss"],
 })
 export class NewPostComponent implements OnInit {
-  flag = -1;
+  catWithTextArea;
+  selectedCategory;
+  categories;
   file = false;
   private fileList;
 
+  constructor() {}
   selectFile(event) {
     this.fileList = event.target.files;
     console.log("File Uploaded");
   }
-  categories = [
-    {
-      id: 1,
-      name: "Text",
-    },
-    {
-      id: 2,
-      name: "Image",
-    },
-    {
-      id: 3,
-      name: "Video",
-    },
-    {
-      id: 4,
-      name: "Audio",
-    },
-    {
-      id: 5,
-      name: "Document",
-    },
-  ];
-  constructor() {}
-
   changeCategory(e) {
-    this.flag = e.target.value;
+    this.selectedCategory = e.target.value;
   }
 
-  ngOnInit(): void {}
+  setupCategoryList() {
+    this.categories = defaults.categories;
+
+    this.categories.forEach((element) => {
+      if (element.defaultForNewPost) {
+        this.selectedCategory = element.value;
+        this.catWithTextArea = element.value;
+      }
+    });
+
+    // filtering default list for NewPost and removing "All" category
+    this.categories = _.filter(this.categories, (element) => {
+      return !element.defaultForNav;
+    });
+  }
+
+  ngOnInit(): void {
+    this.setupCategoryList();
+  }
 }

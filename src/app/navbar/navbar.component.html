@@ -45,7 +45,7 @@
     <div class="sorts-and-filters">
       <div class="feeds" *ngFor="let item of feed">
         <button
-          *ngIf="item.show && isTagSearched"
+          *ngIf="isTagSearched"
           class="element"
           [ngClass]="{
             active: item.isActive
@@ -62,7 +62,6 @@
       </div>
       <div class="sorts" *ngFor="let item of sorts">
         <button
-          *ngIf="item.show"
           class="element"
           [ngClass]="{
             active: item.isActive
@@ -82,7 +81,7 @@
           <option
             *ngFor="let category of categories"
             [value]="category.value"
-            [selected]="category.defaultSelected == true"
+            [selected]="category.defaultForNav == true"
           >
             {{ category.name }}</option
           >

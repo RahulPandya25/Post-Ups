@@ -1,7 +1,7 @@
 import { PostService } from "./../services/post.service";
 import { Component, OnInit } from "@angular/core";
 import { ConstantsService } from "../services/constants.service";
-import defaults from "../assets/defaults.json";
+import defaults from "../../assets/defaults.json";
 
 @Component({
   selector: "app-feed",
