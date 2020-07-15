@@ -6,7 +6,10 @@ import defaults from "../../assets/defaults.json";
   providedIn: "root",
 })
 export class ConstantsService {
+  // for production only
   public static BASE_URL = window.location.origin + "/api";
+
+  // for development only don't commit below line to any branch
   // public static BASE_URL = "http://localhost:4300/api";
 
   private tagSource = new BehaviorSubject(defaults.defaultTag);
