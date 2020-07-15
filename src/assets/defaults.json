@@ -3,12 +3,10 @@
   "defaultSort": { "datePosted": -1 },
   "defaultCategory": "all",
   "feed": [
-    { "name": "All Posts", "value": "all", "isActive": false, "show": true },
+    { "name": "All Posts", "value": "all" },
     {
-      "name": "Tag",
+      "name": "",
       "value": "",
-      "isActive": true,
-      "show": true,
       "isCustom": true
     }
   ],
@@ -16,58 +14,47 @@
     {
       "name": "Recently Posted",
       "value": { "datePosted": -1 },
-      "isActive": true,
-      "show": true
+      "isActive": true
     },
     {
       "name": "Most Liked",
-      "value": { "likes": -1 },
-      "isActive": false,
-      "show": true
+      "value": { "likes": -1 }
     },
     {
       "name": "Most Viewed",
-      "value": { "views": -1 },
-      "isActive": false,
-      "show": true
+      "value": { "views": -1 }
     },
     {
       "name": "Most Commented",
-      "value": { "comments": -1 },
-      "isActive": false,
-      "show": true
+      "value": { "comments": -1 }
     }
   ],
   "categories": [
     {
       "value": "all",
       "name": "All",
-      "defaultSelected": true
+      "defaultForNav": true
     },
     {
       "value": "text",
       "name": "Texts",
-      "defaultSelected": false
+      "defaultForNewPost": true
     },
     {
       "value": "image",
-      "name": "Images",
-      "defaultSelected": false
+      "name": "Images"
     },
     {
       "value": "video",
-      "name": "Videos",
-      "defaultSelected": false
+      "name": "Videos"
     },
     {
       "value": "audio",
-      "name": "Audios",
-      "defaultSelected": false
+      "name": "Audios"
     },
     {
       "value": "document",
-      "name": "Documents",
-      "defaultSelected": false
+      "name": "Documents"
     }
   ]
 }
