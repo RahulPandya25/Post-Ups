@@ -7,57 +7,61 @@
 </div>
 
 <div class="container">
-  <label class="section new-post-label">New Post</label>
   <form class="section form">
-    <div class="form-element">
-      <label for="post-title">Title</label>
-      <input
-        type="text"
-        name="post-title"
-        id="post-title"
-        placeholder="Add Title..."
-      />
-    </div>
-    <div class="form-element">
-      <label for="category">Category</label
-      ><select
-        ngModel
-        name="category"
-        id="category"
-        (change)="changeCategory($event)"
-        aria-placeholder="Select Category"
-      >
-        <option *ngFor="let category of categories" [value]="category.id">
-          {{ category.name }}</option
+    <div class="form-set">
+      <div class="form-element">
+        <label for="post-title">Title</label>
+        <input
+          type="text"
+          name="post-title"
+          id="post-title"
+          placeholder="Add Title..."
+        />
+      </div>
+      <div class="form-element">
+        <label for="category">Category</label
+        ><select
+          (change)="changeCategory($event)"
+          aria-placeholder="Select Category"
         >
-      </select>
-    </div>
-    <div class="form-element" *ngIf="flag == 1">
-      <label for="text">Add Text</label>
-      <textarea rows="3" placeholder="Enter the post here..."></textarea>
-    </div>
+          <option
+            *ngFor="let category of categories"
+            [value]="category.value"
+            [selected]="category.defaultForNewPost == true"
+          >
+            {{ category.name }}</option
+          >
+        </select>
+      </div>
+      <div class="form-element" *ngIf="selectedCategory === catWithTextArea">
+        <label for="text">Add Text</label>
+        <textarea rows="3" placeholder="Enter the post here..."></textarea>
+      </div>
 
-    <div class="form-element" *ngIf="flag != 1 && flag != -1">
-      <label for="mediaFile">Upload File</label>
-      <input
-        type="file"
-        name="mediaFile"
-        id="mediaFile"
-        (change)="selectFile($event)"
-      />
-    </div>
+      <div class="form-element" *ngIf="selectedCategory !== catWithTextArea">
+        <label for="mediaFile">Upload File</label>
+        <input
+          type="file"
+          name="mediaFile"
+          id="mediaFile"
+          (change)="selectFile($event)"
+        />
+      </div>
 
-    <div class="form-element">
-      <label for="tag">Tags</label>
-      <input
-        type="text"
-        name="tag"
-        placeholder="Add Tags seperated by commas..."
-      />
+      <div class="form-element">
+        <label for="tag">Tags</label>
+        <input
+          type="text"
+          name="tag"
+          placeholder="Add Tags seperated by commas..."
+        />
+      </div>
     </div>
-    <div class="form-element form-btns">
-      <button type="reset">Reset</button>
-      <button type="submit">Submit</button>
+    <div class="form-set">
+      <div class="form-element form-btns">
+        <button type="reset">Reset</button>
+        <button type="submit">Submit</button>
+      </div>
     </div>
   </form>
 </div>
