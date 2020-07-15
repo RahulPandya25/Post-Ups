@@ -28,11 +28,7 @@ jobs:
 
             [1]: https://github.com/peter-evans/create-pull-request
          labels: report, automated pr
-         team-reviewers: owners, maintainers
-         milestone: 1
-         draft: false
          branch: example-patches
-         request-to-parent: false
      - name: Check outputs
        run: |
           echo "Pull Request Number - ${{ env.PULL_REQUEST_NUMBER }}"
