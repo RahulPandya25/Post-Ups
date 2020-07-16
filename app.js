@@ -31,6 +31,7 @@ app.use(
     origin: "http://localhost:4200",
   })
 );
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: "false" }));
 
