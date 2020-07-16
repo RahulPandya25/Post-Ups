@@ -1,0 +1,26 @@
+# reference
+# https://github.com/peter-evans/create-pull-request/blob/master/docs/examples.md#keep-a-branch-up-to-date-with-another
+
+name: Create 'Feature' to 'Develop' Request
+
+on:
+  push:
+    branches:
+      - feature
+
+jobs:
+  featurePromotion:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: develop
+      - name: Reset promotion branch
+        run: |
+          git fetch origin feature:feature
+          git reset --hard feature
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v2
+        with:
+          branch: develop-promotion
+          assignees: RahulPandya25
