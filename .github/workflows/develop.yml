@@ -1,7 +1,7 @@
 # reference
 # https://github.com/peter-evans/create-pull-request/blob/master/docs/examples.md#keep-a-branch-up-to-date-with-another
 
-name: Create Automated Pull Request
+name: Create 'Develop' to 'Master' Request
 
 on:
   push:
@@ -23,3 +23,4 @@ jobs:
         uses: peter-evans/create-pull-request@v2
         with:
           branch: master-promotion
+          assignees: RahulPandya25
