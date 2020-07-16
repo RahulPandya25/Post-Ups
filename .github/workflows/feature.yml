@@ -1,7 +1,7 @@
 # reference
 # https://github.com/peter-evans/create-pull-request/blob/master/docs/examples.md#keep-a-branch-up-to-date-with-another
 
-name: Create 'Feature' to 'Develop' Request
+name: Create 'feature -> develop' Request
 
 on:
   push:
@@ -22,5 +22,5 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v2
         with:
-          branch: develop-promotion
+          branch: feature-promotion
           assignees: RahulPandya25
