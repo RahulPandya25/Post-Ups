@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 const postSchema = new mongoose.Schema(
   {
     title: String,
+    textContent: String,
     category: String,
     tags: Array,
     likes: { type: Number, default: 0 },
