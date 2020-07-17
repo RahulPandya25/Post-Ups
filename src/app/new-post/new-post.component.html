@@ -7,13 +7,19 @@
 </div>
 
 <div class="container">
-  <form class="section form">
+  <form
+    class="section form"
+    #myForm="ngForm"
+    [formGroup]="myFormGroup"
+    (ngSubmit)="onSubmit(myForm)"
+  >
     <div class="form-set">
       <div class="form-element">
         <label for="post-title">Title</label>
         <input
           type="text"
-          name="post-title"
+          name="postTitle"
+          formControlName="title"
           id="post-title"
           placeholder="Add Title..."
         />
@@ -35,15 +41,20 @@
       </div>
       <div class="form-element" *ngIf="selectedCategory === catWithTextArea">
         <label for="text">Add Text</label>
-        <textarea rows="3" placeholder="Enter the post here..."></textarea>
+        <textarea
+          rows="3"
+          placeholder="Enter the post here..."
+          formControlName="textContent"
+        ></textarea>
       </div>
 
       <div class="form-element" *ngIf="selectedCategory !== catWithTextArea">
         <label for="mediaFile">Upload File</label>
         <input
           type="file"
-          name="mediaFile"
-          id="mediaFile"
+          name="file"
+          id="file"
+          formControlName="file"
           (change)="selectFile($event)"
         />
       </div>
@@ -53,14 +64,15 @@
         <input
           type="text"
           name="tag"
+          formControlName="tag"
           placeholder="Add Tags seperated by commas..."
         />
       </div>
     </div>
     <div class="form-set">
       <div class="form-element form-btns">
-        <button type="reset">Reset</button>
         <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
       </div>
     </div>
   </form>
