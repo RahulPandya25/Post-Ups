@@ -18,10 +18,6 @@ export class PostComponent implements OnInit {
   post;
   comment = "";
 
-  // TODO: here was the code
-  // navBar: NavbarComponent;
-  @Output() tagClicked = new EventEmitter();
-
   likeThisPost(postId) {
     console.log(postId);
     this.postService.likeThisPost(postId).subscribe((response) => {
@@ -47,12 +43,9 @@ export class PostComponent implements OnInit {
         });
   }
 
-  searchThisTag(tag: String) {
-    this.constService.changeTag(tag.toLowerCase());
-    // TODO: navbar tag update
-    // this.navBar.tagClickedOnPostScreen(tag.toLowerCase());
-    this.tagClicked.emit(tag.toLowerCase());
-
+  searchThisTag(tag: string) {
+    this.constService.changeTag(tag);
+    this.constService.clicktag(tag);
     this.router.navigateByUrl("/");
   }
   constructor(

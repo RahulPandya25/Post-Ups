@@ -19,7 +19,6 @@ export class AppComponent {
   showSecondaryNavBar;
   showSearchBtn;
   showBackBtn;
-  siblingComponent;
 
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
@@ -32,7 +31,6 @@ export class AppComponent {
         this.showSecondaryNavBar = this.routerOutlet.component.showSecondaryNavBar;
         this.showSearchBtn = this.routerOutlet.component.showSearchBtn;
         this.showBackBtn = this.routerOutlet.component.showBackBtn;
-        this.siblingComponent = this.routerOutlet.component;
       }
 
       if (event instanceof NavigationError) {

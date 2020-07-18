@@ -21,7 +21,11 @@ export class FeedComponent implements OnInit {
   constructor(
     private postService: PostService,
     private constService: ConstantsService
-  ) {}
+  ) {
+    this.constService.updateFeedComponent.subscribe(() => {
+      this.getFeed();
+    });
+  }
 
   getFeed() {
     // getting values
