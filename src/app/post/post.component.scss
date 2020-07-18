@@ -1,150 +1,133 @@
-.nav-container {
-  position: fixed;
-  width: 100vw;
-  top: 0;
-  z-index: 1;
+.section {
+  width: 100%;
+  padding: 0 1rem;
+  margin-bottom: 0.5rem;
 }
 
-.container {
-  --nav-area: 85px;
-  margin-top: var(--nav-area);
-  width: 100%;
+.section.main-content {
+  padding: 0;
+}
 
-  .section {
-    width: 100%;
-    padding: 0 1rem;
-    margin-bottom: 0.5rem;
+.header {
+  display: flex;
+  justify-content: space-between;
 
-    // &:not(:last-child) {
-    //   margin-bottom: 0.5rem;
-    // }
+  .post-title {
+    font-size: 1.5em;
+    align-self: baseline;
   }
 
-  .section.main-content {
-    padding: 0;
-  }
-
-  .header {
-    display: flex;
-    justify-content: space-between;
-
-    .post-title {
-      font-size: 1.5em;
-      align-self: baseline;
-    }
-
-    .post-category {
-      font-size: 1em;
-      align-self: baseline;
-      color: var(--black);
-    }
-  }
-
-  .main-content {
-    background-color: lightgoldenrodyellow;
-    height: 200px;
-
-    // remove below code, only for demonstration purpose
-    text-align: center;
-    line-height: 200px;
-  }
-
-  .post-stat {
-    display: flex;
-    justify-content: space-between;
-    font-size: 1.2em;
-    .like-view {
-      display: flex;
-      .likes {
-        margin-right: 1rem;
-        cursor: pointer;
-      }
-    }
-
-    button {
-      all: unset;
-    }
-  }
-
-  .date-posted {
-    font-size: 0.75rem;
+  .post-category {
+    font-size: 1em;
+    align-self: baseline;
     color: var(--black);
   }
+}
 
-  .tags {
+.main-content {
+  background-color: lightgoldenrodyellow;
+  height: 200px;
+
+  // remove below code, only for demonstration purpose
+  text-align: center;
+  line-height: 200px;
+}
+
+.post-stat {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2em;
+  .like-view {
     display: flex;
-    flex-wrap: wrap;
-    .tag-title {
-      padding: 0.2rem 0;
-      margin: 0.2rem 0 0.2rem 0;
-      font-size: 1.2em;
-      font-weight: 600;
-    }
-
-    .tag {
-      border: 1px solid rgb(75, 75, 75);
-      border-radius: 0.75rem;
-      margin: 0.2rem 0;
+    .likes {
+      margin-right: 1rem;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      &:not(:last-child) {
-        margin-right: 0.2rem;
-      }
-
-      .tag-link {
-        padding: 0.2rem 0.5rem;
-        text-align: center;
-      }
     }
   }
 
-  .comments {
-    label {
-      font-size: 1.2em;
-      font-weight: 600;
-    }
-    .comment-container {
-      display: flex;
-      flex-direction: column;
-      .comment {
-        background-color: var(--pale-grey);
-        border-radius: 0.75rem;
-        padding: 0.5rem 1rem;
+  button {
+    all: unset;
+  }
+}
 
-        margin-bottom: 0.3rem;
-      }
+.date-posted {
+  font-size: 0.75rem;
+  color: var(--black);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  .tag-title {
+    padding: 0.2rem 0;
+    margin: 0.2rem 0 0.2rem 0;
+    font-size: 1.2em;
+    font-weight: 600;
+  }
+
+  .tag {
+    border: 1px solid rgb(75, 75, 75);
+    border-radius: 0.75rem;
+    margin: 0.2rem 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    &:not(:last-child) {
+      margin-right: 0.2rem;
     }
 
-    .add-comment-section {
+    .tag-link {
+      padding: 0.2rem 0.5rem;
+      text-align: center;
+    }
+  }
+}
+
+.comments {
+  label {
+    font-size: 1.2em;
+    font-weight: 600;
+  }
+  .comment-container {
+    display: flex;
+    flex-direction: column;
+    .comment {
+      background-color: var(--pale-grey);
       border-radius: 0.75rem;
+      padding: 0.5rem 1rem;
 
-      width: 100%;
-      border: 1px solid rgb(75, 75, 75);
+      margin-bottom: 0.3rem;
+    }
+  }
 
-      display: flex;
-      justify-content: space-between;
+  .add-comment-section {
+    border-radius: 0.75rem;
 
-      input {
-        all: unset;
-        padding: 0.5rem 0.75rem;
-        max-width: 75%;
+    width: 100%;
+    border: 1px solid rgb(75, 75, 75);
 
-        &::placeholder {
-          font-size: 1em;
-          color: var(--black);
-        }
-      }
-      .send-comment {
-        --square: 45px;
-        all: unset;
+    display: flex;
+    justify-content: space-between;
 
-        width: var(--square);
-        height: var(--square);
-        text-align: center;
-        font-size: 1.3em;
+    input {
+      all: unset;
+      padding: 0.5rem 0.75rem;
+      max-width: 75%;
+
+      &::placeholder {
+        font-size: 1em;
         color: var(--black);
       }
+    }
+    .send-comment {
+      --square: 45px;
+      all: unset;
+
+      width: var(--square);
+      height: var(--square);
+      text-align: center;
+      font-size: 1.3em;
+      color: var(--black);
     }
   }
 }
