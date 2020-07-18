@@ -1,6 +1,16 @@
-<app-navbar
-  [showSecondaryNavBar]="showSecondaryNavBar"
-  [showBackBtn]="showBackBtn"
-  [showSearchBtn]="showSearchBtn"
-></app-navbar>
-<router-outlet></router-outlet>
+<div class="nav-container">
+  <app-navbar
+    [showSecondaryNavBar]="showSecondaryNavBar"
+    [showBackBtn]="showBackBtn"
+    [showSearchBtn]="showSearchBtn"
+  ></app-navbar>
+</div>
+<div
+  class="main-content"
+  [ngClass]="{
+    'without-secondary-nav': !showSecondaryNavBar,
+    'with-secondary-nav': showSecondaryNavBar
+  }"
+>
+  <router-outlet></router-outlet>
+</div>
