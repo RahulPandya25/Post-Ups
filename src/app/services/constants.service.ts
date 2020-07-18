@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, EventEmitter } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import defaults from "../../assets/defaults.json";
 
@@ -30,5 +30,18 @@ export class ConstantsService {
     this.categorySource.next(category);
   }
 
-  constructor() {}
+  public tagClickOnPostComponent: EventEmitter<String>;
+  clicktag(tag): void {
+    this.tagClickOnPostComponent.emit(tag);
+  }
+
+  public updateFeedComponent: EventEmitter<null>;
+  updateFeed(): void {
+    this.updateFeedComponent.emit();
+  }
+
+  constructor() {
+    this.tagClickOnPostComponent = new EventEmitter();
+    this.updateFeedComponent = new EventEmitter();
+  }
 }

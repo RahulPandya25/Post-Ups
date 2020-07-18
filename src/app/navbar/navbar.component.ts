@@ -12,7 +12,6 @@ export class NavbarComponent implements OnInit {
   @Input() showSecondaryNavBar: boolean;
   @Input() showBackBtn: boolean;
   @Input() showSearchBtn: boolean;
-  @Output() updateFeed: EventEmitter<any> = new EventEmitter();
 
   tag;
   showSearchBar = false;
@@ -31,7 +30,7 @@ export class NavbarComponent implements OnInit {
     });
 
     // update feed logic
-    this.constService.changeTag(tag.toLowerCase());
+    this.constService.changeTag(tag);
     this.updateFeedComponent();
   }
 
@@ -49,12 +48,12 @@ export class NavbarComponent implements OnInit {
 
         if (element.isCustom) {
           element.name = tag;
-          element.value = tag.toLowerCase();
+          element.value = tag;
         }
       });
 
       // update feed logic
-      this.constService.changeTag(tag.toLowerCase());
+      this.constService.changeTag(tag);
 
       this.updateFeedComponent();
     }
@@ -79,7 +78,7 @@ export class NavbarComponent implements OnInit {
   }
 
   updateFeedComponent() {
-    this.updateFeed.emit();
+    this.constService.updateFeed();
   }
 
   getCurrentTag() {
@@ -100,12 +99,16 @@ export class NavbarComponent implements OnInit {
 
       if (element.isCustom) {
         element.name = tag;
-        element.value = tag.toLowerCase();
+        element.value = tag;
       }
     });
   }
 
-  constructor(private constService: ConstantsService, private router: Router) {}
+  constructor(private constService: ConstantsService, private router: Router) {
+    this.constService.tagClickOnPostComponent.subscribe((tag) => {
+      this.tagClickedOnPostScreen(tag);
+    });
+  }
 
   ngOnInit(): void {}
 }

@@ -10,6 +10,10 @@ import { FormGroup, FormControl } from "@angular/forms";
   styleUrls: ["./new-post.component.scss"],
 })
 export class NewPostComponent implements OnInit {
+  showSecondaryNavBar = false;
+  showBackBtn = true;
+  showSearchBtn = false;
+
   catWithTextArea;
   selectedCategory;
   categories;
