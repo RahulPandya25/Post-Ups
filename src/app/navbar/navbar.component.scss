@@ -26,11 +26,6 @@
     .fa::before {
       font-size: 1.75em;
     }
-
-    .hide {
-      pointer-events: none;
-      opacity: 0;
-    }
   }
 
   .secondary-bar {
@@ -126,4 +121,9 @@
     // &.show-search-bar {
     // }
   }
+}
+
+.hide {
+  pointer-events: none;
+  opacity: 0;
 }
