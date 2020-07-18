@@ -14,6 +14,10 @@ export class FeedComponent implements OnInit {
   currentSort;
   currentCatgeory;
 
+  showSecondaryNavBar = true;
+  showBackBtn = false;
+  showSearchBtn = true;
+
   constructor(
     private postService: PostService,
     private constService: ConstantsService
@@ -46,10 +50,6 @@ export class FeedComponent implements OnInit {
           element.datePosted = new Date(date);
         });
       });
-  }
-
-  updateFeed() {
-    this.getFeed();
   }
 
   ngOnInit(): void {

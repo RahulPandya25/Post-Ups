@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, EventEmitter, Output } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { PostService } from "../services/post.service";
 import { ConstantsService } from "../services/constants.service";
@@ -10,11 +10,17 @@ import { NavbarComponent } from "../navbar/navbar.component";
   styleUrls: ["./post.component.scss"],
 })
 export class PostComponent implements OnInit {
+  showSecondaryNavBar = false;
+  showBackBtn = true;
+  showSearchBtn = false;
+
   postId;
   post;
   comment = "";
 
-  @ViewChild(NavbarComponent) navBar: NavbarComponent;
+  // TODO: here was the code
+  // navBar: NavbarComponent;
+  @Output() tagClicked = new EventEmitter();
 
   likeThisPost(postId) {
     console.log(postId);
@@ -43,7 +49,10 @@ export class PostComponent implements OnInit {
 
   searchThisTag(tag: String) {
     this.constService.changeTag(tag.toLowerCase());
-    this.navBar.tagClickedOnPostScreen(tag.toLowerCase());
+    // TODO: navbar tag update
+    // this.navBar.tagClickedOnPostScreen(tag.toLowerCase());
+    this.tagClicked.emit(tag.toLowerCase());
+
     this.router.navigateByUrl("/");
   }
   constructor(

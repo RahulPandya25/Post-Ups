@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { ConstantsService } from "../services/constants.service";
 import { Router } from "@angular/router";
 import defaults from "../../assets/defaults.json";
+import { FeedComponent } from "../feed/feed.component";
 
 @Component({
   selector: "app-navbar",
@@ -12,7 +13,7 @@ export class NavbarComponent implements OnInit {
   @Input() showSecondaryNavBar: boolean;
   @Input() showBackBtn: boolean;
   @Input() showSearchBtn: boolean;
-  @Output() updateFeed: EventEmitter<any> = new EventEmitter();
+  @Input() siblingComponent: FeedComponent;
 
   tag;
   showSearchBar = false;
@@ -79,7 +80,7 @@ export class NavbarComponent implements OnInit {
   }
 
   updateFeedComponent() {
-    this.updateFeed.emit();
+    this.siblingComponent.getFeed();
   }
 
   getCurrentTag() {
