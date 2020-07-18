@@ -1,0 +1,21 @@
+.nav-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+}
+
+.main-content {
+  transition: margin-top 0.5s ease;
+}
+
+.without-secondary-nav {
+  --nav-gap: 85px;
+  margin-top: var(--nav-gap);
+}
+
+.with-secondary-nav {
+  --nav-gap: 135px;
+  margin-top: var(--nav-gap);
+}
