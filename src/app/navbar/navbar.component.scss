@@ -5,6 +5,7 @@
   box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.05);
   .primary-bar {
     padding: 0.5rem 1rem;
+    z-index: 1;
 
     display: flex;
     justify-content: space-between;
@@ -31,6 +32,11 @@
   .secondary-bar {
     padding: 0.5rem 0;
     background-color: white;
+    position: absolute;
+    width: 100%;
+    top: -2rem;
+    z-index: -1;
+    transition: top 0.25s ease;
 
     .search-tag {
       width: 90%;
@@ -117,9 +123,12 @@
       }
     }
 
-    // animation for searchbar dropping from back of primary nav
-    // &.show-search-bar {
-    // }
+    &.show-secondary-nav-bar {
+      top: 1rem;
+    }
+    &.show-secondary-nav-bar.show-search-bar {
+      top: 5rem;
+    }
   }
 }
 
