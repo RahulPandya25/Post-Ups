@@ -6,11 +6,12 @@
   ></app-navbar>
 </div>
 <div
+  [@routeAnimations]="prepareRoute(outlet)"
   class="main-content"
   [ngClass]="{
     'without-secondary-nav': !showSecondaryNavBar,
     'with-secondary-nav': showSecondaryNavBar
   }"
 >
-  <router-outlet></router-outlet>
+  <router-outlet #outlet="outlet"></router-outlet>
 </div>
