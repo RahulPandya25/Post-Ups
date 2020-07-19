@@ -6,21 +6,27 @@ import {
   NavigationEnd,
   NavigationError,
 } from "@angular/router";
-
+import { fader } from "./route-animations";
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
+  animations: [fader],
 })
 export class AppComponent {
   title = "Post-Ups";
 
   @ViewChild(RouterOutlet) routerOutlet;
-  showSecondaryNavBar;
-  showSearchBtn;
-  showBackBtn;
+  showSecondaryNavBar = true;
+  showSearchBtn = true;
+  showBackBtn = false;
 
-  constructor(private router: Router) {
+  prepareRoute(outlet: RouterOutlet) {
+    this.updateNavbar();
+    return outlet && outlet.activatedRoute;
+  }
+
+  updateNavbar() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         // Show loading indicator
@@ -38,5 +44,9 @@ export class AppComponent {
         // Present error to user
       }
     });
+  }
+
+  constructor(private router: Router) {
+    this.updateNavbar();
   }
 }
