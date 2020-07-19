@@ -24,12 +24,12 @@
   </div>
   <div
     class="secondary-bar"
-    *ngIf="showSecondaryNavBar"
     [ngClass]="{
-      'show-search-bar': showSearchBar
+      'show-search-bar': showSearchBar,
+      'show-secondary-nav-bar': showSecondaryNavBar
     }"
   >
-    <div class="search-tag" *ngIf="showSearchBar">
+    <div class="search-tag">
       <input
         type="text"
         name="tag"
