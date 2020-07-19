@@ -11,6 +11,7 @@ import { NavbarComponent } from "./navbar/navbar.component";
 import { NewPostComponent } from "./new-post/new-post.component";
 import { PostComponent } from "./post/post.component";
 import { CommonModule } from "@angular/common";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CommonModule } from "@angular/common";
     FormsModule,
     CommonModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
