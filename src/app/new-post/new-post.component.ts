@@ -51,30 +51,23 @@ export class NewPostComponent implements OnInit {
   myFormGroup = new FormGroup({
     title: new FormControl(""),
     textContent: new FormControl(""),
+    category: new FormControl(""),
     //file: new FormControl(""),
     tag: new FormControl(""),
   });
 
   onSubmit(form: any) {
-    let formData: FormData = new FormData();
-    formData.append("title", form.value.title),
-      formData.append("category", this.selectedCategory),
-      formData.append("tag", form.value.tag);
     if (this.selectedCategory === this.catWithTextArea) {
-      formData.append("textContent", form.value.textContent);
-      console.log(form.value.textContent);
+      form.value.category = this.selectedCategory;
+
+      console.log("Category:" + form.value.category);
+      console.log("Tags:" + form.value.tag.split(","));
+
+      this.uploadPostService.submitPost(form.value).subscribe((response) => {
+        console.log(response);
+        this.router.navigate(["/"]);
+      });
     }
-
-    console.log(formData.get("category"));
-    console.log(formData.get("title"));
-    console.log(formData.get("textContent"));
-    //console.log(formData.get("file"));
-    console.log(formData.get("tag"));
-
-    this.uploadPostService.submitPost(formData).subscribe((response) => {
-      console.log(response);
-      this.router.navigate(["/"]);
-    });
   }
 
   ngOnInit(): void {
