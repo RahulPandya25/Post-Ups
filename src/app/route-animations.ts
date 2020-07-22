@@ -20,7 +20,7 @@ export const fader = trigger("routeAnimations", [
           left: 0,
           width: "100%",
           opacity: 0,
-          transform: "translateY(100px)",
+          transform: "translateY(80px)",
         }),
       ],
       { optional: true }
@@ -28,7 +28,7 @@ export const fader = trigger("routeAnimations", [
     query(
       ":enter",
       [
-        animate(`500ms ease-in-out`),
+        animate(`400ms ease-in-out`),
         style({ opacity: 1, transform: "translateY(0)" }),
       ],
       { optional: true }
