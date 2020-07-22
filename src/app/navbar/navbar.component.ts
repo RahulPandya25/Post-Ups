@@ -10,9 +10,9 @@ import { NotificationService } from "../services/notification.service";
   styleUrls: ["./navbar.component.scss"],
 })
 export class NavbarComponent implements OnInit {
-  @Input() showSecondaryNavBar: boolean;
-  @Input() showBackBtn: boolean;
-  @Input() showSearchBtn: boolean;
+  showSecondaryNavBar = this.notifService.currentShowSecondaryNavBar;
+  showBackBtn = this.notifService.currentShowBackBtn;
+  showSearchBtn = this.notifService.currentShowSearchBtn;
 
   tag;
   showSearchBar = false;
@@ -110,8 +110,17 @@ export class NavbarComponent implements OnInit {
     private constService: ConstantsService,
     private router: Router
   ) {
-    this.notifService.tagClickOnPostComponent.subscribe((tag) => {
+    this.notifService.clicktagEmitter.subscribe((tag) => {
       this.tagClickedOnPostScreen(tag);
+    });
+    this.notifService.toogleShowSecondaryNavBar.subscribe(() => {
+      this.showSecondaryNavBar = !this.showSecondaryNavBar;
+    });
+    this.notifService.toogleShowBackBtn.subscribe(() => {
+      this.showBackBtn = !this.showBackBtn;
+    });
+    this.notifService.toogleShowSearchBtn.subscribe(() => {
+      this.showSearchBtn = !this.showSearchBtn;
     });
   }
 

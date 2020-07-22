@@ -14,22 +14,25 @@ export class FeedComponent implements OnInit {
   currentTag;
   currentSort;
   currentCatgeory;
-
-  showSecondaryNavBar = true;
-  showBackBtn = false;
-  showSearchBtn = true;
+  requiredNavComponents = {
+    showSecondaryNavBar: true,
+    showBackBtn: false,
+    showSearchBtn: true,
+  };
 
   constructor(
     private postService: PostService,
     private constService: ConstantsService,
     private notifService: NotificationService
   ) {
-    this.notifService.updateFeedComponent.subscribe(() => {
+    this.notifService.updateFeedEmitter.subscribe(() => {
       this.getFeed();
     });
   }
 
   getFeed() {
+    this.notifService.updateNavComponents(this.requiredNavComponents);
+
     // getting values
     this.constService.currentTag.subscribe((tag) => (this.currentTag = tag));
     this.constService.currentCategory.subscribe(

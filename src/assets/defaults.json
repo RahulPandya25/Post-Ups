@@ -57,5 +57,8 @@
       "value": "document",
       "name": "Documents"
     }
-  ]
+  ],
+  "defaultShowSecondaryNavBar": true,
+  "defaultShowSearchBtn": true,
+  "defaultShowBackBtn": false
 }

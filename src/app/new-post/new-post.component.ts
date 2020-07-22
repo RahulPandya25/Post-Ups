@@ -4,15 +4,18 @@ import { Component, OnInit } from "@angular/core";
 import defaults from "../../assets/defaults.json";
 import * as _ from "lodash";
 import { FormGroup, FormControl } from "@angular/forms";
+import { NotificationService } from "../services/notification.service";
 @Component({
   selector: "app-new-post",
   templateUrl: "./new-post.component.html",
   styleUrls: ["./new-post.component.scss"],
 })
 export class NewPostComponent implements OnInit {
-  showSecondaryNavBar = false;
-  showBackBtn = true;
-  showSearchBtn = false;
+  requiredNavComponents = {
+    showSecondaryNavBar: false,
+    showBackBtn: true,
+    showSearchBtn: false,
+  };
 
   catWithTextArea;
   selectedCategory;
@@ -22,7 +25,8 @@ export class NewPostComponent implements OnInit {
 
   constructor(
     private uploadPostService: UploadPostService,
-    private router: Router
+    private router: Router,
+    private notifService: NotificationService
   ) {}
   selectFile(event) {
     this.fileList = event.target.files;
@@ -71,6 +75,8 @@ export class NewPostComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.notifService.updateNavComponents(this.requiredNavComponents);
+
     this.setupCategoryList();
   }
 }

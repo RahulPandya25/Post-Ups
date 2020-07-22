@@ -11,9 +11,11 @@ import { NotificationService } from "../services/notification.service";
   styleUrls: ["./post.component.scss"],
 })
 export class PostComponent implements OnInit {
-  showSecondaryNavBar = false;
-  showBackBtn = true;
-  showSearchBtn = false;
+  requiredNavComponents = {
+    showSecondaryNavBar: false,
+    showBackBtn: true,
+    showSearchBtn: false,
+  };
 
   postId;
   post;
@@ -58,6 +60,8 @@ export class PostComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.notifService.updateNavComponents(this.requiredNavComponents);
+
     this.route.queryParams.subscribe((params) => {
       this.postId = params["postId"];
     });
