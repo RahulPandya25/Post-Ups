@@ -4,11 +4,15 @@
       <div class="post-title">{{ post.title }}</div>
       <div class="post-category">{{ post.category }}</div>
     </div>
-    <a routerLink="/post" [queryParams]="{ postId: post._id }"
-      ><div class="section main-content">
-        Main Content
-      </div></a
-    >
+    <div class="section main-content">
+      <a routerLink="/post" [queryParams]="{ postId: post._id }">
+        <div class="text" *ngIf="post.category === 'text'">
+          <p class="content">{{ post.textContent }}</p>
+          <!-- <p>... read more</p> -->
+        </div>
+        <!-- add more main content here -->
+      </a>
+    </div>
     <div class="section post-stat">
       <div class="views">
         {{ post.views }}

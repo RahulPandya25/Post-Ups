@@ -21,7 +21,7 @@
     padding: 0 1.2rem;
 
     &:not(:last-child) {
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.25rem;
     }
   }
 
@@ -46,12 +46,17 @@
   }
 
   .main-content {
-    background-color: lightgoldenrodyellow;
-    height: 200px;
-
-    // remove below code, only for demonstration purpose
-    text-align: center;
-    line-height: 200px;
+    a {
+      text-decoration: none;
+    }
+    .text {
+      .content {
+        max-height: 8rem;
+        overflow: hidden;
+      }
+      // to match with section
+      padding: 0 1.2rem;
+    }
   }
 
   .post-stat {
