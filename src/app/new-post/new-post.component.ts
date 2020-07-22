@@ -4,15 +4,18 @@ import { Component, OnInit } from "@angular/core";
 import defaults from "../../assets/defaults.json";
 import * as _ from "lodash";
 import { FormGroup, FormControl } from "@angular/forms";
+import { NotificationService } from "../services/notification.service";
 @Component({
   selector: "app-new-post",
   templateUrl: "./new-post.component.html",
   styleUrls: ["./new-post.component.scss"],
 })
 export class NewPostComponent implements OnInit {
-  showSecondaryNavBar = false;
-  showBackBtn = true;
-  showSearchBtn = false;
+  requiredNavComponents = {
+    showSecondaryNavBar: false,
+    showBackBtn: true,
+    showSearchBtn: false,
+  };
 
   catWithTextArea;
   selectedCategory;
@@ -22,7 +25,8 @@ export class NewPostComponent implements OnInit {
 
   constructor(
     private uploadPostService: UploadPostService,
-    private router: Router
+    private router: Router,
+    private notifService: NotificationService
   ) {}
   selectFile(event) {
     this.fileList = event.target.files;
@@ -51,33 +55,28 @@ export class NewPostComponent implements OnInit {
   myFormGroup = new FormGroup({
     title: new FormControl(""),
     textContent: new FormControl(""),
+    category: new FormControl(""),
     //file: new FormControl(""),
     tag: new FormControl(""),
   });
 
   onSubmit(form: any) {
-    let formData: FormData = new FormData();
-    formData.append("title", form.value.title),
-      formData.append("category", this.selectedCategory),
-      formData.append("tag", form.value.tag);
     if (this.selectedCategory === this.catWithTextArea) {
-      formData.append("textContent", form.value.textContent);
-      console.log(form.value.textContent);
+      form.value.category = this.selectedCategory;
+
+      console.log("Category:" + form.value.category);
+      console.log("Tags:" + form.value.tag.split(","));
+
+      this.uploadPostService.submitPost(form.value).subscribe((response) => {
+        console.log(response);
+        this.router.navigate(["/"]);
+      });
     }
-
-    console.log(formData.get("category"));
-    console.log(formData.get("title"));
-    console.log(formData.get("textContent"));
-    //console.log(formData.get("file"));
-    console.log(formData.get("tag"));
-
-    this.uploadPostService.submitPost(formData).subscribe((response) => {
-      console.log(response);
-      this.router.navigate(["/"]);
-    });
   }
 
   ngOnInit(): void {
+    this.notifService.updateNavComponents(this.requiredNavComponents);
+
     this.setupCategoryList();
   }
 }

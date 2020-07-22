@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { ConstantsService } from "../services/constants.service";
 import { Router } from "@angular/router";
 import defaults from "../../assets/defaults.json";
+import { NotificationService } from "../services/notification.service";
 
 @Component({
   selector: "app-navbar",
@@ -9,9 +10,9 @@ import defaults from "../../assets/defaults.json";
   styleUrls: ["./navbar.component.scss"],
 })
 export class NavbarComponent implements OnInit {
-  @Input() showSecondaryNavBar: boolean;
-  @Input() showBackBtn: boolean;
-  @Input() showSearchBtn: boolean;
+  showSecondaryNavBar = this.notifService.currentShowSecondaryNavBar;
+  showBackBtn = this.notifService.currentShowBackBtn;
+  showSearchBtn = this.notifService.currentShowSearchBtn;
 
   tag;
   showSearchBar = false;
@@ -78,7 +79,7 @@ export class NavbarComponent implements OnInit {
   }
 
   updateFeedComponent() {
-    this.constService.updateFeed();
+    this.notifService.updateFeed();
   }
 
   getCurrentTag() {
@@ -104,9 +105,22 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  constructor(private constService: ConstantsService, private router: Router) {
-    this.constService.tagClickOnPostComponent.subscribe((tag) => {
+  constructor(
+    private notifService: NotificationService,
+    private constService: ConstantsService,
+    private router: Router
+  ) {
+    this.notifService.clicktagEmitter.subscribe((tag) => {
       this.tagClickedOnPostScreen(tag);
+    });
+    this.notifService.toogleShowSecondaryNavBar.subscribe(() => {
+      this.showSecondaryNavBar = !this.showSecondaryNavBar;
+    });
+    this.notifService.toogleShowBackBtn.subscribe(() => {
+      this.showBackBtn = !this.showBackBtn;
+    });
+    this.notifService.toogleShowSearchBtn.subscribe(() => {
+      this.showSearchBtn = !this.showSearchBtn;
     });
   }
 
