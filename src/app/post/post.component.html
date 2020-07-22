@@ -8,7 +8,10 @@
     </label>
   </div>
   <div class="section main-content">
-    Main content here
+    <div class="text" *ngIf="post.category === 'text'">
+      <p>{{ post.textContent }}</p>
+    </div>
+    <!-- add more main content here -->
   </div>
   <div class="section post-stat">
     <div class="like-view">

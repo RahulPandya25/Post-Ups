@@ -2,7 +2,6 @@ import { Component, OnInit, EventEmitter, Output } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { PostService } from "../services/post.service";
 import { ConstantsService } from "../services/constants.service";
-import { NavbarComponent } from "../navbar/navbar.component";
 import { NotificationService } from "../services/notification.service";
 
 @Component({
