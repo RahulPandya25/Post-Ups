@@ -2,6 +2,7 @@ import { PostService } from "./../services/post.service";
 import { Component, OnInit } from "@angular/core";
 import { ConstantsService } from "../services/constants.service";
 import defaults from "../../assets/defaults.json";
+import { NotificationService } from "../services/notification.service";
 
 @Component({
   selector: "app-feed",
@@ -20,9 +21,10 @@ export class FeedComponent implements OnInit {
 
   constructor(
     private postService: PostService,
-    private constService: ConstantsService
+    private constService: ConstantsService,
+    private notifService: NotificationService
   ) {
-    this.constService.updateFeedComponent.subscribe(() => {
+    this.notifService.updateFeedComponent.subscribe(() => {
       this.getFeed();
     });
   }

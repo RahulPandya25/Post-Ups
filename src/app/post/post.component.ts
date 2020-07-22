@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { PostService } from "../services/post.service";
 import { ConstantsService } from "../services/constants.service";
 import { NavbarComponent } from "../navbar/navbar.component";
+import { NotificationService } from "../services/notification.service";
 
 @Component({
   selector: "app-post",
@@ -45,14 +46,15 @@ export class PostComponent implements OnInit {
 
   searchThisTag(tag: string) {
     this.constService.changeTag(tag);
-    this.constService.clicktag(tag);
+    this.notifService.clicktag(tag);
     this.router.navigateByUrl("/");
   }
   constructor(
     private postService: PostService,
     private route: ActivatedRoute,
     private router: Router,
-    private constService: ConstantsService
+    private constService: ConstantsService,
+    private notifService: NotificationService
   ) {}
 
   ngOnInit(): void {

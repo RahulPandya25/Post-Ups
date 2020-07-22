@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { ConstantsService } from "../services/constants.service";
 import { Router } from "@angular/router";
 import defaults from "../../assets/defaults.json";
+import { NotificationService } from "../services/notification.service";
 
 @Component({
   selector: "app-navbar",
@@ -78,7 +79,7 @@ export class NavbarComponent implements OnInit {
   }
 
   updateFeedComponent() {
-    this.constService.updateFeed();
+    this.notifService.updateFeed();
   }
 
   getCurrentTag() {
@@ -104,8 +105,12 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  constructor(private constService: ConstantsService, private router: Router) {
-    this.constService.tagClickOnPostComponent.subscribe((tag) => {
+  constructor(
+    private notifService: NotificationService,
+    private constService: ConstantsService,
+    private router: Router
+  ) {
+    this.notifService.tagClickOnPostComponent.subscribe((tag) => {
       this.tagClickedOnPostScreen(tag);
     });
   }
