@@ -28,7 +28,7 @@ export const fader = trigger("routeAnimations", [
     query(
       ":enter",
       [
-        animate(`400ms ease-in-out`),
+        animate(`500ms ease-in-out`),
         style({ opacity: 1, transform: "translateY(0)" }),
       ],
       { optional: true }

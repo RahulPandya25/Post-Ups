@@ -3,7 +3,7 @@ import { UploadPostService } from "./../services/upload-post.service";
 import { Component, OnInit } from "@angular/core";
 import defaults from "../../assets/defaults.json";
 import * as _ from "lodash";
-import { FormGroup, FormControl } from "@angular/forms";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { NotificationService } from "../services/notification.service";
 @Component({
   selector: "app-new-post",
@@ -16,12 +16,12 @@ export class NewPostComponent implements OnInit {
     showBackBtn: true,
     showSearchBtn: false,
   };
-
   catWithTextArea;
   selectedCategory;
   categories;
   file = false;
   private fileList;
+  isSubmitted = false;
 
   constructor(
     private uploadPostService: UploadPostService,
@@ -53,24 +53,28 @@ export class NewPostComponent implements OnInit {
   }
 
   myFormGroup = new FormGroup({
-    title: new FormControl(""),
-    textContent: new FormControl(""),
+    title: new FormControl("", Validators.required),
+    textContent: new FormControl("", Validators.required),
     category: new FormControl(""),
     //file: new FormControl(""),
-    tag: new FormControl(""),
+    tag: new FormControl("", Validators.required),
+    tags: new FormControl(""),
   });
 
   onSubmit(form: any) {
-    if (this.selectedCategory === this.catWithTextArea) {
-      form.value.category = this.selectedCategory;
-
-      console.log("Category:" + form.value.category);
-      console.log("Tags:" + form.value.tag.split(","));
-
-      this.uploadPostService.submitPost(form.value).subscribe((response) => {
-        console.log(response);
-        this.router.navigate(["/"]);
-      });
+    this.isSubmitted = true;
+    if (this.myFormGroup.invalid) {
+      return;
+    } else {
+      if (this.selectedCategory === this.catWithTextArea) {
+        form.value.category = this.selectedCategory;
+        form.value.tags = form.value.tag.split(",");
+        console.log(this.isSubmitted);
+        this.uploadPostService.submitPost(form.value).subscribe((response) => {
+          console.log(response);
+          this.router.navigate(["/"]);
+        });
+      }
     }
   }
 
