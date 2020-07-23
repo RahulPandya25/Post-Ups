@@ -11,6 +11,29 @@
   color: var(--dark);
 }
 
+// device sizes
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 765px;
+$breakpoint-desktop: 1024px;
+
+//mobile
+@media only screen and (max-width: $breakpoint-mobile) {
+  *,
+  *::before,
+  *::after {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+//tablet
+@media only screen and (min-width: $breakpoint-mobile) and (max-width: $breakpoint-tablet) {
+}
+//laptop
+@media only screen and (min-width: $breakpoint-tablet) and (max-width: $breakpoint-desktop) {
+}
+// desktop
+@media screen and (min-width: $breakpoint-desktop) {
+}
+
 :root {
   --pale-blue-green: #ecfaf5;
   --pale-green: #dcf8c6;

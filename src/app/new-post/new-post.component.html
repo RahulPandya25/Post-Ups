@@ -14,7 +14,16 @@
           formControlName="title"
           id="post-title"
           placeholder="Add Title..."
+          [ngClass]="{'in-valid': isSubmitted && myFormGroup.controls.title.errors}"
         />
+        <div *ngIf=" isSubmitted && myFormGroup.controls.title.errors">
+          <div
+            *ngIf="myFormGroup.controls.title.errors.required"
+            class="text-danger"
+          >
+            Title is required
+          </div>
+        </div>
       </div>
       <div class="form-element">
         <label for="category">Category</label
@@ -37,7 +46,16 @@
           rows="3"
           placeholder="Enter the post here..."
           formControlName="textContent"
+          [ngClass]="{ 'in-valid': isSubmitted && myFormGroup.controls.textContent.errors}"
         ></textarea>
+        <div *ngIf=" isSubmitted && myFormGroup.controls.textContent.errors">
+          <div
+            *ngIf="myFormGroup.controls.textContent.errors.required"
+            class="text-danger"
+          >
+            Text Content is required
+          </div>
+        </div>
       </div>
 
       <div class="form-element" *ngIf="selectedCategory !== catWithTextArea">
@@ -49,6 +67,14 @@
           formControlName="file"
           (change)="selectFile($event)"
         />
+        <!-- <div
+          *ngIf=" isSubmitted && myFormGroup.controls.title.errors"
+          class="text-danger"
+        >
+          <div *ngIf="myFormGroup.controls.title.errors.required">
+            Title is required
+          </div>
+        </div> -->
       </div>
 
       <div class="form-element">
@@ -58,7 +84,16 @@
           name="tag"
           formControlName="tag"
           placeholder="Add Tags seperated by commas..."
+          [ngClass]="{'in-valid': isSubmitted && myFormGroup.controls.tag.errors}"
         />
+        <div *ngIf=" isSubmitted && myFormGroup.controls.tag.errors">
+          <div
+            *ngIf="myFormGroup.controls.tag.errors.required"
+            class="text-danger"
+          >
+            Tag is required
+          </div>
+        </div>
       </div>
     </div>
     <div class="form-set">

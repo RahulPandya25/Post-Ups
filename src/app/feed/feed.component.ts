@@ -31,8 +31,6 @@ export class FeedComponent implements OnInit {
   }
 
   getFeed() {
-    this.notifService.updateNavComponents(this.requiredNavComponents);
-
     // getting values
     this.constService.currentTag.subscribe((tag) => (this.currentTag = tag));
     this.constService.currentCategory.subscribe(
@@ -63,5 +61,6 @@ export class FeedComponent implements OnInit {
 
   ngOnInit(): void {
     this.getFeed();
+    this.notifService.updateNavComponents(this.requiredNavComponents);
   }
 }

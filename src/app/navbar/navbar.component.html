@@ -75,14 +75,11 @@
         &nbsp;&nbsp;Filter:
         <select
           class="element active"
+          [(ngModel)]="selectedCategory"
           aria-placeholder="Select Category"
-          (change)="changeCategory($event)"
+          (change)="changeCategory()"
         >
-          <option
-            *ngFor="let category of categories"
-            [value]="category.value"
-            [selected]="category.defaultForNav == true"
-          >
+          <option *ngFor="let category of categories" [value]="category.value">
             {{ category.name }}</option
           >
         </select>
