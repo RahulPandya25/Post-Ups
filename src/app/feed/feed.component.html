@@ -5,13 +5,13 @@
       <div class="post-category">{{ post.category }}</div>
     </div>
     <div class="section main-content">
-      <div routerLink="/post" [queryParams]="{ postId: post._id }">
+      <a routerLink="/post" [queryParams]="{ postId: post._id }">
         <div class="text" *ngIf="post.category === 'text'">
           <p class="content">{{ post.textContent }}</p>
           <!-- <p>... read more</p> -->
         </div>
         <!-- add more main content here -->
-      </div>
+      </a>
     </div>
     <div class="section post-stat">
       <div class="views">
@@ -34,6 +34,6 @@
     </div>
   </div>
 </div>
-<div routerLink="/new-post" class="new-post-btn">
-  <i class="fa fa-plus" aria-hidden="true"></i>
-</div>
+<a routerLink="/new-post" class="new-post-btn"
+  ><i class="fa fa-plus" aria-hidden="true"></i
+></a>
