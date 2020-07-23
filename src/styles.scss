@@ -18,6 +18,11 @@ $breakpoint-desktop: 1024px;
 
 //mobile
 @media only screen and (max-width: $breakpoint-mobile) {
+  *,
+  *::before,
+  *::after {
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 //tablet
 @media only screen and (min-width: $breakpoint-mobile) and (max-width: $breakpoint-tablet) {
