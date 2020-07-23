@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit {
   feed = defaults.feed;
   sorts = defaults.sorts;
   categories = defaults.categories;
+  selectedCategory = defaults.defaultCategory;
   defaultTagForViewComparision = defaults.defaultTag;
 
   refreshFeed(tag) {
@@ -55,13 +56,27 @@ export class NavbarComponent implements OnInit {
 
       // update feed logic
       this.constService.changeTag(tag);
-
+      this.resetSortAndFilters();
       this.updateFeedComponent();
     }
   }
 
+  resetSortAndFilters() {
+    //update sort in view
+    this.sorts.forEach((element) => {
+      if (element.value == this.sorts[0].value) element.isActive = true;
+      else element.isActive = false;
+    });
+    // update sort globally
+    this.constService.changeSort(defaults.defaultSort);
+    // update category in view
+    this.selectedCategory = defaults.defaultCategory;
+    // update category globally
+    this.constService.changeCategory(defaults.defaultCategory);
+  }
+
   sortFeed(value) {
-    //update the tag in view
+    //update the sort in view
     this.sorts.forEach((element) => {
       if (element.value === value) element.isActive = true;
       else element.isActive = false;
@@ -72,9 +87,9 @@ export class NavbarComponent implements OnInit {
     this.updateFeedComponent();
   }
 
-  changeCategory(e) {
+  changeCategory() {
     // update feed logic
-    this.constService.changeCategory(e.target.value);
+    this.constService.changeCategory(this.selectedCategory);
     this.updateFeedComponent();
   }
 
@@ -103,6 +118,7 @@ export class NavbarComponent implements OnInit {
         element.value = tag;
       }
     });
+    this.resetSortAndFilters();
   }
 
   constructor(
