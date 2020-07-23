@@ -46,6 +46,13 @@
     input[type="file"] {
       all: unset;
     }
+    .in-valid {
+      border: 2px solid #ff000063;
+    }
+
+    .text-danger {
+      color: #ff000063;
+    }
   }
 
   .form-btns {
