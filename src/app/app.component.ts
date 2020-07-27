@@ -7,7 +7,6 @@ import {
   NavigationError,
 } from "@angular/router";
 import { fader } from "./route-animations";
-import defaults from "../assets/defaults.json";
 import { NotificationService } from "./services/notification.service";
 @Component({
   selector: "app-root",
@@ -17,10 +16,12 @@ import { NotificationService } from "./services/notification.service";
 })
 export class AppComponent {
   title = "Post-Ups";
+  @ViewChild(RouterOutlet) routerOutlet;
   showSecondaryNavBar = this.notifService.currentShowSecondaryNavBar;
 
-  prepareRoute(outlet: RouterOutlet) {
-    return outlet && outlet.activatedRoute;
+  prepareRoute() {
+    this.routerChange();
+    return this.routerOutlet && this.routerOutlet.activatedRoute;
   }
 
   routerChange() {
@@ -31,6 +32,7 @@ export class AppComponent {
 
       if (event instanceof NavigationEnd) {
         // Hide loading indicator
+        this.showSecondaryNavBar = this.routerOutlet.component.requiredNavComponents.showSecondaryNavBar;
       }
 
       if (event instanceof NavigationError) {
@@ -43,9 +45,5 @@ export class AppComponent {
   constructor(
     private router: Router,
     private notifService: NotificationService
-  ) {
-    this.notifService.toogleShowSecondaryNavBar.subscribe(() => {
-      this.showSecondaryNavBar = !this.showSecondaryNavBar;
-    });
-  }
+  ) {}
 }

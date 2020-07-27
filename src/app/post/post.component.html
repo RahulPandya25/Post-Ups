@@ -11,7 +11,17 @@
     <div class="text" *ngIf="post.category === 'text'">
       <p>{{ post.textContent }}</p>
     </div>
-    <!-- add more main content here -->
+    <div class="image" *ngIf="post.category === 'image'">
+      <img class="content" src="../../assets/image3.jfif" alt="post-image" />
+    </div>
+    <div class="video" *ngIf="post.category === 'video'">
+      <video class="content" controls autoplay="autoplay">
+        <source
+          src="../../assets/coverr-aerial-view-of-rocky-mountains-1585320758193.mp4"
+          type="video/mp4"
+        />
+      </video>
+    </div>
   </div>
   <div class="section post-stat">
     <div class="like-view">

@@ -31,6 +31,14 @@
     // to match with section
     padding: 0 1.2rem;
   }
+
+  .image,
+  .video {
+    .content {
+      width: 100%;
+      height: auto;
+    }
+  }
 }
 
 .post-stat {

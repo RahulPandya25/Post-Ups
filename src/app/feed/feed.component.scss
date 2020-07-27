@@ -57,6 +57,41 @@
       // to match with section
       padding: 0 1.2rem;
     }
+    .image,
+    .video {
+      .content {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .video {
+      position: relative;
+
+      --play-btn-size: 60px;
+      --play-btn-color: white;
+
+      .play-btn {
+        z-index: 1;
+
+        height: var(--play-btn-size);
+        width: var(--play-btn-size);
+        border: 2px solid var(--play-btn-color);
+        border-radius: 50%;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .fa::before {
+          color: var(--play-btn-color);
+        }
+      }
+    }
   }
 
   .post-stat {
