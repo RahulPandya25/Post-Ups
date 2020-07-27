@@ -10,7 +10,25 @@
           <p class="content">{{ post.textContent }}</p>
           <!-- <p>... read more</p> -->
         </div>
-        <!-- add more main content here -->
+        <div class="image" *ngIf="post.category === 'image'">
+          <img
+            class="content"
+            src="../../assets/image3.jfif"
+            alt="post-image"
+          />
+        </div>
+
+        <div class="video" *ngIf="post.category === 'video'">
+          <div class="play-btn">
+            <i class="fa fa-play" aria-hidden="true"></i>
+          </div>
+          <video class="content">
+            <source
+              src="../../assets/coverr-aerial-view-of-rocky-mountains-1585320758193.mp4"
+              type="video/mp4"
+            />
+          </video>
+        </div>
       </a>
     </div>
     <div class="section post-stat">
