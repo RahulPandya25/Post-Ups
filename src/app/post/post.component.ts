@@ -41,7 +41,7 @@ export class PostComponent implements OnInit {
         .postComment(this.postId, comment)
         .subscribe((response) => {
           this.comment = "";
-          this.ngOnInit();
+          this.ngOnInit(false);
         });
   }
 
@@ -58,23 +58,25 @@ export class PostComponent implements OnInit {
     private notifService: NotificationService
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit(updateViewCount = true): void {
     this.notifService.updateNavComponents(this.requiredNavComponents);
 
     this.route.queryParams.subscribe((params) => {
       this.postId = params["postId"];
     });
 
-    this.postService.getPostById(this.postId).subscribe((response) => {
-      this.post = response;
-      // updating post-date
-      let date = this.post.datePosted;
-      this.post.datePosted = new Date(date);
-      // updating comment-date
-      this.post.comments.forEach((element) => {
-        let date = element.datePosted;
-        element.datePosted = new Date(date);
+    this.postService
+      .getPostById(this.postId, updateViewCount)
+      .subscribe((response) => {
+        this.post = response;
+        // updating post-date
+        let date = this.post.datePosted;
+        this.post.datePosted = new Date(date);
+        // updating comment-date
+        this.post.comments.forEach((element) => {
+          let date = element.datePosted;
+          element.datePosted = new Date(date);
+        });
       });
-    });
   }
 }
