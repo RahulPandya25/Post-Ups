@@ -8,7 +8,6 @@
       <a routerLink="/post" [queryParams]="{ postId: post._id }">
         <div class="text" *ngIf="post.category === 'text'">
           <p class="content">{{ post.textContent }}</p>
-          <!-- <p>... read more</p> -->
         </div>
         <div class="image" *ngIf="post.category === 'image'">
           <img
@@ -17,7 +16,6 @@
             alt="post-image"
           />
         </div>
-
         <div class="video" *ngIf="post.category === 'video'">
           <div class="play-btn">
             <i class="fa fa-play" aria-hidden="true"></i>
@@ -28,6 +26,14 @@
               type="video/mp4"
             />
           </video>
+        </div>
+        <div class="audio" *ngIf="post.category === 'audio'">
+          <div class="play-btn">
+            <i class="fa fa-music" aria-hidden="true"></i>
+          </div>
+          <div class="title">&nbsp;&nbsp;{{ post.title }}</div>
+          <div class="play-hologram">PLAY</div>
+          <div class="music-hologram">music.</div>
         </div>
       </a>
     </div>
