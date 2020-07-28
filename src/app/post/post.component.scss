@@ -33,11 +33,16 @@
   }
 
   .image,
-  .video {
+  .video,
+  .audio {
     .content {
       width: 100%;
       height: auto;
     }
+  }
+
+  .audio .content audio {
+    width: 100%;
   }
 }
 

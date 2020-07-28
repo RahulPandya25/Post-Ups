@@ -92,6 +92,57 @@
         }
       }
     }
+
+    .audio {
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      width: 100%;
+      background-color: var(--pale-grey);
+      padding: 1rem 0.5rem;
+      overflow: hidden;
+
+      --btn-size: 40px;
+      --base-color: var(--medium);
+
+      position: relative;
+
+      .play-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        height: var(--btn-size);
+        width: var(--btn-size);
+        border: 2px solid var(--base-color);
+        border-radius: 50%;
+
+        .fa::before {
+          color: var(--base-color);
+        }
+      }
+
+      .title {
+        font-size: 1.25em;
+      }
+
+      .music-hologram {
+        position: absolute;
+        bottom: 0;
+        right: 10px;
+        line-height: 1em;
+        color: rgba(0, 0, 0, 0.04);
+        font-size: 3em;
+      }
+      .play-hologram {
+        position: absolute;
+        top: 0;
+        left: 10px;
+        line-height: 1em;
+        color: rgba(0, 0, 0, 0.04);
+        font-size: 5em;
+      }
+    }
   }
 
   .post-stat {
