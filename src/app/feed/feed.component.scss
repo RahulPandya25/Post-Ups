@@ -100,10 +100,11 @@
       width: 100%;
       background-color: var(--pale-grey);
       padding: 1rem 0.5rem;
-      overflow: hidden;
 
       --btn-size: 40px;
       --base-color: var(--medium);
+
+      position: relative;
 
       .play-btn {
         display: flex;
@@ -124,26 +125,22 @@
         font-size: 1.25em;
       }
 
-      .hologram {
-        position: relative;
+      .music-hologram {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-6%) translateY(-50%);
+        color: rgba(0, 0, 0, 0.04);
+        font-size: 3em;
+      }
 
-        .music-hologram {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translateX(10%) translateY(-50%);
-          color: rgba(0, 0, 0, 0.04);
-          font-size: 3em;
-        }
-
-        .play-hologram {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translateX(-85%) translateY(-50%);
-          color: rgba(0, 0, 0, 0.04);
-          font-size: 5em;
-        }
+      .play-hologram {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-100%) translateY(-50%);
+        color: rgba(0, 0, 0, 0.04);
+        font-size: 5em;
       }
     }
   }
