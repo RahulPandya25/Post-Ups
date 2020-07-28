@@ -105,14 +105,15 @@
       --base-color: var(--medium);
 
       position: relative;
+      overflow: hidden;
 
       .play-btn {
         display: flex;
         align-items: center;
         justify-content: center;
 
-        height: var(--btn-size);
-        width: var(--btn-size);
+        min-height: var(--btn-size);
+        min-width: var(--btn-size);
         border: 2px solid var(--base-color);
         border-radius: 50%;
 
@@ -122,6 +123,7 @@
       }
 
       .title {
+        white-space: nowrap;
         font-size: 1.25em;
       }
 
@@ -129,7 +131,7 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translateX(-6%) translateY(-50%);
+        transform: translateX(5%) translateY(-50%);
         color: rgba(0, 0, 0, 0.04);
         font-size: 3em;
       }
@@ -138,7 +140,7 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translateX(-100%) translateY(-50%);
+        transform: translateX(-95%) translateY(-50%);
         color: rgba(0, 0, 0, 0.04);
         font-size: 5em;
       }
