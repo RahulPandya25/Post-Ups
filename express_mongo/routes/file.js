@@ -7,6 +7,7 @@ const crypto = require("crypto");
 const gridFsStorage = require("multer-gridfs-storage");
 const grid = require("gridfs-stream");
 var mongoose = require("mongoose");
+var Post = require("../model/post.js");
 
 const mongoURI =
   "mongodb+srv://Mongo:mongoMan@cluster0.3wgsb.mongodb.net/post?retryWrites=true&w=majority";
@@ -51,12 +52,16 @@ router.post("/uploadFile/:id", (req, res) => {
   const upload = multer({ storage }).any();
   upload(req, res, function (err) {
     if (err) {
-      console.log(err);
-      return res.end("Error uploading file.");
+      console.log(err); // if error occurs then remove post
+      return res.send("Error uploading file.");
     } else {
-      var jsonObj = req.files;
       req.files.forEach(function (f) {
-        res.send(f);
+        Post.updateOne(
+          { _id: f.metadata.postId },
+          { $set: { mediaContent: f.id } }
+        ).then(() => {
+          res.send(f);
+        });
       });
     }
   });
