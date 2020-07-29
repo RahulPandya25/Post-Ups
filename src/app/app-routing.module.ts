@@ -3,7 +3,6 @@ import { Routes, RouterModule } from "@angular/router";
 import { FeedComponent } from "./feed/feed.component";
 import { NewPostComponent } from "./new-post/new-post.component";
 import { PostComponent } from "./post/post.component";
-import { NoPostComponent } from './no-post/no-post.component';
 
 const routes: Routes = [
   // default route
@@ -12,8 +11,6 @@ const routes: Routes = [
   { path: "new-post", component: NewPostComponent },
   // post
   { path: "post", component: PostComponent },
-  // no post
-  { path: "no-post", component: NoPostComponent },
 ];
 
 @NgModule({
