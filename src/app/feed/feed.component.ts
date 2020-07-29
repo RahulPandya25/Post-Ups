@@ -19,6 +19,7 @@ export class FeedComponent implements OnInit {
     showBackBtn: false,
     showSearchBtn: true,
   };
+  endOfPostLimit = 2;
 
   constructor(
     private postService: PostService,
@@ -58,7 +59,16 @@ export class FeedComponent implements OnInit {
         });
       });
   }
-
+  likeThisPost(postId) {
+    this.postService.likeThisPost(postId).subscribe((response) => {
+      var temp = Object.assign(response);
+      this.posts.forEach((post) => {
+        if (post._id === postId) {
+          post.likes = temp.likes;
+        }
+      });
+    });
+  }
   ngOnInit(): void {
     this.getFeed();
     this.notifService.updateNavComponents(this.requiredNavComponents);

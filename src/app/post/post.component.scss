@@ -28,8 +28,9 @@
   .text {
     // different than feed
     margin-bottom: 0.75rem;
-    // to match with section
-    padding: 0 1.2rem;
+
+    padding: 0 0.75rem;
+    font-size: 1.1em;
   }
 
   .image,
@@ -46,16 +47,17 @@
   }
 }
 
+.section.caption {
+  padding: 0 0.5rem;
+  line-height: 1.25em;
+}
+
 .post-stat {
   display: flex;
   justify-content: space-between;
   font-size: 1.2em;
-  .like-view {
-    display: flex;
-    .likes {
-      margin-right: 1rem;
-      cursor: pointer;
-    }
+  .likes {
+    cursor: pointer;
   }
 
   button {
@@ -63,9 +65,15 @@
   }
 }
 
-.date-posted {
-  font-size: 0.75rem;
-  color: var(--black);
+.views-date {
+  display: flex;
+  justify-content: space-between;
+
+  .date-posted,
+  .views {
+    font-size: 0.75rem;
+    color: var(--black);
+  }
 }
 
 .tags {

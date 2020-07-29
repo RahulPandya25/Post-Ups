@@ -9,8 +9,10 @@ export class PostService {
   getFeed(feed) {
     return this.http.post(ConstantsService.BASE_URL + "/getFeed", feed);
   }
-  getPostById(postId) {
-    return this.http.get(ConstantsService.BASE_URL + "/getPost/" + postId);
+  getPostById(postId, updateViewCount) {
+    return this.http.get(
+      ConstantsService.BASE_URL + "/getPost/" + postId + "/" + updateViewCount
+    );
   }
   postComment(postId, comment) {
     return this.http.post(ConstantsService.BASE_URL + "/submitComment", {
