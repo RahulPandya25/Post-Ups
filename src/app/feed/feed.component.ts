@@ -19,6 +19,7 @@ export class FeedComponent implements OnInit {
     showBackBtn: false,
     showSearchBtn: true,
   };
+  endOfPostLimit = 2;
 
   constructor(
     private postService: PostService,

@@ -60,6 +60,14 @@
       {{ post.datePosted.toDateString() }}
     </div>
   </div>
+
+  <div class="end-of-post" *ngIf="posts.length > endOfPostLimit">
+    <div class="header">🥳&nbsp;Hurray!&nbsp;🥳</div>
+    <div class="main">You Have Made Till The End</div>
+    <div class="sub">
+      Thanks for your time on <span class="app-title">Post-Ups</span>
+    </div>
+  </div>
 </div>
 <a routerLink="/new-post" class="new-post-btn"
   ><i class="fa fa-plus" aria-hidden="true"></i
