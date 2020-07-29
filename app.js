@@ -8,6 +8,7 @@ var path = require("path");
 var bodyParser = require("body-parser");
 
 var api = require("./express_mongo/routes/api.js");
+var file = require("./express_mongo/routes/file.js");
 var app = express();
 
 var mongoose = require("mongoose");
@@ -21,7 +22,9 @@ mongoose
       promiseLibrary: require("bluebird"),
     }
   )
-  .then(() => console.log("DB connection succesful"))
+  .then(() => {
+    console.log("DB connection succesful");
+  })
   .catch((err) => console.error(err));
 
 const ANGULAR_BUNDLE = "dist";
@@ -40,6 +43,9 @@ app.use(express.static(path.join(__dirname, ANGULAR_BUNDLE)));
 
 // all the api requests
 app.use("/api", api);
+
+// all the api requests
+app.use("/file", file);
 
 // all the other request should be redirected to angular app
 app.use("*", express.static(path.join(__dirname, ANGULAR_BUNDLE)));
