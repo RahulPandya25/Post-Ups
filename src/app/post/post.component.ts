@@ -21,8 +21,7 @@ export class PostComponent implements OnInit {
   comment = "";
 
   likeThisPost(postId) {
-    console.log(postId);
-    this.postService.likeThisPost(postId).subscribe((response) => {
+      this.postService.likeThisPost(postId).subscribe((response) => {
       this.post = response;
       // updating post-date
       let date = this.post.datePosted;
