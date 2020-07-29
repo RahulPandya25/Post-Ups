@@ -4,6 +4,7 @@ const postSchema = new mongoose.Schema(
   {
     title: String,
     textContent: String,
+    mediaContent: { type: Schema.Types.ObjectId, ref: "uploads.files" },
     category: String,
     tags: Array,
     likes: { type: Number, default: 0 },

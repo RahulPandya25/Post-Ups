@@ -1,5 +1,6 @@
 var Post = require("../model/post.js");
 var Comment = require("../model/comment.js");
+var File = require("../model/file.js");
 const { isNullOrUndefined } = require("util");
 
 postService = {};
@@ -11,7 +12,7 @@ postService.submitPost = (data) => {
 postService.getPostById = async (postId, updateViewCount) => {
   if (updateViewCount == "true")
     await Post.findOneAndUpdate({ _id: postId }, { $inc: { views: 1 } });
-  return Post.findById(postId).populate("comments");
+  return Post.findById(postId).populate("comments").populate("mediaContent");
 };
 
 postService.submitCommentOnPost = async (data) => {
