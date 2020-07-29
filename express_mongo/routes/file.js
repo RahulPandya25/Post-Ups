@@ -56,11 +56,8 @@ router.post("/uploadFile/:id", (req, res) => {
     } else {
       var jsonObj = req.files;
       req.files.forEach(function (f) {
-        console.log(f);
-        // and move file to final destination...
+        res.send(f);
       });
-
-      res.end("File has been uploaded");
     }
   });
 });
