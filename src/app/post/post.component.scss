@@ -28,8 +28,9 @@
   .text {
     // different than feed
     margin-bottom: 0.75rem;
-    // to match with section
-    padding: 0 1.2rem;
+
+    padding: 0 0.75rem;
+    font-size: 1.1em;
   }
 
   .image,
@@ -44,6 +45,11 @@
   .audio .content audio {
     width: 100%;
   }
+}
+
+.section.caption {
+  padding: 0 0.5rem;
+  line-height: 1.25em;
 }
 
 .post-stat {

@@ -54,8 +54,8 @@
         max-height: 8rem;
         overflow: hidden;
       }
-      // to match with section
-      padding: 0 1.2rem;
+      padding: 0 0.75rem;
+      font-size: 1.1em;
     }
     .image,
     .video {
@@ -145,6 +145,11 @@
         font-size: 5em;
       }
     }
+  }
+
+  .section.caption {
+    padding: 0 0.5rem;
+    line-height: 1.25em;
   }
 
   .post-stat {

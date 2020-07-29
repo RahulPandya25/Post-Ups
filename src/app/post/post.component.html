@@ -28,6 +28,9 @@
       </figure>
     </div>
   </div>
+  <div class="section caption" *ngIf="post.category !== 'text'">
+    {{ post.textContent }}
+  </div>
   <div class="section post-stat">
     <div class="like-view">
       <div class="likes" (click)="likeThisPost(post._id)">
