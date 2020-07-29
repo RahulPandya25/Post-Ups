@@ -183,9 +183,15 @@
     }
   }
 
-  .date-posted {
-    font-size: 0.75rem;
-    color: var(--black);
+  .views-date {
+    display: flex;
+    justify-content: space-between;
+
+    .date-posted,
+    .views {
+      font-size: 0.75rem;
+      color: var(--black);
+    }
   }
 }
 

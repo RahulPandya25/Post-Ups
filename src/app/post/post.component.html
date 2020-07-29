@@ -32,19 +32,11 @@
     {{ post.textContent }}
   </div>
   <div class="section post-stat">
-    <div class="like-view">
-      <div class="likes" (click)="likeThisPost(post._id)">
-        {{ post.likes }}
-        <button>
-          <i class="fa fa-heart" aria-hidden="true"></i>
-        </button>
-      </div>
-      <div class="views">
-        {{ post.views }}
-        <button>
-          <i class="fa fa-eye" aria-hidden="true"></i>
-        </button>
-      </div>
+    <div class="likes" (click)="likeThisPost(post._id)">
+      {{ post.likes }}
+      <button>
+        <i class="fa fa-heart" aria-hidden="true"></i>
+      </button>
     </div>
 
     <div class="comments-count">
@@ -54,9 +46,14 @@
       </button>
     </div>
   </div>
-  <div class="section date-posted">
-    {{ post.datePosted.toDateString() }}
+
+  <div class="section views-date">
+    <div class="views">{{ post.views }}&nbsp;views</div>
+    <div class="date-posted">
+      {{ post.datePosted.toDateString() }}
+    </div>
   </div>
+
   <div class="section tags" *ngIf="post.tags.length > 0">
     <label class="tag-title">Tags&nbsp;&nbsp;</label>
     <div class="tag" *ngFor="let tag of post.tags">
