@@ -1,3 +1,24 @@
+.no-post {
+  min-height: 40vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  --base-color: rgba(0, 0, 0, 0.5);
+  .title,
+  .body,
+  .emoji {
+    color: var(--base-color);
+  }
+  .emoji {
+    font-size: 2em;
+    .fa::before {
+      color: var(--base-color);
+    }
+  }
+}
 .post {
   width: 100%;
   position: relative;
