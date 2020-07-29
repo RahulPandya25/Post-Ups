@@ -8,8 +8,9 @@ postService.submitPost = (data) => {
   return Post.create(data);
 };
 
-postService.getPostById = async (postId) => {
-  await Post.findOneAndUpdate({ _id: postId }, { $inc: { views: 1 } });
+postService.getPostById = async (postId, updateViewCount) => {
+  if (updateViewCount == "true")
+    await Post.findOneAndUpdate({ _id: postId }, { $inc: { views: 1 } });
   return Post.findById(postId).populate("comments");
 };
 

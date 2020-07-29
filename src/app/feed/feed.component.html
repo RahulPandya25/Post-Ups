@@ -1,4 +1,12 @@
 <div class="container">
+  <div class="no-post" *ngIf="posts.length === 0">
+    <div class="emoji">
+      <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    </div>
+    <div class="title">Sorry! No posts available</div>
+    <div class="body">New posts will be available soon!</div>
+  </div>
+
   <div class="post" *ngFor="let post of posts">
     <div class="section header">
       <div class="post-title">{{ post.title }}</div>
@@ -37,14 +45,16 @@
         </div>
       </a>
     </div>
+    <div class="section caption" *ngIf="post.category !== 'text'">
+      {{ post.textContent }}
+    </div>
     <div class="section post-stat">
-      <div class="views">
-        {{ post.views }}
+      <div class="likes" (click)="likeThisPost(post._id)">
+        {{ post.likes }}
         <button>
-          <i class="fa fa-eye" aria-hidden="true"></i>
+          <i class="fa fa-heart" aria-hidden="true"></i>
         </button>
       </div>
-
       <div class="comments-count">
         {{ post.comments.length }}
         <button>
@@ -52,9 +62,19 @@
         </button>
       </div>
     </div>
+    <div class="section views-date">
+      <div class="views">{{ post.views }}&nbsp;views</div>
+      <div class="date-posted">
+        {{ post.datePosted.toDateString() }}
+      </div>
+    </div>
+  </div>
 
-    <div class="section date-posted">
-      {{ post.datePosted.toDateString() }}
+  <div class="end-of-post" *ngIf="posts.length > endOfPostLimit">
+    <div class="header">🥳&nbsp;Hurray!&nbsp;🥳</div>
+    <div class="main">You Have Made Till The End</div>
+    <div class="sub">
+      Thank you for spending time on <span class="app-title">Post-Ups</span>
     </div>
   </div>
 </div>

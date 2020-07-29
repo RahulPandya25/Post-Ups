@@ -1,3 +1,24 @@
+.no-post {
+  min-height: 40vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  --base-color: rgba(0, 0, 0, 0.5);
+  .title,
+  .body,
+  .emoji {
+    color: var(--base-color);
+  }
+  .emoji {
+    font-size: 2em;
+    .fa::before {
+      color: var(--base-color);
+    }
+  }
+}
 .post {
   width: 100%;
   position: relative;
@@ -9,7 +30,6 @@
     width: 100%;
     height: 100%;
     z-index: -1;
-    // background-color: lightblue;
     border-bottom: 2px solid rgba(0, 0, 0, 0.05);
   }
   &:not(:last-child) {
@@ -35,6 +55,7 @@
 
     .post-title {
       font-size: 1.3em;
+      font-weight: 500;
       align-self: baseline;
     }
 
@@ -54,8 +75,8 @@
         max-height: 8rem;
         overflow: hidden;
       }
-      // to match with section
-      padding: 0 1.2rem;
+      padding: 0 0.75rem;
+      font-size: 1.1em;
     }
     .image,
     .video {
@@ -147,6 +168,11 @@
     }
   }
 
+  .section.caption {
+    padding: 0 0.5rem;
+    line-height: 1.25em;
+  }
+
   .post-stat {
     display: flex;
     justify-content: space-between;
@@ -157,9 +183,42 @@
     }
   }
 
-  .date-posted {
-    font-size: 0.75rem;
-    color: var(--black);
+  .views-date {
+    display: flex;
+    justify-content: space-between;
+
+    .date-posted,
+    .views {
+      font-size: 0.75rem;
+      color: var(--black);
+    }
+  }
+}
+
+.end-of-post {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin: 1.5rem 0;
+
+  .header {
+    font-size: 1.2em;
+    font-weight: 500;
+  }
+  .main {
+    font-size: 1.1em;
+  }
+  .sub {
+    --text-clr: rgba(0, 0, 0, 0.5);
+
+    font-size: 0.9em;
+    color: var(--text-clr);
+
+    .app-title {
+      color: var(--text-clr);
+    }
   }
 }
 
