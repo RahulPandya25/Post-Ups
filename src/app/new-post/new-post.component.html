@@ -4,6 +4,7 @@
     #myForm="ngForm"
     [formGroup]="myFormGroup"
     (ngSubmit)="onSubmit(myForm)"
+    enctype="multipart/form-data"
   >
     <div class="form-set">
       <div class="form-element">
@@ -58,34 +59,32 @@
         </div>
       </div>
 
-      <div *ngIf="selectedCategory !== catWithTextArea">
-        <div class="form-element">
-          <label for="text">Add Caption</label>
-          <textarea
-            rows="1"
-            placeholder="Enter the caption here..."
-            formControlName="textContent"
-            [ngClass]="{ 'in-valid': isSubmitted && myFormGroup.controls.textContent.errors}"
-          ></textarea>
-          <div *ngIf=" isSubmitted && myFormGroup.controls.textContent.errors">
-            <div
-              *ngIf="myFormGroup.controls.textContent.errors.required"
-              class="text-danger"
-            >
-              Caption is required
-            </div>
+      <div class="form-element" *ngIf="selectedCategory !== catWithTextArea">
+        <label for="text">Add Caption</label>
+        <textarea
+          rows="1"
+          placeholder="Enter the caption here..."
+          formControlName="textContent"
+          [ngClass]="{ 'in-valid': isSubmitted && myFormGroup.controls.textContent.errors}"
+        ></textarea>
+        <div *ngIf=" isSubmitted && myFormGroup.controls.textContent.errors">
+          <div
+            *ngIf="myFormGroup.controls.textContent.errors.required"
+            class="text-danger"
+          >
+            Caption is required
           </div>
         </div>
-        <div class="form-element">
-          <label for="mediaFile">Upload File</label>
-          <input
-            type="file"
-            name="file"
-            id="file"
-            formControlName="file"
-            (change)="selectFile($event)"
-          />
-        </div>
+      </div>
+      <div class="form-element" *ngIf="selectedCategory !== catWithTextArea">
+        <label for="mediaFile">Upload File</label>
+        <input
+          type="file"
+          name="file"
+          id="file"
+          formControlName="file"
+          (change)="selectFile($event)"
+        />
       </div>
 
       <div class="form-element">

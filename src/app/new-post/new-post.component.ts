@@ -22,6 +22,7 @@ export class NewPostComponent implements OnInit {
   file = false;
   private fileList;
   isSubmitted = false;
+  post;
 
   constructor(
     private uploadPostService: UploadPostService,
@@ -68,16 +69,34 @@ export class NewPostComponent implements OnInit {
     if (this.myFormGroup.invalid) {
       return;
     } else {
+      form.value.category = this.selectedCategory;
+      form.value.tags = form.value.tag.split(",");
+      if (form.value.isCommentEnabled === "") {
+        form.value.isCommentEnabled = false;
+      }
       if (this.selectedCategory === this.catWithTextArea) {
-        form.value.category = this.selectedCategory;
-        form.value.tags = form.value.tag.split(",");
-        if (form.value.isCommentEnabled === "") {
-          form.value.isCommentEnabled = false;
-        }
         console.log(this.isSubmitted);
         this.uploadPostService.submitPost(form.value).subscribe((response) => {
+          this.post = response;
           console.log(response);
+          console.log(response.hasOwnProperty("id"));
           this.router.navigate(["/"]);
+        });
+      }
+      if (this.selectedCategory !== this.catWithTextArea) {
+        let file: File = this.fileList[0];
+        let formData: FormData = new FormData();
+        formData.append("file", file, file.name);
+        this.uploadPostService.submitPost(form.value).subscribe((response) => {
+          if (response !== null) {
+            this.post = response;
+            this.uploadPostService
+              .uploadFile(formData, this.post._id)
+              .subscribe((data) => {
+                console.log(data);
+                this.router.navigate(["/"]);
+              });
+          }
         });
       }
     }
