@@ -34,5 +34,24 @@ export class PostService {
     });
   }
 
+  getFile(postId) {
+    return this.http.get(
+      "http://localhost:4300/file/getFileByPostId/" + postId
+    );
+  }
+
+  arrayBufferToBase64(buffer) {
+    var binary = "";
+    var bytes = [].slice.call(new Uint8Array(buffer));
+    bytes.forEach((b) => (binary += String.fromCharCode(b)));
+    return window.btoa(binary);
+  }
+
+  getFilesrc(post) {
+    var base64Flag = `data:${post.file.files_id.contentType};base64,`;
+    var imageStr = this.arrayBufferToBase64(post.file.data.data);
+    return "" + base64Flag + imageStr;
+  }
+
   constructor(private http: HttpClient) {}
 }

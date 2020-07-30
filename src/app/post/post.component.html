@@ -12,13 +12,13 @@
       <p>{{ post.textContent }}</p>
     </div>
     <div class="image" *ngIf="post.category === 'image'">
-      <img class="content" src="../../assets/image2.jfif" alt="post-image" />
+      <img class="content" src="{{ post.filesrc }}" alt="post-image" />
     </div>
     <div class="video" *ngIf="post.category === 'video'">
       <video class="content" controls autoplay="autoplay">
         <source
           src="../../assets/coverr-aerial-view-of-rocky-mountains-1585320758193.mp4"
-          type="video/mp4"
+          type="{{ post.file.files_id.contentType }}"
         />
       </video>
     </div>

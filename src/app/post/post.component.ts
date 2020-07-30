@@ -21,7 +21,7 @@ export class PostComponent implements OnInit {
   comment = "";
 
   likeThisPost(postId) {
-      this.postService.likeThisPost(postId).subscribe((response) => {
+    this.postService.likeThisPost(postId).subscribe((response) => {
       this.post = response;
       // updating post-date
       let date = this.post.datePosted;
@@ -76,6 +76,9 @@ export class PostComponent implements OnInit {
           let date = element.datePosted;
           element.datePosted = new Date(date);
         });
+
+        this.post.filesrc = this.postService.getFilesrc(this.post);
+        console.log(this.post);
       });
   }
 }

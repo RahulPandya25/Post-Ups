@@ -18,6 +18,7 @@
     .back-btn,
     .search-btn {
       transition: all 0.25s ease-in-out;
+      cursor: pointer;
       button {
         all: unset;
         padding: 0.75rem;
