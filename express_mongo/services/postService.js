@@ -37,7 +37,7 @@ postService.getFeed = (data) => {
     var query = { tags: data.tag, category: data.category };
   }
 
-  return Post.find(query).sort(data.sort);
+  return Post.find(query).sort(data.sort).populate("mediaContent");
 };
 
 postService.incrementLikeOnPost = async (postId) => {
