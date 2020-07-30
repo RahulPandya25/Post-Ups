@@ -1,6 +1,7 @@
 var Post = require("../model/post.js");
 var Comment = require("../model/comment.js");
 var File = require("../model/file.js");
+var Chunk = require("../model/chunks.js");
 const { isNullOrUndefined } = require("util");
 
 postService = {};
@@ -12,7 +13,9 @@ postService.submitPost = (data) => {
 postService.getPostById = async (postId, updateViewCount) => {
   if (updateViewCount == "true")
     await Post.findOneAndUpdate({ _id: postId }, { $inc: { views: 1 } });
-  return Post.findById(postId).populate("comments").populate("mediaContent");
+  var post = await Post.findById(postId).populate("comments");
+  post.file = await getChunkbyPostId(postId);
+  return post;
 };
 
 postService.submitCommentOnPost = async (data) => {
@@ -37,12 +40,20 @@ postService.getFeed = (data) => {
     var query = { tags: data.tag, category: data.category };
   }
 
-  return Post.find(query).sort(data.sort).populate("mediaContent");
+  return Post.find(query).sort(data.sort);
 };
 
 postService.incrementLikeOnPost = async (postId) => {
   await Post.findOneAndUpdate({ _id: postId }, { $inc: { likes: 1 } });
   return Post.findById(postId).populate("comments");
 };
+
+async function getChunkbyPostId(postId) {
+  var file = await File.findOne({
+    metadata: { postId: postId },
+  });
+  var chunk = await Chunk.findOne({ files_id: file._id }).populate("files_id");
+  return chunk;
+}
 
 module.exports = postService;

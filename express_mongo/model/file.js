@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { json } = require("body-parser");
 var Schema = mongoose.Schema;
 var GridfsSchema = new mongoose.Schema(
   {

@@ -1,24 +1,14 @@
 var express = require("express");
 var router = express.Router();
 var path = require("path");
-const { send } = require("process");
 const multer = require("multer");
 const crypto = require("crypto");
 const gridFsStorage = require("multer-gridfs-storage");
-const grid = require("gridfs-stream");
-var mongoose = require("mongoose");
 var Post = require("../model/post.js");
+var File = require("../model/file.js");
+var Chunk = require("../model/chunks.js");
 const mongoURI =
   "mongodb+srv://Mongo:mongoMan@cluster0.3wgsb.mongodb.net/post?retryWrites=true&w=majority";
-// Create mongo DB connection
-const conn = mongoose.createConnection(mongoURI);
-let gfs;
-
-conn.once("open", () => {
-  // Initialize stream
-  gfs = grid(conn.db, mongoose.mongo);
-  gfs.collection("uploads");
-});
 
 // ********************* //
 // base api call: '/file' //
@@ -71,6 +61,15 @@ router.post("/uploadFile/:id", (req, res) => {
       });
     }
   });
+});
+
+router.get("/getFileByPostId/:postId", async (req, res) => {
+  var file = await File.findOne({
+    metadata: { postId: req.params.postId },
+  });
+  var chunk = await Chunk.findOne({ files_id: file._id }).populate("files_id");
+  console.log(chunk);
+  return chunk;
 });
 
 module.exports = router;

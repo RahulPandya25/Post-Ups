@@ -13,6 +13,7 @@ const postSchema = new mongoose.Schema(
     isCommentEnabled: { type: Boolean, default: true },
     comments: [{ type: Schema.Types.ObjectId, ref: "comment" }],
     datePosted: { type: Date, default: Date.now },
+    file: {},
   },
   { collection: "post", timestamp: true }
 );
