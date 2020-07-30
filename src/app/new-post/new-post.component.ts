@@ -56,9 +56,11 @@ export class NewPostComponent implements OnInit {
     title: new FormControl("", Validators.required),
     textContent: new FormControl("", Validators.required),
     category: new FormControl(""),
-    //file: new FormControl(""),
+    file: new FormControl(""),
+    caption: new FormControl(""),
     tag: new FormControl("", Validators.required),
     tags: new FormControl(""),
+    isCommentEnabled: new FormControl(""),
   });
 
   onSubmit(form: any) {
@@ -69,6 +71,9 @@ export class NewPostComponent implements OnInit {
       if (this.selectedCategory === this.catWithTextArea) {
         form.value.category = this.selectedCategory;
         form.value.tags = form.value.tag.split(",");
+        if (form.value.isCommentEnabled === "") {
+          form.value.isCommentEnabled = false;
+        }
         console.log(this.isSubmitted);
         this.uploadPostService.submitPost(form.value).subscribe((response) => {
           console.log(response);

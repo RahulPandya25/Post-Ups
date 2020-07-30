@@ -58,23 +58,34 @@
         </div>
       </div>
 
-      <div class="form-element" *ngIf="selectedCategory !== catWithTextArea">
-        <label for="mediaFile">Upload File</label>
-        <input
-          type="file"
-          name="file"
-          id="file"
-          formControlName="file"
-          (change)="selectFile($event)"
-        />
-        <!-- <div
-          *ngIf=" isSubmitted && myFormGroup.controls.title.errors"
-          class="text-danger"
-        >
-          <div *ngIf="myFormGroup.controls.title.errors.required">
-            Title is required
+      <div *ngIf="selectedCategory !== catWithTextArea">
+        <div class="form-element">
+          <label for="text">Add Caption</label>
+          <textarea
+            rows="1"
+            placeholder="Enter the caption here..."
+            formControlName="textContent"
+            [ngClass]="{ 'in-valid': isSubmitted && myFormGroup.controls.textContent.errors}"
+          ></textarea>
+          <div *ngIf=" isSubmitted && myFormGroup.controls.textContent.errors">
+            <div
+              *ngIf="myFormGroup.controls.textContent.errors.required"
+              class="text-danger"
+            >
+              Caption is required
+            </div>
           </div>
-        </div> -->
+        </div>
+        <div class="form-element">
+          <label for="mediaFile">Upload File</label>
+          <input
+            type="file"
+            name="file"
+            id="file"
+            formControlName="file"
+            (change)="selectFile($event)"
+          />
+        </div>
       </div>
 
       <div class="form-element">
@@ -94,6 +105,19 @@
             Tag is required
           </div>
         </div>
+      </div>
+      <div>
+        <input
+          type="checkbox"
+          name="isCommentEnabled"
+          formControlName="isCommentEnabled"
+          class="comment-checkbox"
+          checked
+        />
+        <!-- TODO: By default the check box should be checked -->
+        <label for="isCommentEnabled" class="comment-label"
+          >Enable Comments</label
+        >
       </div>
     </div>
     <div class="form-set">
