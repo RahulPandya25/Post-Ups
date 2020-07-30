@@ -8,6 +8,7 @@ import defaults from "../../assets/defaults.json";
 export class ConstantsService {
   // for production only
   public static BASE_URL = window.location.origin + "/api";
+  public static FILE_URL = window.location.origin + "/file";
 
   // for development only don't commit below line to any branch
   // public static BASE_URL = "http://localhost:4300/api";

@@ -4,6 +4,7 @@ const postSchema = new mongoose.Schema(
   {
     title: String,
     textContent: String,
+    mediaContent: { type: Schema.Types.ObjectId, ref: "uploads.files" },
     category: String,
     tags: Array,
     likes: { type: Number, default: 0 },
@@ -12,6 +13,7 @@ const postSchema = new mongoose.Schema(
     isCommentEnabled: { type: Boolean, default: true },
     comments: [{ type: Schema.Types.ObjectId, ref: "comment" }],
     datePosted: { type: Date, default: Date.now },
+    file: {},
   },
   { collection: "post", timestamp: true }
 );
