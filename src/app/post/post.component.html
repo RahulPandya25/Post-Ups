@@ -17,14 +17,14 @@
     <div class="video" *ngIf="post.category === 'video'">
       <video class="content" controls autoplay="autoplay">
         <source
-          src="../../assets/coverr-aerial-view-of-rocky-mountains-1585320758193.mp4"
+          src="{{ post.filesrc }}"
           type="{{ post.file.files_id.contentType }}"
         />
       </video>
     </div>
     <div class="audio" *ngIf="post.category === 'audio'">
       <figure class="content">
-        <audio controls src="../../assets/Danza Kuduro.mp3"></audio>
+        <audio controls src="{{ post.filesrc }}"></audio>
       </figure>
     </div>
   </div>

@@ -3,6 +3,7 @@ var Comment = require("../model/comment.js");
 var File = require("../model/file.js");
 var Chunk = require("../model/chunks.js");
 const { isNullOrUndefined } = require("util");
+var defaults = require("../../src/assets/defaults.json");
 
 postService = {};
 
@@ -14,7 +15,16 @@ postService.getPostById = async (postId, updateViewCount) => {
   if (updateViewCount == "true")
     await Post.findOneAndUpdate({ _id: postId }, { $inc: { views: 1 } });
   var post = await Post.findById(postId).populate("comments");
-  post.file = await getChunkbyPostId(postId);
+
+  let catWithTextArea;
+  defaults.categories.forEach((element) => {
+    if (element.defaultForNewPost) {
+      catWithTextArea = element.value;
+    }
+  });
+
+  if (post.category !== catWithTextArea)
+    post.file = await getChunkbyPostId(postId);
   return post;
 };
 
@@ -28,7 +38,6 @@ postService.submitCommentOnPost = async (data) => {
 };
 
 postService.getFeed = (data) => {
-  console.log(data);
   if (isNullOrUndefined(data.tag) && !isNullOrUndefined(data.category)) {
     var query = { category: data.category };
   } else if (!isNullOrUndefined(data.tag) && isNullOrUndefined(data.category)) {
