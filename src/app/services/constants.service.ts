@@ -12,6 +12,7 @@ export class ConstantsService {
 
   // for development only don't commit below line to any branch
   // public static BASE_URL = "http://localhost:4300/api";
+  // public static FILE_URL = "http://localhost:4300/file";
 
   private tagSource = new BehaviorSubject(defaults.defaultTag);
   currentTag = this.tagSource.asObservable();

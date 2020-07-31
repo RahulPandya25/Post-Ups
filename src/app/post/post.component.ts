@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { PostService } from "../services/post.service";
 import { ConstantsService } from "../services/constants.service";
 import { NotificationService } from "../services/notification.service";
+import defaults from "../../assets/defaults.json";
 
 @Component({
   selector: "app-post",
@@ -77,8 +78,16 @@ export class PostComponent implements OnInit {
           element.datePosted = new Date(date);
         });
 
-        this.post.filesrc = this.postService.getFilesrc(this.post);
-        console.log(this.post);
+        let catWithTextArea;
+        defaults.categories.forEach((element) => {
+          if (element.defaultForNewPost) {
+            catWithTextArea = element.value;
+          }
+        });
+
+        if (this.post.category !== catWithTextArea) {
+          this.post.filesrc = this.postService.getFilesrc(this.post);
+        }
       });
   }
 }
