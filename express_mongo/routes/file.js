@@ -7,6 +7,7 @@ const gridFsStorage = require("multer-gridfs-storage");
 var Post = require("../model/post.js");
 var File = require("../model/file.js");
 var Chunk = require("../model/chunks.js");
+const fileService = require("../services/fileService.js");
 const mongoURI =
   "mongodb+srv://Mongo:mongoMan@cluster0.3wgsb.mongodb.net/post?retryWrites=true&w=majority";
 
@@ -64,12 +65,9 @@ router.post("/uploadFile/:id", (req, res) => {
 });
 
 router.get("/getFileByPostId/:postId", async (req, res) => {
-  var file = await File.findOne({
-    metadata: { postId: req.params.postId },
+  fileService.getChunkByPostId(req.params.postId).then((data) => {
+    res.json(data);
   });
-  var chunk = await Chunk.findOne({ files_id: file._id }).populate("files_id");
-  console.log(chunk);
-  return chunk;
 });
 
 module.exports = router;

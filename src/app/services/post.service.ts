@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { ConstantsService } from "./constants.service";
 import { Injectable } from "@angular/core";
 
@@ -34,9 +34,29 @@ export class PostService {
     });
   }
 
-  getFile(postId) {
-    return this.http.get(
-      "http://localhost:4300/file/getFileByPostId/" + postId
+  submitPost(formData: any) {
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Accept: "application/json",
+      }),
+    };
+    return this.http.post(
+      ConstantsService.BASE_URL + "/submitPost",
+      formData,
+      httpOptions
+    );
+  }
+
+  uploadFile(formData: any, postId: any) {
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Accept: "application/json",
+      }),
+    };
+    return this.http.post(
+      ConstantsService.FILE_URL + "/uploadFile/" + postId,
+      formData,
+      httpOptions
     );
   }
 

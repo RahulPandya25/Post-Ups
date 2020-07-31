@@ -53,11 +53,16 @@ export class FeedComponent implements OnInit {
       })
       .subscribe((response) => {
         this.posts = response;
-        this.posts.forEach((element) => {
-          let date = element.datePosted;
-          element.datePosted = new Date(date);
+        this.posts.forEach((post) => {
+          let date = post.datePosted;
+          post.datePosted = new Date(date);
+          // todo
+          // if (post.category !== "text" || post.category !== "audio")
+          // post.filesrc = this.postService.getFilesrc(post);
         });
       });
+
+    console.log(this.posts);
   }
   likeThisPost(postId) {
     this.postService.likeThisPost(postId).subscribe((response) => {

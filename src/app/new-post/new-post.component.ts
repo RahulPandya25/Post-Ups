@@ -1,10 +1,10 @@
 import { Router } from "@angular/router";
-import { UploadPostService } from "./../services/upload-post.service";
 import { Component, OnInit } from "@angular/core";
 import defaults from "../../assets/defaults.json";
 import * as _ from "lodash";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { NotificationService } from "../services/notification.service";
+import { PostService } from "../services/post.service";
 @Component({
   selector: "app-new-post",
   templateUrl: "./new-post.component.html",
@@ -25,7 +25,7 @@ export class NewPostComponent implements OnInit {
   post;
 
   constructor(
-    private uploadPostService: UploadPostService,
+    private postService: PostService,
     private router: Router,
     private notifService: NotificationService
   ) {}
@@ -76,7 +76,7 @@ export class NewPostComponent implements OnInit {
       }
       if (this.selectedCategory === this.catWithTextArea) {
         console.log(this.isSubmitted);
-        this.uploadPostService.submitPost(form.value).subscribe((response) => {
+        this.postService.submitPost(form.value).subscribe((response) => {
           this.post = response;
           console.log(response);
           console.log(response.hasOwnProperty("id"));
@@ -87,10 +87,10 @@ export class NewPostComponent implements OnInit {
         let file: File = this.fileList[0];
         let formData: FormData = new FormData();
         formData.append("file", file, file.name);
-        this.uploadPostService.submitPost(form.value).subscribe((response) => {
+        this.postService.submitPost(form.value).subscribe((response) => {
           if (response !== null) {
             this.post = response;
-            this.uploadPostService
+            this.postService
               .uploadFile(formData, this.post._id)
               .subscribe((data) => {
                 console.log(data);

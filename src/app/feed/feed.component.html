@@ -18,21 +18,19 @@
           <p class="content">{{ post.textContent }}</p>
         </div>
         <div class="image" *ngIf="post.category === 'image'">
-          <img
-            class="content"
-            src="../../assets/image2.jfif"
-            alt="post-image"
-          />
+          <img class="content" src="{{ post.filesrc }}" alt="post-image" />
         </div>
         <div class="video" *ngIf="post.category === 'video'">
           <div class="play-btn">
             <i class="fa fa-play" aria-hidden="true"></i>
           </div>
           <video class="content">
-            <source
-              src="../../assets/coverr-aerial-view-of-rocky-mountains-1585320758193.mp4"
-              type="video/mp4"
-            />
+            <!-- todo -->
+            <!-- <source
+              src="{{ post.filesrc }}"
+              type="{{ post.file.files_id.contentType }}"
+            /> -->
+            <source src="{{ post.filesrc }}" type="video/mp4" />
           </video>
         </div>
         <div class="audio" *ngIf="post.category === 'audio'">
