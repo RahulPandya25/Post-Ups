@@ -4,6 +4,7 @@ var File = require("../model/file.js");
 var Chunk = require("../model/chunks.js");
 const { isNullOrUndefined } = require("util");
 var defaults = require("../../src/assets/defaults.json");
+var fileService = require("../services/fileService.js");
 
 postService = {};
 
@@ -24,7 +25,7 @@ postService.getPostById = async (postId, updateViewCount) => {
   });
 
   if (post.category !== catWithTextArea)
-    post.file = await getChunkbyPostId(postId);
+    post.file = await fileService.getChunkByPostId(postId);
   return post;
 };
 
@@ -56,13 +57,5 @@ postService.incrementLikeOnPost = async (postId) => {
   await Post.findOneAndUpdate({ _id: postId }, { $inc: { likes: 1 } });
   return Post.findById(postId).populate("comments");
 };
-
-async function getChunkbyPostId(postId) {
-  var file = await File.findOne({
-    metadata: { postId: postId },
-  });
-  var chunk = await Chunk.findOne({ files_id: file._id }).populate("files_id");
-  return chunk;
-}
 
 module.exports = postService;
