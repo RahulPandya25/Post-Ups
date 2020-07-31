@@ -38,7 +38,7 @@ postService.submitCommentOnPost = async (data) => {
   return Post.findById(data.postId).populate("comments");
 };
 
-postService.getFeed = (data) => {
+postService.getFeed = async (data) => {
   if (isNullOrUndefined(data.tag) && !isNullOrUndefined(data.category)) {
     var query = { category: data.category };
   } else if (!isNullOrUndefined(data.tag) && isNullOrUndefined(data.category)) {
@@ -50,7 +50,18 @@ postService.getFeed = (data) => {
     var query = { tags: data.tag, category: data.category };
   }
 
-  return Post.find(query).sort(data.sort);
+  var posts = await Post.find(query).sort(data.sort);
+
+  // below is the code to update feed with files
+  const postLoop = async () => {
+    for await (const post of posts) {
+      if (post.category !== "text" || post.category !== "audio")
+        post.file = await fileService.getChunkByPostId(post._id);
+    }
+  };
+  postLoop();
+
+  return posts;
 };
 
 postService.incrementLikeOnPost = async (postId) => {
