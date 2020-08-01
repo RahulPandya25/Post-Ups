@@ -32,12 +32,17 @@ postService.getPostById = async (postId, updateViewCount) => {
 };
 
 postService.submitCommentOnPost = async (data) => {
-  var commentObj = await Comment.create(data);
-  await Post.updateOne(
-    { _id: data.postId },
-    { $push: { comments: commentObj._id } }
-  );
-  return Post.findById(data.postId).populate("comments");
+  var post = await Post.findOne({ _id: data.postId });
+  if (post.isCommentEnabled == true) {
+    var commentObj = await Comment.create(data);
+    await Post.updateOne(
+      { _id: data.postId },
+      { $push: { comments: commentObj._id } }
+    );
+    return Post.findById(data.postId).populate("comments");
+  } else {
+    return "Comments are disabled for this post";
+  }
 };
 
 postService.getFeed = async (data) => {
