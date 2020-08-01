@@ -88,6 +88,8 @@ export class PostComponent implements OnInit {
         if (this.post.category !== catWithTextArea) {
           this.post.filesrc = this.postService.getFilesrc(this.post);
         }
+
+        console.log(this.post);
       });
   }
 }

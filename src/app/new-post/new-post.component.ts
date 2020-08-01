@@ -1,10 +1,12 @@
+import { PostService } from "./../services/post.service";
 import { Router } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
 import defaults from "../../assets/defaults.json";
 import * as _ from "lodash";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { NotificationService } from "../services/notification.service";
-import { PostService } from "../services/post.service";
+import { fileExtensionValidator } from "./file-extension-validator.directive";
+
 @Component({
   selector: "app-new-post",
   templateUrl: "./new-post.component.html",
@@ -18,6 +20,7 @@ export class NewPostComponent implements OnInit {
   };
   catWithTextArea;
   selectedCategory;
+  fileSizeFlag;
   categories;
   file = false;
   private fileList;
@@ -31,10 +34,24 @@ export class NewPostComponent implements OnInit {
   ) {}
   selectFile(event) {
     this.fileList = event.target.files;
-    console.log("File Uploaded");
+    let fileInput = this.fileList[0];
+    if (fileInput.size <= 5000000) {
+      this.fileSizeFlag = false;
+    } else {
+      this.fileSizeFlag = true;
+    }
   }
   changeCategory(e) {
     this.selectedCategory = e.target.value;
+    if (this.selectedCategory !== this.catWithTextArea) {
+      this.myFormGroup.addControl(
+        "file",
+        new FormControl("", [
+          Validators.required,
+          fileExtensionValidator(this.selectedCategory),
+        ])
+      );
+    }
   }
 
   setupCategoryList() {
@@ -57,8 +74,6 @@ export class NewPostComponent implements OnInit {
     title: new FormControl("", Validators.required),
     textContent: new FormControl("", Validators.required),
     category: new FormControl(""),
-    file: new FormControl(""),
-    caption: new FormControl(""),
     tag: new FormControl("", Validators.required),
     tags: new FormControl(""),
     isCommentEnabled: new FormControl(""),
@@ -77,9 +92,7 @@ export class NewPostComponent implements OnInit {
       if (this.selectedCategory === this.catWithTextArea) {
         console.log(this.isSubmitted);
         this.postService.submitPost(form.value).subscribe((response) => {
-          this.post = response;
           console.log(response);
-          console.log(response.hasOwnProperty("id"));
           this.router.navigate(["/"]);
         });
       }
@@ -88,8 +101,8 @@ export class NewPostComponent implements OnInit {
         let formData: FormData = new FormData();
         formData.append("file", file, file.name);
         this.postService.submitPost(form.value).subscribe((response) => {
-          if (response !== null) {
-            this.post = response;
+          if (response.status === 200) {
+            this.post = response.body;
             this.postService
               .uploadFile(formData, this.post._id)
               .subscribe((data) => {
