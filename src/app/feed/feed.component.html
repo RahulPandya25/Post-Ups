@@ -25,12 +25,10 @@
             <i class="fa fa-play" aria-hidden="true"></i>
           </div>
           <video class="content">
-            <!-- todo -->
-            <!-- <source
+            <source
               src="{{ post.filesrc }}"
-              type="{{ post.file.files_id.contentType }}"
-            /> -->
-            <source src="{{ post.filesrc }}" type="video/mp4" />
+              type="{{ post.file.contentType }}"
+            />
           </video>
         </div>
         <div class="audio" *ngIf="post.category === 'audio'">

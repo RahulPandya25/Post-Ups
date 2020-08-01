@@ -2,6 +2,8 @@ var Post = require("../model/post.js");
 var Comment = require("../model/comment.js");
 var File = require("../model/file.js");
 var Chunk = require("../model/chunks.js");
+var auditPost = require("../aggregation/auditPost.json");
+var auditFile = require("../aggregation/auditFile.json");
 const { isNullOrUndefined } = require("util");
 var defaults = require("../../src/assets/defaults.json");
 var fileService = require("../services/fileService.js");
@@ -49,17 +51,33 @@ postService.getFeed = async (data) => {
   ) {
     var query = { tags: data.tag, category: data.category };
   }
+  var posts = await Post.aggregate([
+    {
+      $lookup: {
+        from: "uploads.files",
+        localField: "mediaContent",
+        foreignField: "_id",
+        as: "file",
+      },
+    },
+    {
+      $unwind: {
+        path: "$file",
+        preserveNullAndEmptyArrays: true,
+      },
+    },
+    {
+      $lookup: {
+        from: "uploads.chunks",
+        localField: "file._id",
+        foreignField: "files_id",
+        as: "data",
+      },
+    },
+    { $sort: data.sort },
+  ]);
 
-  var posts = await Post.find(query).sort(data.sort);
-
-  // below is the code to update feed with files
-  const postLoop = async () => {
-    for await (const post of posts) {
-      if (post.category !== "text" || post.category !== "audio")
-        post.file = await fileService.getChunkByPostId(post._id);
-    }
-  };
-  postLoop();
+  // var posts = await Post.find(query).sort(data.sort);
 
   return posts;
 };

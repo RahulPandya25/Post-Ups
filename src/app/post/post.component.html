@@ -16,10 +16,7 @@
     </div>
     <div class="video" *ngIf="post.category === 'video'">
       <video class="content" controls autoplay="autoplay">
-        <source
-          src="{{ post.filesrc }}"
-          type="{{ post.file.files_id.contentType }}"
-        />
+        <source src="{{ post.filesrc }}" type="{{ post.file.contentType }}" />
       </video>
     </div>
     <div class="audio" *ngIf="post.category === 'audio'">
