@@ -84,7 +84,26 @@
           id="file"
           formControlName="file"
           (change)="selectFile($event)"
+          [ngClass]="{ 'in-valid': isSubmitted && myFormGroup.controls.file.errors}"
         />
+
+        <div *ngIf=" isSubmitted && myFormGroup.controls.file.errors">
+          <div
+            *ngIf="myFormGroup.controls.file.errors.required"
+            class="text-danger"
+          >
+            Select a file
+          </div>
+          <div
+            *ngIf="!myFormGroup.controls.file.errors.required && myFormGroup.controls.file.errors?.inValidExt"
+            class="text-danger"
+          >
+            Invalid file Extension
+          </div>
+          <div *ngIf="fileSizeFlag" class="text-danger">
+            File size should be less than 5MB
+          </div>
+        </div>
       </div>
 
       <div class="form-element">

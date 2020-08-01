@@ -40,11 +40,9 @@ export class PostService {
         Accept: "application/json",
       }),
     };
-    return this.http.post(
-      ConstantsService.BASE_URL + "/submitPost",
-      formData,
-      httpOptions
-    );
+    return this.http.post(ConstantsService.BASE_URL + "/submitPost", formData, {
+      observe: "response",
+    });
   }
 
   uploadFile(formData: any, postId: any) {
