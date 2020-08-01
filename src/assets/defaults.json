@@ -43,15 +43,22 @@
     },
     {
       "value": "image",
-      "name": "Images"
+      "name": "Images",
+      "extensions": "png, jpg, jpeg"
     },
     {
       "value": "video",
-      "name": "Videos"
+      "name": "Videos",
+      "extensions": "mkv, mp4, avi"
     },
     {
       "value": "audio",
-      "name": "Audios"
+      "name": "Audios",
+      "extensions": "mp3, wma, aac"
+    },
+    {
+      "value": "document",
+      "name": "Documents"
     }
   ],
   "defaultShowSecondaryNavBar": true,

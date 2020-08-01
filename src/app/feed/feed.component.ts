@@ -56,9 +56,9 @@ export class FeedComponent implements OnInit {
         this.posts.forEach((post) => {
           let date = post.datePosted;
           post.datePosted = new Date(date);
-          // todo
-          // if (post.category !== "text" || post.category !== "audio")
-          // post.filesrc = this.postService.getFilesrc(post);
+          if (post.category !== "text")
+            if (post.category !== "audio")
+              post.filesrc = this.postService.getFilesrc(post);
         });
       });
 

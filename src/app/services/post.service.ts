@@ -40,11 +40,9 @@ export class PostService {
         Accept: "application/json",
       }),
     };
-    return this.http.post(
-      ConstantsService.BASE_URL + "/submitPost",
-      formData,
-      httpOptions
-    );
+    return this.http.post(ConstantsService.BASE_URL + "/submitPost", formData, {
+      observe: "response",
+    });
   }
 
   uploadFile(formData: any, postId: any) {
@@ -60,16 +58,24 @@ export class PostService {
     );
   }
 
+  // arrayBufferToBase64(buffer) {
+  //   var binary = "";
+  //   var bytes = [].slice.call(new Uint8Array(buffer));
+  //   bytes.forEach((b) => (binary += String.fromCharCode(b)));
+  //   return window.btoa(binary);
+  // }
+
   arrayBufferToBase64(buffer) {
     var binary = "";
-    var bytes = [].slice.call(new Uint8Array(buffer));
-    bytes.forEach((b) => (binary += String.fromCharCode(b)));
-    return window.btoa(binary);
+    buffer.forEach((element) => {
+      binary += "" + element.data;
+    });
+    return binary;
   }
 
   getFilesrc(post) {
-    var base64Flag = `data:${post.file.files_id.contentType};base64,`;
-    var imageStr = this.arrayBufferToBase64(post.file.data.data);
+    var base64Flag = `data:${post.file.contentType};base64,`;
+    var imageStr = this.arrayBufferToBase64(post.data);
     return "" + base64Flag + imageStr;
   }
 
