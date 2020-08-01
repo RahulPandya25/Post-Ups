@@ -7,6 +7,7 @@ var auditFile = require("../aggregation/auditFile.json");
 const { isNullOrUndefined } = require("util");
 var defaults = require("../../src/assets/defaults.json");
 var fileService = require("../services/fileService.js");
+const Mongoose = require("mongoose");
 
 postService = {};
 
@@ -17,18 +18,36 @@ postService.submitPost = (data) => {
 postService.getPostById = async (postId, updateViewCount) => {
   if (updateViewCount == "true")
     await Post.findOneAndUpdate({ _id: postId }, { $inc: { views: 1 } });
-  var post = await Post.findById(postId).populate("comments");
 
-  let catWithTextArea;
-  defaults.categories.forEach((element) => {
-    if (element.defaultForNewPost) {
-      catWithTextArea = element.value;
-    }
-  });
+  var post = await Post.aggregate([
+    { $match: { _id: Mongoose.Types.ObjectId(postId) } },
+    {
+      $lookup: {
+        from: "uploads.files",
+        localField: "mediaContent",
+        foreignField: "_id",
+        as: "file",
+      },
+    },
+    {
+      $unwind: {
+        path: "$file",
+        preserveNullAndEmptyArrays: true,
+      },
+    },
+    {
+      $lookup: {
+        from: "uploads.chunks",
+        localField: "file._id",
+        foreignField: "files_id",
+        as: "data",
+      },
+    },
+  ]);
 
-  if (post.category !== catWithTextArea)
-    post.file = await fileService.getChunkByPostId(postId);
-  return post;
+  await Post.populate(post[0], { path: "comments" });
+
+  return post[0];
 };
 
 postService.submitCommentOnPost = async (data) => {
