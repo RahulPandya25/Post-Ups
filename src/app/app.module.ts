@@ -12,6 +12,7 @@ import { NewPostComponent } from "./new-post/new-post.component";
 import { PostComponent } from "./post/post.component";
 import { CommonModule } from "@angular/common";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     NavbarComponent,
     NewPostComponent,
     PostComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,

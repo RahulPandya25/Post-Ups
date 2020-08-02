@@ -10,6 +10,7 @@ import { NotificationService } from "../services/notification.service";
   styleUrls: ["./feed.component.scss"],
 })
 export class FeedComponent implements OnInit {
+  isLoading;
   posts;
   currentTag;
   currentSort;
@@ -60,6 +61,7 @@ export class FeedComponent implements OnInit {
             if (post.category !== "audio")
               post.filesrc = this.postService.getFilesrc(post);
         });
+        this.isLoading = false;
       });
 
     console.log(this.posts);
@@ -75,6 +77,7 @@ export class FeedComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    this.isLoading = true;
     this.getFeed();
     this.notifService.updateNavComponents(this.requiredNavComponents);
   }

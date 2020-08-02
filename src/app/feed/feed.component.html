@@ -1,4 +1,6 @@
 <div class="container">
+  <app-loading *ngIf="isLoading"></app-loading>
+
   <div class="no-post" *ngIf="posts.length === 0">
     <div class="emoji">
       <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
