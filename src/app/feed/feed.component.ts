@@ -11,6 +11,7 @@ import { NotificationService } from "../services/notification.service";
 })
 export class FeedComponent implements OnInit {
   isLoading;
+  loadingMessage = "Creating your Feed!";
   posts;
   currentTag;
   currentSort;

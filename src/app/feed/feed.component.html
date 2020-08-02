@@ -1,5 +1,5 @@
 <div class="container">
-  <app-loading *ngIf="isLoading"></app-loading>
+  <app-loading [message]="loadingMessage" *ngIf="isLoading"></app-loading>
 
   <div class="no-post" *ngIf="!isLoading && posts.length === 0">
     <div class="emoji">

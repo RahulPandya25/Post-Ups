@@ -1,9 +1,15 @@
 .loader-container {
   width: 100%;
+  min-height: 30vh;
   margin: 5rem 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+
+.message {
+  margin-top: 0.5rem;
 }
 
 .loader-box {
