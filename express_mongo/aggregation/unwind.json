@@ -1,0 +1,6 @@
+{
+    "$unwind": {
+        "path": "$file",
+        "preserveNullAndEmptyArrays": true
+    }
+}
