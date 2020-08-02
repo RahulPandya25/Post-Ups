@@ -25,15 +25,10 @@ export class PostComponent implements OnInit {
 
   likeThisPost(postId) {
     this.postService.likeThisPost(postId).subscribe((response) => {
-      this.post = response;
-      // updating post-date
-      let date = this.post.datePosted;
-      this.post.datePosted = new Date(date);
-      // updating comment-date
-      this.post.comments.forEach((element) => {
-        let date = element.datePosted;
-        element.datePosted = new Date(date);
-      });
+      var temp = Object.assign(response);
+      if (this.post._id === postId) {
+        this.post.likes = temp.likes;
+      }
     });
   }
 
