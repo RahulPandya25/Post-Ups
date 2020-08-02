@@ -44,7 +44,7 @@
     {
       "value": "image",
       "name": "Images",
-      "extensions": "png, jpg, jpeg"
+      "extensions": "png, jpg, jpeg, gif, jfif"
     },
     {
       "value": "video",
