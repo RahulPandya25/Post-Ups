@@ -17,6 +17,8 @@ export class PostComponent implements OnInit {
     showSearchBtn: false,
   };
 
+  isLoading;
+  loadingMessage = "Fetching Post!";
   postId;
   post;
   comment = "";
@@ -59,6 +61,8 @@ export class PostComponent implements OnInit {
   ) {}
 
   ngOnInit(updateViewCount = true): void {
+    this.isLoading = true;
+
     this.notifService.updateNavComponents(this.requiredNavComponents);
 
     this.route.queryParams.subscribe((params) => {
@@ -89,7 +93,7 @@ export class PostComponent implements OnInit {
           this.post.filesrc = this.postService.getFilesrc(this.post);
         }
 
-        console.log(this.post);
+        this.isLoading = false;
       });
   }
 }

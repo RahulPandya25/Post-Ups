@@ -44,7 +44,7 @@
     {
       "value": "image",
       "name": "Images",
-      "extensions": "png, jpg, jpeg"
+      "extensions": "png, jpg, jpeg, gif, jfif"
     },
     {
       "value": "video",
@@ -55,10 +55,6 @@
       "value": "audio",
       "name": "Audios",
       "extensions": "mp3, wma, aac"
-    },
-    {
-      "value": "document",
-      "name": "Documents"
     }
   ],
   "defaultShowSecondaryNavBar": true,

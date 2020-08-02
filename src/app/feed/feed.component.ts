@@ -10,6 +10,8 @@ import { NotificationService } from "../services/notification.service";
   styleUrls: ["./feed.component.scss"],
 })
 export class FeedComponent implements OnInit {
+  isLoading;
+  loadingMessage = "Creating your Feed!";
   posts;
   currentTag;
   currentSort;
@@ -32,6 +34,9 @@ export class FeedComponent implements OnInit {
   }
 
   getFeed() {
+    this.isLoading = true;
+    this.posts = [];
+
     // getting values
     this.constService.currentTag.subscribe((tag) => (this.currentTag = tag));
     this.constService.currentCategory.subscribe(
@@ -60,6 +65,7 @@ export class FeedComponent implements OnInit {
             if (post.category !== "audio")
               post.filesrc = this.postService.getFilesrc(post);
         });
+        this.isLoading = false;
       });
 
     console.log(this.posts);

@@ -1,5 +1,7 @@
 <div class="container">
-  <div class="no-post" *ngIf="posts.length === 0">
+  <app-loading [message]="loadingMessage" *ngIf="isLoading"></app-loading>
+
+  <div class="no-post" *ngIf="!isLoading && posts.length === 0">
     <div class="emoji">
       <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
     </div>

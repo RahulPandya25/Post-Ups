@@ -1,10 +1,13 @@
 <div class="container">
+  <app-loading [message]="loadingMessage" *ngIf="isLoading"></app-loading>
+
   <form
     class="section form"
     #myForm="ngForm"
     [formGroup]="myFormGroup"
     (ngSubmit)="onSubmit(myForm)"
     enctype="multipart/form-data"
+    *ngIf="!isLoading"
   >
     <div class="form-set">
       <div class="form-element">
@@ -15,9 +18,11 @@
           formControlName="title"
           id="post-title"
           placeholder="Add Title..."
-          [ngClass]="{'in-valid': isSubmitted && myFormGroup.controls.title.errors}"
+          [ngClass]="{
+            'in-valid': isSubmitted && myFormGroup.controls.title.errors
+          }"
         />
-        <div *ngIf=" isSubmitted && myFormGroup.controls.title.errors">
+        <div *ngIf="isSubmitted && myFormGroup.controls.title.errors">
           <div
             *ngIf="myFormGroup.controls.title.errors.required"
             class="text-danger"
@@ -47,9 +52,11 @@
           rows="3"
           placeholder="Enter the post here..."
           formControlName="textContent"
-          [ngClass]="{ 'in-valid': isSubmitted && myFormGroup.controls.textContent.errors}"
+          [ngClass]="{
+            'in-valid': isSubmitted && myFormGroup.controls.textContent.errors
+          }"
         ></textarea>
-        <div *ngIf=" isSubmitted && myFormGroup.controls.textContent.errors">
+        <div *ngIf="isSubmitted && myFormGroup.controls.textContent.errors">
           <div
             *ngIf="myFormGroup.controls.textContent.errors.required"
             class="text-danger"
@@ -65,9 +72,11 @@
           rows="1"
           placeholder="Enter the caption here..."
           formControlName="textContent"
-          [ngClass]="{ 'in-valid': isSubmitted && myFormGroup.controls.textContent.errors}"
+          [ngClass]="{
+            'in-valid': isSubmitted && myFormGroup.controls.textContent.errors
+          }"
         ></textarea>
-        <div *ngIf=" isSubmitted && myFormGroup.controls.textContent.errors">
+        <div *ngIf="isSubmitted && myFormGroup.controls.textContent.errors">
           <div
             *ngIf="myFormGroup.controls.textContent.errors.required"
             class="text-danger"
@@ -84,10 +93,12 @@
           id="file"
           formControlName="file"
           (change)="selectFile($event)"
-          [ngClass]="{ 'in-valid': isSubmitted && myFormGroup.controls.file.errors}"
+          [ngClass]="{
+            'in-valid': isSubmitted && myFormGroup.controls.file.errors
+          }"
         />
 
-        <div *ngIf=" isSubmitted && myFormGroup.controls.file.errors">
+        <div *ngIf="isSubmitted && myFormGroup.controls.file.errors">
           <div
             *ngIf="myFormGroup.controls.file.errors.required"
             class="text-danger"
@@ -95,7 +106,10 @@
             Select a file
           </div>
           <div
-            *ngIf="!myFormGroup.controls.file.errors.required && myFormGroup.controls.file.errors?.inValidExt"
+            *ngIf="
+              !myFormGroup.controls.file.errors.required &&
+              myFormGroup.controls.file.errors?.inValidExt
+            "
             class="text-danger"
           >
             Invalid file Extension
@@ -113,9 +127,11 @@
           name="tag"
           formControlName="tag"
           placeholder="Add Tags seperated by commas..."
-          [ngClass]="{'in-valid': isSubmitted && myFormGroup.controls.tag.errors}"
+          [ngClass]="{
+            'in-valid': isSubmitted && myFormGroup.controls.tag.errors
+          }"
         />
-        <div *ngIf=" isSubmitted && myFormGroup.controls.tag.errors">
+        <div *ngIf="isSubmitted && myFormGroup.controls.tag.errors">
           <div
             *ngIf="myFormGroup.controls.tag.errors.required"
             class="text-danger"
