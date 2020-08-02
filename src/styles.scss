@@ -10,7 +10,15 @@
   font-family: "Poppins", sans-serif;
   color: var(--dark);
 }
-
+body {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--teal-accent);
+    border-radius: 10px;
+  }
+}
 // device sizes
 $breakpoint-mobile: 480px;
 $breakpoint-tablet: 765px;
@@ -34,29 +42,9 @@ $breakpoint-desktop: 1024px;
 }
 //laptop
 @media only screen and (min-width: $breakpoint-tablet) and (max-width: $breakpoint-desktop) {
-  body {
-    &::-webkit-scrollbar {
-      width: 8px;
-      background: rgba(0, 0, 0, 0.1);
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: var(--teal-accent);
-      border-radius: 10px;
-    }
-  }
 }
 // desktop
 @media screen and (min-width: $breakpoint-desktop) {
-  body {
-    &::-webkit-scrollbar {
-      width: 8px;
-      background: rgba(0, 0, 0, 0.1);
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: var(--teal-accent);
-      border-radius: 10px;
-    }
-  }
 }
 
 :root {
