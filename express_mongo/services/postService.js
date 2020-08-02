@@ -2,8 +2,9 @@ var Post = require("../model/post.js");
 var Comment = require("../model/comment.js");
 var File = require("../model/file.js");
 var Chunk = require("../model/chunks.js");
-var auditPost = require("../aggregation/auditPost.json");
+var auditChunk = require("../aggregation/auditChunks.json");
 var auditFile = require("../aggregation/auditFile.json");
+var unwind = require("../aggregation/unwind.json");
 const { isNullOrUndefined } = require("util");
 var defaults = require("../../src/assets/defaults.json");
 var fileService = require("../services/fileService.js");
@@ -21,28 +22,7 @@ postService.getPostById = async (postId, updateViewCount) => {
 
   var post = await Post.aggregate([
     { $match: { _id: Mongoose.Types.ObjectId(postId) } },
-    {
-      $lookup: {
-        from: "uploads.files",
-        localField: "mediaContent",
-        foreignField: "_id",
-        as: "file",
-      },
-    },
-    {
-      $unwind: {
-        path: "$file",
-        preserveNullAndEmptyArrays: true,
-      },
-    },
-    {
-      $lookup: {
-        from: "uploads.chunks",
-        localField: "file._id",
-        foreignField: "files_id",
-        as: "data",
-      },
-    },
+    auditFile, unwind, auditChunk,
   ]);
 
   await Post.populate(post[0], { path: "comments" });
@@ -76,28 +56,7 @@ postService.getFeed = async (data) => {
     var query = { tags: data.tag, category: data.category };
   }
   var posts = await Post.aggregate([
-    {
-      $lookup: {
-        from: "uploads.files",
-        localField: "mediaContent",
-        foreignField: "_id",
-        as: "file",
-      },
-    },
-    {
-      $unwind: {
-        path: "$file",
-        preserveNullAndEmptyArrays: true,
-      },
-    },
-    {
-      $lookup: {
-        from: "uploads.chunks",
-        localField: "file._id",
-        foreignField: "files_id",
-        as: "data",
-      },
-    },
+    auditFile, unwind, auditChunk,
     { $sort: data.sort },
   ]);
 
