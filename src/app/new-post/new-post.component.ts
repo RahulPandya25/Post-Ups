@@ -18,6 +18,8 @@ export class NewPostComponent implements OnInit {
     showBackBtn: true,
     showSearchBtn: false,
   };
+  isLoading = false;
+  loadingMessage = "Please wait while we upload your Post!";
   catWithTextArea;
   selectedCategory;
   fileSizeFlag;
@@ -84,6 +86,7 @@ export class NewPostComponent implements OnInit {
     if (this.myFormGroup.invalid) {
       return;
     } else {
+      this.isLoading = true;
       form.value.category = this.selectedCategory;
       form.value.tags = form.value.tag.split(",");
       if (form.value.isCommentEnabled === "") {

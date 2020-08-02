@@ -1,86 +1,91 @@
 <div class="container">
-  <div class="section header">
-    <label class="post-title">
-      {{ post.title }}
-    </label>
-    <label class="post-category">
-      {{ post.category }}
-    </label>
-  </div>
-  <div class="section main-content">
-    <div class="text" *ngIf="post.category === 'text'">
-      <p>{{ post.textContent }}</p>
-    </div>
-    <div class="image" *ngIf="post.category === 'image'">
-      <img class="content" src="{{ post.filesrc }}" alt="post-image" />
-    </div>
-    <div class="video" *ngIf="post.category === 'video'">
-      <video class="content" controls autoplay="autoplay">
-        <source src="{{ post.filesrc }}" type="{{ post.file.contentType }}" />
-      </video>
-    </div>
-    <div class="audio" *ngIf="post.category === 'audio'">
-      <figure class="content">
-        <audio controls src="{{ post.filesrc }}"></audio>
-      </figure>
-    </div>
-  </div>
-  <div class="section caption" *ngIf="post.category !== 'text'">
-    {{ post.textContent }}
-  </div>
-  <div class="section post-stat">
-    <div class="likes" (click)="likeThisPost(post._id)">
-      {{ post.likes }}
-      <button>
-        <i class="fa fa-heart" aria-hidden="true"></i>
-      </button>
-    </div>
+  <app-loading [message]="loadingMessage" *ngIf="isLoading"></app-loading>
 
-    <div class="comments-count">
-      {{ post.comments.length }}
-      <button>
-        <i class="fa fa-comment" aria-hidden="true"></i>
-      </button>
+  <div class="post-content" *ngIf="!isLoading">
+    <div class="section header">
+      <label class="post-title">
+        {{ post.title }}
+      </label>
+      <label class="post-category">
+        {{ post.category }}
+      </label>
     </div>
-  </div>
-
-  <div class="section views-date">
-    <div class="views">{{ post.views }}&nbsp;views</div>
-    <div class="date-posted">
-      {{ post.datePosted.toDateString() }}
-    </div>
-  </div>
-
-  <div class="section tags" *ngIf="post.tags.length > 0">
-    <label class="tag-title">Tags&nbsp;&nbsp;</label>
-    <div class="tag" *ngFor="let tag of post.tags">
-      <a class="tag-link" (click)="searchThisTag(tag)">
-        {{ tag }}
-      </a>
-    </div>
-  </div>
-  <div class="section comments">
-    <label>Comments</label>
-    <div class="comment-container">
-      <div class="comment" *ngFor="let commentObj of post.comments">
-        <div class="comment-content">{{ commentObj.comment }}</div>
-        <div class="date-posted">
-          {{ commentObj.datePosted.toDateString() }}
-        </div>
+    <div class="section main-content">
+      <div class="text" *ngIf="post.category === 'text'">
+        <p>{{ post.textContent }}</p>
+      </div>
+      <div class="image" *ngIf="post.category === 'image'">
+        <img class="content" src="{{ post.filesrc }}" alt="post-image" />
+      </div>
+      <div class="video" *ngIf="post.category === 'video'">
+        <video class="content" controls autoplay="autoplay">
+          <source src="{{ post.filesrc }}" type="{{ post.file.contentType }}" />
+        </video>
+      </div>
+      <div class="audio" *ngIf="post.category === 'audio'">
+        <figure class="content">
+          <audio controls src="{{ post.filesrc }}"></audio>
+        </figure>
       </div>
     </div>
-    <div class="add-comment-section">
-      <input
-        type="text"
-        name="comment"
-        [(ngModel)]="comment"
-        class="add-comment"
-        placeholder="Add comment..."
-        (keyup.enter)="sendComment(comment)"
-      />
-      <button class="send-comment" (click)="sendComment(comment)">
-        <i class="far fa-paper-plane"></i>
-      </button>
+    <div class="section caption" *ngIf="post.category !== 'text'">
+      {{ post.textContent }}
+    </div>
+    <div class="section post-stat">
+      <div class="likes" (click)="likeThisPost(post._id)">
+        {{ post.likes }}
+        <button>
+          <i class="fa fa-heart" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div class="comments-count">
+        {{ post.comments.length }}
+        <button>
+          <i class="fa fa-comment" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+    <div class="section views-date">
+      <div class="views">{{ post.views }}&nbsp;views</div>
+      <div class="date-posted">
+        {{ post.datePosted.toDateString() }}
+      </div>
+    </div>
+    <div class="section tags" *ngIf="post.tags.length > 0">
+      <label class="tag-title">Tags&nbsp;&nbsp;</label>
+      <div class="tag" *ngFor="let tag of post.tags">
+        <a class="tag-link" (click)="searchThisTag(tag)">
+          {{ tag }}
+        </a>
+      </div>
+    </div>
+    <div class="section comments">
+      <label>Comments</label>
+      <p class="comment-disable-label" *ngIf="!post.isCommentEnabled">
+        *Comments are disabled for this Post!
+      </p>
+      <div *ngIf="post.isCommentEnabled" class="comment-container">
+        <div class="comment" *ngFor="let commentObj of post.comments">
+          <div class="comment-content">{{ commentObj.comment }}</div>
+          <div class="date-posted">
+            {{ commentObj.datePosted.toDateString() }}
+          </div>
+        </div>
+      </div>
+      <div *ngIf="post.isCommentEnabled" class="add-comment-section">
+        <input
+          type="text"
+          name="comment"
+          [(ngModel)]="comment"
+          class="add-comment"
+          placeholder="Add comment..."
+          (keyup.enter)="sendComment(comment)"
+        />
+        <button class="send-comment" (click)="sendComment(comment)">
+          <i class="far fa-paper-plane"></i>
+        </button>
+      </div>
     </div>
   </div>
 </div>

@@ -26,8 +26,10 @@
     position: absolute;
     content: "";
     top: 0.75rem;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
+    max-width: 900px;
     height: 100%;
     z-index: -1;
     border-bottom: 2px solid rgba(0, 0, 0, 0.05);
@@ -241,5 +243,41 @@
   cursor: pointer;
   .fa {
     font-size: 1.25rem;
+  }
+}
+
+// device sizes
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 765px;
+$breakpoint-desktop: 1024px;
+
+//tablet
+@media only screen and (min-width: $breakpoint-mobile) and (max-width: $breakpoint-tablet) {
+  .section {
+    width: 100%;
+    max-width: var(--max-section-width);
+    margin: 0 auto;
+  }
+}
+//laptop
+@media only screen and (min-width: $breakpoint-tablet) and (max-width: $breakpoint-desktop) {
+  .section {
+    width: 100%;
+    max-width: var(--max-section-width);
+    margin: 0 auto;
+  }
+  .new-post-btn {
+    right: 8vw;
+  }
+}
+// desktop
+@media screen and (min-width: $breakpoint-desktop) {
+  .section {
+    width: 100%;
+    max-width: var(--max-section-width);
+    margin: 0 auto;
+  }
+  .new-post-btn {
+    right: 200px;
   }
 }
