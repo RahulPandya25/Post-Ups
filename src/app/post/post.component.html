@@ -62,7 +62,10 @@
     </div>
     <div class="section comments">
       <label>Comments</label>
-      <div class="comment-container">
+      <p class="comment-disable-label" *ngIf="!post.isCommentEnabled">
+        *Comments are disabled for this Post!
+      </p>
+      <div *ngIf="post.isCommentEnabled" class="comment-container">
         <div class="comment" *ngFor="let commentObj of post.comments">
           <div class="comment-content">{{ commentObj.comment }}</div>
           <div class="date-posted">
@@ -70,7 +73,7 @@
           </div>
         </div>
       </div>
-      <div class="add-comment-section">
+      <div *ngIf="post.isCommentEnabled" class="add-comment-section">
         <input
           type="text"
           name="comment"
