@@ -55,10 +55,6 @@
       "value": "audio",
       "name": "Audios",
       "extensions": "mp3, wma, aac"
-    },
-    {
-      "value": "document",
-      "name": "Documents"
     }
   ],
   "defaultShowSecondaryNavBar": true,
