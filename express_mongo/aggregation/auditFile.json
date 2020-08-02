@@ -1,8 +1,8 @@
 {
   "$lookup": {
-    "from": "uploads.chunks",
-    "localField": "file._id",
-    "foreignField": "files_id",
-    "as": "data"
+    "from": "uploads.files",
+    "localField": "mediaContent",
+    "foreignField": "_id",
+    "as": "file"
   }
 }

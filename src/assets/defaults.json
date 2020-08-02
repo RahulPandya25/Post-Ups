@@ -1,9 +1,14 @@
 {
   "defaultTag": "all",
-  "defaultSort": { "datePosted": -1 },
+  "defaultSort": {
+    "datePosted": -1
+  },
   "defaultCategory": "all",
   "feed": [
-    { "name": "All Posts", "value": "all" },
+    {
+      "name": "All Posts",
+      "value": "all"
+    },
     {
       "name": "",
       "value": "",
@@ -14,20 +19,28 @@
   "sorts": [
     {
       "name": "Recently Posted",
-      "value": { "datePosted": -1 },
+      "value": {
+        "datePosted": -1
+      },
       "isActive": true
     },
     {
       "name": "Most Liked",
-      "value": { "likes": -1 }
+      "value": {
+        "likes": -1
+      }
     },
     {
       "name": "Most Viewed",
-      "value": { "views": -1 }
+      "value": {
+        "views": -1
+      }
     },
     {
       "name": "Most Commented",
-      "value": { "comments": -1 }
+      "value": {
+        "comments": -1
+      }
     }
   ],
   "categories": [
@@ -49,7 +62,7 @@
     {
       "value": "video",
       "name": "Videos",
-      "extensions": "mkv, mp4, avi"
+      "extensions": "mkv, mp4, avi, webm"
     },
     {
       "value": "audio",
