@@ -84,3 +84,33 @@
     }
   }
 }
+
+// device sizes
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 765px;
+$breakpoint-desktop: 1024px;
+
+//tablet
+@media only screen and (min-width: $breakpoint-mobile) and (max-width: $breakpoint-tablet) {
+  .section {
+    width: 100%;
+    max-width: var(--max-section-width);
+    margin: 0 auto;
+  }
+}
+//laptop
+@media only screen and (min-width: $breakpoint-tablet) and (max-width: $breakpoint-desktop) {
+  .section {
+    width: 100%;
+    max-width: var(--max-section-width);
+    margin: 0 auto;
+  }
+}
+// desktop
+@media screen and (min-width: $breakpoint-desktop) {
+  .section {
+    width: 100%;
+    max-width: var(--max-section-width);
+    margin: 0 auto;
+  }
+}

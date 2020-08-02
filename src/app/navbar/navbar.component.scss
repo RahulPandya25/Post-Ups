@@ -40,6 +40,17 @@
     transition: top 0.25s ease;
     border-bottom: 1px solid rgba(0, 0, 0, 0.03);
 
+    &::after {
+      position: absolute;
+      content: "";
+      top: -20px;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      z-index: -1;
+    }
+
     .search-tag {
       width: 90%;
       margin: 0 auto;
@@ -110,7 +121,7 @@
         }
 
         &.active {
-          background-color: var(--blue-accent);
+          background-color: var(--teal-accent);
           color: white;
 
           span {
@@ -137,4 +148,42 @@
 .hide {
   pointer-events: none;
   opacity: 0;
+}
+
+// device sizes
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 765px;
+$breakpoint-desktop: 1024px;
+
+//tablet
+@media only screen and (min-width: $breakpoint-mobile) and (max-width: $breakpoint-tablet) {
+  .section {
+    width: 100%;
+    max-width: calc(var(--max-section-width) + 20vw);
+    margin: 0 auto;
+  }
+}
+//laptop
+@media only screen and (min-width: $breakpoint-tablet) and (max-width: $breakpoint-desktop) {
+  .section {
+    width: 100%;
+    max-width: calc(var(--max-section-width) + 20vw);
+    margin: 0 auto;
+  }
+  .secondary-bar {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+// desktop
+@media screen and (min-width: $breakpoint-desktop) {
+  .section {
+    width: 100%;
+    max-width: calc(var(--max-section-width) + 20vw);
+    margin: 0 auto;
+  }
+  .secondary-bar {
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }

@@ -34,9 +34,29 @@ $breakpoint-desktop: 1024px;
 }
 //laptop
 @media only screen and (min-width: $breakpoint-tablet) and (max-width: $breakpoint-desktop) {
+  body {
+    &::-webkit-scrollbar {
+      width: 8px;
+      background: rgba(0, 0, 0, 0.1);
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--teal-accent);
+      border-radius: 10px;
+    }
+  }
 }
 // desktop
 @media screen and (min-width: $breakpoint-desktop) {
+  body {
+    &::-webkit-scrollbar {
+      width: 8px;
+      background: rgba(0, 0, 0, 0.1);
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--teal-accent);
+      border-radius: 10px;
+    }
+  }
 }
 
 :root {
@@ -68,6 +88,8 @@ $breakpoint-desktop: 1024px;
     -6px -6px 10px rgba(255, 255, 255, 0.8);
   --deboss: inset 6px 6px 10px rgba(0, 0, 0, 0.1),
     inset -6px -6px 10px rgba(255, 255, 255, 0.8);
+
+  --max-section-width: 700px;
 }
 
 .fa::before,
