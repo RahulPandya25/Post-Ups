@@ -8,8 +8,8 @@ var Post = require("../model/post.js");
 var File = require("../model/file.js");
 var Chunk = require("../model/chunks.js");
 const fileService = require("../services/fileService.js");
-const mongoURI =
-  "mongodb+srv://Mongo:mongoMan@cluster0.3wgsb.mongodb.net/post?retryWrites=true&w=majority";
+const mongoURI = "mongodb+srv://uowproj2020:uow@1243@cluster0.oeyuu.mongodb.net/post?retryWrites=true&w=majority";
+// "mongodb+srv://Mongo:mongoMan@cluster0.3wgsb.mongodb.net/post?retryWrites=true&w=majority";
 
 // ********************* //
 // base api call: '/file' //

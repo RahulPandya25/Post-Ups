@@ -67,8 +67,6 @@ export class FeedComponent implements OnInit {
         });
         this.isLoading = false;
       });
-
-    console.log(this.posts);
   }
   likeThisPost(postId) {
     this.postService.likeThisPost(postId).subscribe((response) => {
