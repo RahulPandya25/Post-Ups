@@ -53,29 +53,56 @@ postService.getFeed = async (data) => {
     isNullOrUndefined(feedData.tag) &&
     !isNullOrUndefined(feedData.category)
   ) {
-    var query = { category: feedData.category };
+    // var query = { category: feedData.category };
+    var posts = await Post.aggregate([
+      { $match: { category: feedData.category } },
+      { $sort: feedData.sort },
+      { $limit: page.limit + page.skip },
+      { $skip: page.skip },
+      auditFile,
+      unwind,
+      auditChunk,
+    ]);
   } else if (
     !isNullOrUndefined(feedData.tag) &&
     isNullOrUndefined(feedData.category)
   ) {
-    var query = { tags: feedData.tag };
+    // var query = { tags: feedData.tag };
+    var posts = await Post.aggregate([
+      { $match: { tags: { $in: [feedData.tag] } } },
+      { $sort: feedData.sort },
+      { $limit: page.limit + page.skip },
+      { $skip: page.skip },
+      auditFile,
+      unwind,
+      auditChunk,
+    ]);
   } else if (
     !isNullOrUndefined(feedData.tag) &&
     !isNullOrUndefined(feedData.category)
   ) {
-    var query = { tags: feedData.tag, category: feedData.category };
+    // var query = { tags: feedData.tag, category: feedData.category };
+    var posts = await Post.aggregate([
+      { $match: { tags: { $in: [feedData.tag] } } },
+      { $match: { category: feedData.category } },
+      { $sort: feedData.sort },
+      { $limit: page.limit + page.skip },
+      { $skip: page.skip },
+      auditFile,
+      unwind,
+      auditChunk,
+    ]);
+  } else {
+    // no query
+    var posts = await Post.aggregate([
+      { $sort: feedData.sort },
+      { $limit: page.limit + page.skip },
+      { $skip: page.skip },
+      auditFile,
+      unwind,
+      auditChunk,
+    ]);
   }
-  var posts = await Post.aggregate([
-    { $sort: feedData.sort },
-    { $limit: page.limit + page.skip },
-    { $skip: page.skip },
-    auditFile,
-    unwind,
-    auditChunk,
-  ]);
-
-  // var posts = await Post.find(query).sort(data.sort);
-
   return posts;
 };
 
