@@ -67,7 +67,15 @@
   </div>
 
   <app-loading [message]="loadingMessage" *ngIf="isLoading"></app-loading>
-  <button (click)="fetchMorePosts()">Get more</button>
+
+  <!-- automate below code -->
+  <button
+    style="width: 100%; margin: 0 auto;"
+    *ngIf="!showEndOfPosts && !isLoading"
+    (click)="fetchMorePosts()"
+  >
+    Gimme more postsss
+  </button>
 
   <div class="end-of-post" *ngIf="showEndOfPosts">
     <div class="header">🥳&nbsp;Hurray!&nbsp;🥳</div>
