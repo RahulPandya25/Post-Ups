@@ -4,6 +4,7 @@ import { PostService } from "../services/post.service";
 import { ConstantsService } from "../services/constants.service";
 import { NotificationService } from "../services/notification.service";
 import defaults from "../../assets/defaults.json";
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
   selector: "app-post",
@@ -52,8 +53,15 @@ export class PostComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private constService: ConstantsService,
-    private notifService: NotificationService
+    private notifService: NotificationService,
+    private sanitizor: DomSanitizer
   ) {}
+
+  getSrcUrl() {
+    return this.sanitizor.bypassSecurityTrustUrl(
+      this.postService.getFilesrc(this.post)
+    );
+  }
 
   ngOnInit(updateViewCount = true): void {
     this.isLoading = true;

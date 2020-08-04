@@ -24,7 +24,7 @@
       </div>
       <div class="audio" *ngIf="post.category === 'audio'">
         <figure class="content">
-          <audio controls src="{{ post.filesrc }}"></audio>
+          <audio [src]="getSrcUrl()" controls></audio>
         </figure>
       </div>
     </div>

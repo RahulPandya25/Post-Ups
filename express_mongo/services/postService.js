@@ -22,7 +22,9 @@ postService.getPostById = async (postId, updateViewCount) => {
 
   var post = await Post.aggregate([
     { $match: { _id: Mongoose.Types.ObjectId(postId) } },
-    auditFile, unwind, auditChunk,
+    auditFile,
+    unwind,
+    auditChunk,
   ]);
 
   await Post.populate(post[0], { path: "comments" });
@@ -45,19 +47,31 @@ postService.submitCommentOnPost = async (data) => {
 };
 
 postService.getFeed = async (data) => {
-  if (isNullOrUndefined(data.tag) && !isNullOrUndefined(data.category)) {
-    var query = { category: data.category };
-  } else if (!isNullOrUndefined(data.tag) && isNullOrUndefined(data.category)) {
-    var query = { tags: data.tag };
-  } else if (
-    !isNullOrUndefined(data.tag) &&
-    !isNullOrUndefined(data.category)
+  feedData = data.feed;
+  page = data.page;
+  if (
+    isNullOrUndefined(feedData.tag) &&
+    !isNullOrUndefined(feedData.category)
   ) {
-    var query = { tags: data.tag, category: data.category };
+    var query = { category: feedData.category };
+  } else if (
+    !isNullOrUndefined(feedData.tag) &&
+    isNullOrUndefined(feedData.category)
+  ) {
+    var query = { tags: feedData.tag };
+  } else if (
+    !isNullOrUndefined(feedData.tag) &&
+    !isNullOrUndefined(feedData.category)
+  ) {
+    var query = { tags: feedData.tag, category: feedData.category };
   }
   var posts = await Post.aggregate([
-    auditFile, unwind, auditChunk,
-    { $sort: data.sort },
+    { $sort: feedData.sort },
+    { $limit: page.limit + page.skip },
+    { $skip: page.skip },
+    auditFile,
+    unwind,
+    auditChunk,
   ]);
 
   // var posts = await Post.find(query).sort(data.sort);
@@ -68,6 +82,10 @@ postService.getFeed = async (data) => {
 postService.incrementLikeOnPost = async (postId) => {
   await Post.findOneAndUpdate({ _id: postId }, { $inc: { likes: 1 } });
   return Post.findById(postId).populate("comments");
+};
+
+postService.deletePostbyId = (postId) => {
+  return Post.findByIdAndDelete({ _id: postId });
 };
 
 module.exports = postService;

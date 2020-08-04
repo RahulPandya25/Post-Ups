@@ -51,5 +51,10 @@ router.post("/updateLikes/:id", function (req, res) {
     res.json(data);
   });
 });
+router.delete("/deletePost/:postId", function (req, res) {
+  return postService.deletePostbyId(req.params.postId).then((data) => {
+    res.json(data);
+  });
+});
 
 module.exports = router;

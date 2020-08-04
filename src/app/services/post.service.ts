@@ -6,8 +6,11 @@ import { Injectable } from "@angular/core";
   providedIn: "root",
 })
 export class PostService {
-  getFeed(feed) {
-    return this.http.post(ConstantsService.BASE_URL + "/getFeed", feed);
+  getFeed(feed, page) {
+    return this.http.post(ConstantsService.BASE_URL + "/getFeed", {
+      feed: feed,
+      page: page,
+    });
   }
   getPostById(postId, updateViewCount) {
     return this.http.get(

@@ -12,7 +12,10 @@ import { NotificationService } from "../services/notification.service";
 export class FeedComponent implements OnInit {
   isLoading;
   loadingMessage = "Creating your Feed!";
-  posts;
+  posts = [];
+  page;
+  postsPerFetch = 3;
+  showEndOfPosts = false;
   currentTag;
   currentSort;
   currentCatgeory;
@@ -29,13 +32,30 @@ export class FeedComponent implements OnInit {
     private notifService: NotificationService
   ) {
     this.notifService.updateFeedEmitter.subscribe(() => {
-      this.getFeed();
+      // bootstraping again for same page to refresh
+      this.page = {
+        limit: this.postsPerFetch,
+        skip: 0,
+      };
+      this.posts = [];
+      this.loadingMessage = "Creating your Feed!";
+      this.isLoading = true;
+      this.showEndOfPosts = false;
+
+      // update feed
+      this.getFeed(this.page);
     });
   }
 
-  getFeed() {
+  fetchMorePosts() {
+    this.page.skip += this.page.limit;
+    this.loadingMessage = "";
     this.isLoading = true;
-    this.posts = [];
+    this.getFeed(this.page);
+  }
+
+  getFeed(page) {
+    if (this.posts && this.posts.length === 0) this.isLoading = true;
 
     // getting values
     this.constService.currentTag.subscribe((tag) => (this.currentTag = tag));
@@ -47,25 +67,33 @@ export class FeedComponent implements OnInit {
     );
 
     this.postService
-      .getFeed({
-        tag:
-          defaults.defaultTag === this.currentTag ? undefined : this.currentTag,
-        sort: this.currentSort,
-        category:
-          defaults.defaultCategory === this.currentCatgeory
-            ? undefined
-            : this.currentCatgeory,
-      })
-      .subscribe((response) => {
-        this.posts = response;
-        this.posts.forEach((post) => {
+      .getFeed(
+        {
+          tag:
+            defaults.defaultTag === this.currentTag
+              ? undefined
+              : this.currentTag,
+          sort: this.currentSort,
+          category:
+            defaults.defaultCategory === this.currentCatgeory
+              ? undefined
+              : this.currentCatgeory,
+        },
+        page
+      )
+      .subscribe((response: any) => {
+        let beginningPostCount = this.posts.length;
+        response.forEach((post) => {
           let date = post.datePosted;
           post.datePosted = new Date(date);
           if (post.category !== "text")
             if (post.category !== "audio")
               post.filesrc = this.postService.getFilesrc(post);
+          this.posts.push(post);
         });
         this.isLoading = false;
+        let finalPostCount = this.posts.length;
+        if (beginningPostCount === finalPostCount) this.showEndOfPosts = true;
       });
   }
   likeThisPost(postId) {
@@ -79,7 +107,11 @@ export class FeedComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    this.getFeed();
+    this.page = {
+      limit: this.postsPerFetch,
+      skip: 0,
+    };
+    this.getFeed(this.page);
     this.notifService.updateNavComponents(this.requiredNavComponents);
   }
 }
