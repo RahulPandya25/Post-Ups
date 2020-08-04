@@ -1,6 +1,4 @@
 <div class="container">
-  <app-loading [message]="loadingMessage" *ngIf="isLoading"></app-loading>
-
   <div class="no-post" *ngIf="!isLoading && posts.length === 0">
     <div class="emoji">
       <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
@@ -68,7 +66,10 @@
     </div>
   </div>
 
-  <div class="end-of-post" *ngIf="posts.length > endOfPostLimit">
+  <app-loading [message]="loadingMessage" *ngIf="isLoading"></app-loading>
+  <button (click)="fetchMorePosts()">Get more</button>
+
+  <div class="end-of-post" *ngIf="showEndOfPosts">
     <div class="header">🥳&nbsp;Hurray!&nbsp;🥳</div>
     <div class="main">You Have Made Till The End</div>
     <div class="sub">
