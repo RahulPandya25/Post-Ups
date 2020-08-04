@@ -22,7 +22,9 @@ postService.getPostById = async (postId, updateViewCount) => {
 
   var post = await Post.aggregate([
     { $match: { _id: Mongoose.Types.ObjectId(postId) } },
-    auditFile, unwind, auditChunk,
+    auditFile,
+    unwind,
+    auditChunk,
   ]);
 
   await Post.populate(post[0], { path: "comments" });
@@ -56,7 +58,9 @@ postService.getFeed = async (data) => {
     var query = { tags: data.tag, category: data.category };
   }
   var posts = await Post.aggregate([
-    auditFile, unwind, auditChunk,
+    auditFile,
+    unwind,
+    auditChunk,
     { $sort: data.sort },
   ]);
 
@@ -68,6 +72,10 @@ postService.getFeed = async (data) => {
 postService.incrementLikeOnPost = async (postId) => {
   await Post.findOneAndUpdate({ _id: postId }, { $inc: { likes: 1 } });
   return Post.findById(postId).populate("comments");
+};
+
+postService.deletePostbyId = (postId) => {
+  return Post.findByIdAndDelete({ _id: postId });
 };
 
 module.exports = postService;
