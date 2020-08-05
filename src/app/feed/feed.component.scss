@@ -184,6 +184,18 @@
     justify-content: space-between;
     font-size: 1.2em;
 
+    .likes {
+      cursor: pointer;
+
+      .fa {
+        transform-origin: center;
+        &::before {
+          color: inherit;
+          transition: color ease-in-out;
+        }
+      }
+    }
+
     button {
       all: unset;
     }

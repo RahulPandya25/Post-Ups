@@ -13,7 +13,7 @@
       <div class="post-category">{{ post.category }}</div>
     </div>
     <div class="section main-content">
-      <a routerLink="/post" [queryParams]="{ postId: post._id }">
+      <a (click)="detectTap(post)">
         <div class="text" *ngIf="post.category === 'text'">
           <p class="content">{{ post.textContent }}</p>
         </div>
@@ -45,10 +45,14 @@
       {{ post.textContent }}
     </div>
     <div class="section post-stat">
-      <div class="likes" (click)="likeThisPost(post._id)">
+      <div class="likes" (click)="likeThisPost(post)">
         {{ post.likes }}
         <button>
-          <i class="fa fa-heart" aria-hidden="true"></i>
+          <i
+            class="fa fa-heart"
+            aria-hidden="true"
+            [@likeAnimation]="post.isBeingLiked ? 'start' : 'end'"
+          ></i>
         </button>
       </div>
       <div class="comments-count">
