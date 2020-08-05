@@ -49,7 +49,7 @@
         {{ post.likes }}
         <button>
           <i
-            class="fa fa-heart"
+            class="far fa-heart"
             aria-hidden="true"
             [@likeAnimation]="post.isBeingLiked ? 'start' : 'end'"
           ></i>
@@ -58,7 +58,7 @@
       <div class="comments-count">
         {{ post.comments.length }}
         <button>
-          <i class="fa fa-comment" aria-hidden="true"></i>
+          <i class="far fa-comment" aria-hidden="true"></i>
         </button>
       </div>
     </div>
