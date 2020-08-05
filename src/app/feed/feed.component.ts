@@ -15,6 +15,7 @@ export class FeedComponent implements OnInit {
   posts = [];
   page;
   postsPerFetch = 3;
+  isFetchingPost = false;
   showEndOfPosts = false;
   currentTag;
   currentSort;
@@ -66,6 +67,7 @@ export class FeedComponent implements OnInit {
       (sort) => (this.currentSort = sort)
     );
 
+    this.isFetchingPost = true;
     this.postService
       .getFeed(
         {
@@ -94,8 +96,11 @@ export class FeedComponent implements OnInit {
         this.isLoading = false;
         let finalPostCount = this.posts.length;
         if (beginningPostCount === finalPostCount) this.showEndOfPosts = true;
+
+        this.isFetchingPost = false;
       });
   }
+
   likeThisPost(postId) {
     this.postService.likeThisPost(postId).subscribe((response) => {
       var temp = Object.assign(response);
@@ -106,12 +111,33 @@ export class FeedComponent implements OnInit {
       });
     });
   }
+
+  // using intersection observer for pagination
+  observer = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (
+          entry.isIntersecting &&
+          !this.isFetchingPost &&
+          !this.showEndOfPosts
+        ) {
+          this.fetchMorePosts();
+        }
+      });
+    },
+    {
+      rootMargin: "0px 0px 0px 0px",
+      threshold: 1,
+    }
+  );
+
   ngOnInit(): void {
+    this.notifService.updateNavComponents(this.requiredNavComponents);
     this.page = {
       limit: this.postsPerFetch,
       skip: 0,
     };
     this.getFeed(this.page);
-    this.notifService.updateNavComponents(this.requiredNavComponents);
+    this.observer.observe(document.querySelector(".observe"));
   }
 }
