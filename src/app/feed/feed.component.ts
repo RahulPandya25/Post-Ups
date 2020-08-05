@@ -4,11 +4,13 @@ import { ConstantsService } from "../services/constants.service";
 import defaults from "../../assets/defaults.json";
 import { NotificationService } from "../services/notification.service";
 import { RouterLink, Router } from "@angular/router";
+import { like } from "../route-animations";
 
 @Component({
   selector: "app-feed",
   templateUrl: "./feed.component.html",
   styleUrls: ["./feed.component.scss"],
+  animations: [like],
 })
 export class FeedComponent implements OnInit {
   isLoading;
@@ -95,6 +97,8 @@ export class FeedComponent implements OnInit {
           if (post.category !== "text")
             if (post.category !== "audio")
               post.filesrc = this.postService.getFilesrc(post);
+
+          post.isBeingLiked = false;
           this.posts.push(post);
         });
         this.isLoading = false;
@@ -105,14 +109,16 @@ export class FeedComponent implements OnInit {
       });
   }
 
-  likeThisPost(postId) {
-    this.postService.likeThisPost(postId).subscribe((response) => {
+  likeThisPost(post) {
+    post.isBeingLiked = true;
+    this.postService.likeThisPost(post._id).subscribe((response) => {
       var temp = Object.assign(response);
-      this.posts.forEach((post) => {
-        if (post._id === postId) {
-          post.likes = temp.likes;
+      this.posts.forEach((element) => {
+        if (element._id === post._id) {
+          element.likes = temp.likes;
         }
       });
+      post.isBeingLiked = false;
     });
   }
 
@@ -135,16 +141,18 @@ export class FeedComponent implements OnInit {
     }
   );
 
-  detectTap(postId) {
+  detectTap(post) {
     if (this.justClicked === true) {
       this.doubleClicked = true;
-      this.likeThisPost(postId);
+      this.likeThisPost(post);
     } else {
       this.justClicked = true;
       setTimeout(() => {
         this.justClicked = false;
         if (this.doubleClicked === false) {
-          this.router.navigate(["/post"], { queryParams: { postId: postId } });
+          this.router.navigate(["/post"], {
+            queryParams: { postId: post._id },
+          });
         }
         this.doubleClicked = false;
       }, 500);
