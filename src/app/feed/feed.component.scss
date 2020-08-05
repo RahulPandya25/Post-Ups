@@ -1,3 +1,7 @@
+.container {
+  position: relative;
+}
+
 .no-post {
   min-height: 40vh;
   width: 100%;
@@ -244,6 +248,14 @@
   .fa {
     font-size: 1.25rem;
   }
+}
+
+.observe {
+  position: absolute;
+  height: 50vh;
+  bottom: 0;
+  width: 100%;
+  z-index: -2;
 }
 
 // device sizes
