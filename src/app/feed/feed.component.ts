@@ -95,7 +95,8 @@ export class FeedComponent implements OnInit {
         });
         this.isLoading = false;
         let finalPostCount = this.posts.length;
-        if (beginningPostCount === finalPostCount) this.showEndOfPosts = true;
+        if (this.posts.length > 0 && beginningPostCount === finalPostCount)
+          this.showEndOfPosts = true;
 
         this.isFetchingPost = false;
       });
