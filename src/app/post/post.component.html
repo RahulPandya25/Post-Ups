@@ -10,7 +10,7 @@
         {{ post.category }}
       </label>
     </div>
-    <div class="section main-content">
+    <div class="section main-content" (click)="detectTap(post._id)">
       <div class="text" *ngIf="post.category === 'text'">
         <p>{{ post.textContent }}</p>
       </div>
@@ -35,14 +35,18 @@
       <div class="likes" (click)="likeThisPost(post._id)">
         {{ post.likes }}
         <button>
-          <i class="fa fa-heart" aria-hidden="true"></i>
+          <i
+            class="far fa-heart"
+            aria-hidden="true"
+            [@likeAnimation]="likePost ? 'start' : 'end'"
+          ></i>
         </button>
       </div>
 
       <div class="comments-count">
         {{ post.comments.length }}
         <button>
-          <i class="fa fa-comment" aria-hidden="true"></i>
+          <i class="far fa-comment" aria-hidden="true"></i>
         </button>
       </div>
     </div>
