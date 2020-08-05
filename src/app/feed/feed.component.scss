@@ -18,7 +18,9 @@
   }
   .emoji {
     font-size: 2em;
-    .fa::before {
+    .fa::before,
+    .fas::before,
+    .far::before {
       color: var(--base-color);
     }
   }
@@ -114,7 +116,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        .fa::before {
+        .fa::before,
+        .fas::before,
+        .far::before {
           color: var(--play-btn-color);
         }
       }
@@ -144,7 +148,9 @@
         border: 2px solid var(--base-color);
         border-radius: 50%;
 
-        .fa::before {
+        .fa::before,
+        .fas::before,
+        .far::before {
           color: var(--base-color);
         }
       }
@@ -182,12 +188,14 @@
   .post-stat {
     display: flex;
     justify-content: space-between;
-    font-size: 1.2em;
+    font-size: 1em;
 
     .likes {
       cursor: pointer;
 
-      .fa {
+      .fa,
+      .far,
+      .fas {
         transform-origin: center;
         &::before {
           color: inherit;
@@ -198,6 +206,10 @@
 
     button {
       all: unset;
+
+      i {
+        font-size: 1.2em;
+      }
     }
   }
 
@@ -257,7 +269,9 @@
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
   z-index: 1;
   cursor: pointer;
-  .fa {
+  .fa,
+  .far,
+  .fas {
     font-size: 1.25rem;
   }
 }

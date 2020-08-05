@@ -55,11 +55,13 @@
 .post-stat {
   display: flex;
   justify-content: space-between;
-  font-size: 1.2em;
+  font-size: 1em;
   .likes {
     cursor: pointer;
 
-    .fa {
+    .fa,
+    .fas,
+    .far {
       transform-origin: center;
       &::before {
         color: inherit;
@@ -70,6 +72,9 @@
 
   button {
     all: unset;
+    i {
+      font-size: 1.2em;
+    }
   }
 }
 
