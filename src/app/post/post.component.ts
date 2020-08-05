@@ -5,11 +5,13 @@ import { ConstantsService } from "../services/constants.service";
 import { NotificationService } from "../services/notification.service";
 import defaults from "../../assets/defaults.json";
 import { DomSanitizer } from "@angular/platform-browser";
+import { like } from "../route-animations";
 
 @Component({
   selector: "app-post",
   templateUrl: "./post.component.html",
   styleUrls: ["./post.component.scss"],
+  animations: [like],
 })
 export class PostComponent implements OnInit {
   requiredNavComponents = {
@@ -25,13 +27,16 @@ export class PostComponent implements OnInit {
   comment = "";
   justClicked = false;
   doubleClicked = false;
+  likePost = false;
 
   likeThisPost(postId) {
+    this.likePost = true;
     this.postService.likeThisPost(postId).subscribe((response) => {
       var temp = Object.assign(response);
       if (this.post._id === postId) {
         this.post.likes = temp.likes;
       }
+      this.likePost = false;
     });
   }
 

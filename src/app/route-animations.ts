@@ -9,6 +9,34 @@ import {
   keyframes,
 } from "@angular/animations";
 
+export const like = trigger("likeAnimation", [
+  transition("start => end", [
+    animate(
+      ".75s",
+      keyframes([
+        style({ transform: "scale(1)", offset: 0 }),
+        style({
+          transform: "scale(1.2)",
+          color: "yellow",
+          offset: 0.25,
+        }),
+        style({
+          transform: "scale(1.15)",
+          color: "orange",
+          offset: 0.5,
+        }),
+        style({
+          transform: "scale(1.25)",
+          color: "red",
+          offset: 0.75,
+        }),
+        style({ transform: "scale(1)", offset: 1 }),
+      ])
+    ),
+  ]),
+  transition("end => start", []),
+]);
+
 export const fader = trigger("routeAnimations", [
   transition("* <=> *", [
     query(
