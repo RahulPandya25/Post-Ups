@@ -23,6 +23,8 @@ export class PostComponent implements OnInit {
   postId;
   post;
   comment = "";
+  justClicked = false;
+  doubleClicked = false;
 
   likeThisPost(postId) {
     this.postService.likeThisPost(postId).subscribe((response) => {
@@ -31,6 +33,19 @@ export class PostComponent implements OnInit {
         this.post.likes = temp.likes;
       }
     });
+  }
+
+  detectTap(postId) {
+    if (this.justClicked === true) {
+      this.doubleClicked = true;
+      this.likeThisPost(postId);
+    } else {
+      this.justClicked = true;
+      setTimeout(() => {
+        this.justClicked = false;
+        this.doubleClicked = false;
+      }, 500);
+    }
   }
 
   sendComment(comment) {

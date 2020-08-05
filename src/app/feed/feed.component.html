@@ -13,7 +13,7 @@
       <div class="post-category">{{ post.category }}</div>
     </div>
     <div class="section main-content">
-      <a routerLink="/post" [queryParams]="{ postId: post._id }">
+      <a (click)="detectTap(post._id)">
         <div class="text" *ngIf="post.category === 'text'">
           <p class="content">{{ post.textContent }}</p>
         </div>

@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { ConstantsService } from "../services/constants.service";
 import defaults from "../../assets/defaults.json";
 import { NotificationService } from "../services/notification.service";
+import { RouterLink, Router } from "@angular/router";
 
 @Component({
   selector: "app-feed",
@@ -26,11 +27,14 @@ export class FeedComponent implements OnInit {
     showSearchBtn: true,
   };
   endOfPostLimit = 2;
+  justClicked = false;
+  doubleClicked = false;
 
   constructor(
     private postService: PostService,
     private constService: ConstantsService,
-    private notifService: NotificationService
+    private notifService: NotificationService,
+    private router: Router
   ) {
     this.notifService.updateFeedEmitter.subscribe(() => {
       // bootstraping again for same page to refresh
@@ -130,6 +134,22 @@ export class FeedComponent implements OnInit {
       threshold: 1,
     }
   );
+
+  detectTap(postId) {
+    if (this.justClicked === true) {
+      this.doubleClicked = true;
+      this.likeThisPost(postId);
+    } else {
+      this.justClicked = true;
+      setTimeout(() => {
+        this.justClicked = false;
+        if (this.doubleClicked === false) {
+          this.router.navigate(["/post"], { queryParams: { postId: postId } });
+        }
+        this.doubleClicked = false;
+      }, 500);
+    }
+  }
 
   ngOnInit(): void {
     this.notifService.updateNavComponents(this.requiredNavComponents);

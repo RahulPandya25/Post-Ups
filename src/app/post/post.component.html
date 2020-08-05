@@ -10,7 +10,7 @@
         {{ post.category }}
       </label>
     </div>
-    <div class="section main-content">
+    <div class="section main-content" (click)="detectTap(post._id)">
       <div class="text" *ngIf="post.category === 'text'">
         <p>{{ post.textContent }}</p>
       </div>
