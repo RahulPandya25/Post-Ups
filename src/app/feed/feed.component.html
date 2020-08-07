@@ -24,12 +24,7 @@
           <div class="play-btn">
             <i class="fa fa-play" aria-hidden="true"></i>
           </div>
-          <video class="content">
-            <source
-              src="{{ post.filesrc }}"
-              type="{{ post.file.contentType }}"
-            />
-          </video>
+          <video class="content" src="{{ post.filesrc }}"></video>
         </div>
         <div class="audio" *ngIf="post.category === 'audio'">
           <div class="play-btn">
