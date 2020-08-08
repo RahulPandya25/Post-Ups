@@ -40,6 +40,7 @@ postService.submitCommentOnPost = async (data) => {
       { _id: data.postId },
       { $push: { comments: commentObj._id } }
     );
+    await Post.findOneAndUpdate({ _id: data.postId }, { $inc: { commentsCount: 1 } });
     return Post.findById(data.postId).populate("comments");
   } else {
     return "Comments are disabled for this post";
