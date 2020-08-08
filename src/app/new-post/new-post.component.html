@@ -6,6 +6,7 @@
     #myForm="ngForm"
     [formGroup]="myFormGroup"
     (ngSubmit)="onSubmit(myForm)"
+    (keydown.enter)="$event.preventDefault()"
     enctype="multipart/form-data"
     *ngIf="!isLoading"
   >
@@ -126,10 +127,11 @@
           type="text"
           name="tag"
           formControlName="tag"
-          placeholder="Add Tags seperated by commas..."
+          placeholder="Add Tags ..."
           [ngClass]="{
             'in-valid': isSubmitted && myFormGroup.controls.tag.errors
           }"
+          (keyup.enter)="addTag($event)"
         />
         <div *ngIf="isSubmitted && myFormGroup.controls.tag.errors">
           <div
@@ -140,7 +142,19 @@
           </div>
         </div>
       </div>
-      <div>
+
+      <div class="tag-bubbles" *ngIf="currentTags.length > 0">
+        <div class="tag" *ngFor="let t of currentTags">
+          <span class="tag-label">
+            {{ t }}
+          </span>
+          <span class="cross" (click)="removeTag(t)"
+            ><i class="fa fa-times" aria-hidden="true"></i
+          ></span>
+        </div>
+      </div>
+
+      <div class="form-element custom-checkbox">
         <input
           type="checkbox"
           name="isCommentEnabled"

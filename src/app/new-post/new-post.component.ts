@@ -28,6 +28,7 @@ export class NewPostComponent implements OnInit {
   private fileList;
   isSubmitted = false;
   post;
+  currentTags = [];
 
   constructor(
     private postService: PostService,
@@ -88,7 +89,7 @@ export class NewPostComponent implements OnInit {
     } else {
       this.isLoading = true;
       form.value.category = this.selectedCategory;
-      form.value.tags = form.value.tag.split(",");
+      form.value.tags = this.currentTags;
       if (form.value.isCommentEnabled === "") {
         form.value.isCommentEnabled = false;
       }
@@ -116,6 +117,17 @@ export class NewPostComponent implements OnInit {
         });
       }
     }
+  }
+
+  addTag(e) {
+    if (!_.includes(this.currentTags, e.target.value))
+      this.currentTags.push(e.target.value);
+    e.target.value = "";
+  }
+  removeTag(tag) {
+    _.remove(this.currentTags, function (element) {
+      return element === tag;
+    });
   }
 
   ngOnInit(): void {
