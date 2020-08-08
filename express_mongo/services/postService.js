@@ -55,8 +55,8 @@ postService.getFeed = async (data) => {
   ) {
     // var query = { category: feedData.category };
     var posts = await Post.aggregate([
-      { $sort: feedData.sort },
       { $match: { category: feedData.category } },
+      { $sort: feedData.sort },
       { $limit: page.limit + page.skip },
       { $skip: page.skip },
       auditFile,
@@ -69,8 +69,8 @@ postService.getFeed = async (data) => {
   ) {
     // var query = { tags: feedData.tag };
     var posts = await Post.aggregate([
-      { $sort: feedData.sort },
       { $match: { tags: { $in: [feedData.tag] } } },
+      { $sort: feedData.sort },
       { $limit: page.limit + page.skip },
       { $skip: page.skip },
       auditFile,
@@ -83,9 +83,9 @@ postService.getFeed = async (data) => {
   ) {
     // var query = { tags: feedData.tag, category: feedData.category };
     var posts = await Post.aggregate([
-      { $sort: feedData.sort },
       { $match: { tags: { $in: [feedData.tag] } } },
       { $match: { category: feedData.category } },
+      { $sort: feedData.sort },
       { $limit: page.limit + page.skip },
       { $skip: page.skip },
       auditFile,
