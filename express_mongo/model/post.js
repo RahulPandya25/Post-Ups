@@ -12,6 +12,7 @@ const postSchema = new mongoose.Schema(
     dislikes: { type: Number, default: 0 },
     isCommentEnabled: { type: Boolean, default: true },
     comments: [{ type: Schema.Types.ObjectId, ref: "comment" }],
+    commentsCount: { type: Number, default: 0 },
     datePosted: { type: Date, default: Date.now },
     file: {},
   },

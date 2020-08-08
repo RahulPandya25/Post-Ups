@@ -24,7 +24,7 @@
           <div class="play-btn">
             <i class="fa fa-play" aria-hidden="true"></i>
           </div>
-          <video class="content" src="{{ post.filesrc }}"></video>
+          <video class="content" src="{{ post.filesrc }}" controls preload="metadata"></video>
         </div>
         <div class="audio" *ngIf="post.category === 'audio'">
           <div class="play-btn">
@@ -43,11 +43,7 @@
       <div class="likes" (click)="likeThisPost(post)">
         {{ post.likes }}
         <button>
-          <i
-            class="far fa-heart"
-            aria-hidden="true"
-            [@likeAnimation]="post.isBeingLiked ? 'start' : 'end'"
-          ></i>
+          <i class="far fa-heart" aria-hidden="true" [@likeAnimation]="post.isBeingLiked ? 'start' : 'end'"></i>
         </button>
       </div>
       <div class="comments-count">
@@ -78,6 +74,4 @@
     </div>
   </div>
 </div>
-<a routerLink="/new-post" class="new-post-btn"
-  ><i class="fa fa-plus" aria-hidden="true"></i
-></a>
+<a routerLink="/new-post" class="new-post-btn"><i class="fa fa-plus" aria-hidden="true"></i></a>

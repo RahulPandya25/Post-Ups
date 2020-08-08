@@ -39,7 +39,7 @@
     {
       "name": "Most Commented",
       "value": {
-        "comments": -1
+        "commentsCount": -1
       }
     }
   ],
