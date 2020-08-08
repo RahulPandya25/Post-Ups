@@ -62,7 +62,7 @@
     {
       "value": "video",
       "name": "Videos",
-      "extensions": "mkv, mp4, avi, webm"
+      "extensions": "mkv, mp4, webm"
     },
     {
       "value": "audio",
