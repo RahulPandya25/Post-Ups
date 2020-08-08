@@ -29,7 +29,7 @@
       font-size: 1.2em;
     }
 
-    input,
+    input:not([type="checkbox"]),
     select,
     button,
     textarea {
@@ -51,6 +51,10 @@
     }
     .text-danger {
       color: #ff000063;
+    }
+
+    &.custom-checkbox {
+      display: inline;
     }
   }
 
@@ -81,6 +85,34 @@
     }
     button[type="reset"] {
       color: var(--red-accent);
+    }
+  }
+
+  .tag-bubbles {
+    margin-bottom: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+
+    .tag {
+      border: 1px solid rgb(75, 75, 75);
+      border-radius: 0.75rem;
+      margin: 0.2rem 0;
+      display: flex;
+      align-items: center;
+      &:not(:last-child) {
+        margin-right: 0.2rem;
+      }
+
+      .tag-label {
+        padding: 0.2rem 0.25rem 0.2rem 0.5rem;
+        text-align: center;
+      }
+
+      .cross {
+        padding: 0.2rem 0.5rem 0.2rem 0.25rem;
+
+        cursor: pointer;
+      }
     }
   }
 }
