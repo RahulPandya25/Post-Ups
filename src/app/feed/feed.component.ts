@@ -31,6 +31,7 @@ export class FeedComponent implements OnInit {
   endOfPostLimit = 2;
   justClicked = false;
   doubleClicked = false;
+  showNoPost = false;
 
   constructor(
     private postService: PostService,
@@ -61,7 +62,7 @@ export class FeedComponent implements OnInit {
     this.getFeed(this.page);
   }
 
-  getFeed(page) {
+  async getFeed(page) {
     if (this.posts && this.posts.length === 0) this.isLoading = true;
 
     // getting values
@@ -74,7 +75,7 @@ export class FeedComponent implements OnInit {
     );
 
     this.isFetchingPost = true;
-    this.postService
+    await this.postService
       .getFeed(
         {
           tag:
@@ -101,12 +102,17 @@ export class FeedComponent implements OnInit {
           post.isBeingLiked = false;
           this.posts.push(post);
         });
+        // stop loading
         this.isLoading = false;
+        // if no post is returned
+        if (!this.isLoading && this.posts.length === 0) this.showNoPost = true;
+        else this.showNoPost = false;
+        // if it is end of post
         let finalPostCount = this.posts.length;
         if (this.posts.length > 0 && beginningPostCount === finalPostCount)
           this.showEndOfPosts = true;
         else this.showEndOfPosts = false;
-
+        // revert fetching flag
         this.isFetchingPost = false;
       });
   }
@@ -131,7 +137,8 @@ export class FeedComponent implements OnInit {
         if (
           entry.isIntersecting &&
           !this.isFetchingPost &&
-          !this.showEndOfPosts
+          !this.showEndOfPosts &&
+          !this.showNoPost
         ) {
           this.fetchMorePosts();
         }
