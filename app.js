@@ -15,8 +15,9 @@ var mongoose = require("mongoose");
 mongoose.Promise = require("bluebird");
 mongoose
   .connect(
+    "mongodb+srv://uowadt:uowadt@cluster0.rag5p.mongodb.net/post?retryWrites=true&w=majority",
     // "mongodb+srv://Mongo:mongoMan@cluster0.3wgsb.mongodb.net/post?retryWrites=true&w=majority",
-    "mongodb+srv://uowproj2020:uow@1243@cluster0.oeyuu.mongodb.net/post?retryWrites=true&w=majority",
+    // "mongodb+srv://uowproj2020:uow@1243@cluster0.oeyuu.mongodb.net/post?retryWrites=true&w=majority",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
